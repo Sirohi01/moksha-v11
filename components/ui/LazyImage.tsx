@@ -36,7 +36,6 @@ export default function LazyImage({
   rootMargin = '50px',
 }: LazyImageProps) {
   const [shouldLoad, setShouldLoad] = useState(priority);
-  const [isInView, setIsInView] = useState(false);
   const imgRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -46,7 +45,6 @@ export default function LazyImage({
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            setIsInView(true);
             setShouldLoad(true);
             observer.unobserve(entry.target);
           }

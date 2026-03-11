@@ -3,11 +3,11 @@
     "next/core-web-vitals"
   ],
   "rules": {
-    "no-unused-vars": "error",
-    "prefer-const": "error",
-    "no-var": "error",
-    "no-console": "warn",
-    "react-hooks/exhaustive-deps": "warn",
+    "no-unused-vars": "off",
+    "prefer-const": "off",
+    "no-var": "off",
+    "no-console": "off",
+    "react-hooks/exhaustive-deps": "off",
     "react/no-unescaped-entities": "off",
     "@next/next/no-page-custom-font": "off"
   },

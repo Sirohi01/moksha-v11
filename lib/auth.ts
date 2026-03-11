@@ -6,6 +6,7 @@ export interface AdminUser {
   name: string;
   role: 'super_admin' | 'admin' | 'moderator';
   loginTime: string;
+  permissions?: string[];
 }
 
 export const AUTH_CONFIG = {

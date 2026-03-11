@@ -27,12 +27,18 @@ export default function AuthGuard({ children, requiredPermission }: AuthGuardPro
         return;
       }
 
+      // Simple permission check
+      if (requiredPermission && currentUser.role !== 'admin' && currentUser.permissions && !currentUser.permissions.includes(requiredPermission)) {
+        router.push('/admin');
+        return;
+      }
+
       setUser(currentUser);
       setIsLoading(false);
     };
 
     checkAuth();
-  }, [router]);
+  }, [router, requiredPermission]);
 
   if (isLoading) {
     return (

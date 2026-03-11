@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, Phone, Home, Info, Heart, ShieldCheck, Users, Mail, Flame, ChevronDown, BarChart3, Bookmark, FileText, Map, Globe, Video, Megaphone, Target, Anchor, Tent, BookOpen, TrendingUp, Search } from "lucide-react";
+import { Menu, X, Home, Info, Heart, ShieldCheck, Users, Mail, Flame, ChevronDown, BarChart3, Bookmark, FileText, Map, Globe, Video, Megaphone, Target, Anchor, Tent, BookOpen, TrendingUp, Search } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Button from "@/components/ui/Button";
 import Image from "next/image";

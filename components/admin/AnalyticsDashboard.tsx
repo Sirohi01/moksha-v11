@@ -62,7 +62,7 @@ export default function AnalyticsDashboard() {
     <div className="space-y-6">
       {/* Analytics Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {analyticsData.map((item, index) => (
+        {analyticsData.map((item) => (
           <div
             key={item.title}
             className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm border border-gray-200 dark:border-gray-700"
@@ -121,7 +121,7 @@ export default function AnalyticsDashboard() {
           </div>
           <div className="p-6">
             <div className="space-y-4">
-              {topPages.map((page, index) => (
+              {topPages.map((page) => (
                 <div key={page.page} className="flex items-center justify-between">
                   <div className="flex-1">
                     <div className="font-medium text-gray-900 dark:text-white">
@@ -160,7 +160,7 @@ export default function AnalyticsDashboard() {
           </div>
           <div className="p-6">
             <div className="space-y-4">
-              {trafficSources.map((source, index) => (
+              {trafficSources.map((source) => (
                 <div key={source.source} className="flex items-center justify-between">
                   <div className="flex-1">
                     <div className="font-medium text-gray-900 dark:text-white">

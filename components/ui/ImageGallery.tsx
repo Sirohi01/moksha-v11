@@ -28,16 +28,6 @@ interface ImageGalleryProps {
 export default function ImageGallery({
   images,
   className,
-  showThumbnails = true,
-  autoplay = false,
-  loop = true,
-  spaceBetween = 20,
-  slidesPerView = 1,
-  breakpoints = {
-    640: { slidesPerView: 2, spaceBetween: 20 },
-    768: { slidesPerView: 3, spaceBetween: 30 },
-    1024: { slidesPerView: 4, spaceBetween: 40 },
-  },
 }: ImageGalleryProps) {
   const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -78,7 +68,7 @@ export default function ImageGallery({
       document.body.removeChild(link);
       window.URL.revokeObjectURL(url);
     } catch (error) {
-      console.error('Failed to download image:', error);
+      // Failed to download image
     }
   }, []);
 

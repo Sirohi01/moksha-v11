@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { Megaphone, Phone, X, ShieldAlert, AlertTriangle } from "lucide-react";
+import { Megaphone, Phone, X, ShieldAlert } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 

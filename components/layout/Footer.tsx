@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Flame, Phone, Mail, MapPin, Heart, Facebook, Twitter, Instagram, Youtube, ArrowUpRight } from "lucide-react";
+import { Phone, Mail, Facebook, Twitter, Instagram, Youtube, ArrowUpRight } from "lucide-react";
 import { Container } from "@/components/ui/Elements";
 
 const footerLinks = {

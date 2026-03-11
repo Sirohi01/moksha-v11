@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { Container, SectionHeader } from "@/components/ui/Elements";
+import { Container } from "@/components/ui/Elements";
 import { ShieldCheck, FileText, Download, CheckCircle2, Award, Scale } from "lucide-react";
 import Button from "@/components/ui/Button";
 

@@ -6,7 +6,6 @@ import {
     Youtube,
     Linkedin,
     MessageCircle,
-    ExternalLink,
     Camera
 } from "lucide-react";
 import { cn } from "@/lib/utils";

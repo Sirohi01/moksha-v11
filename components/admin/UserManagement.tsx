@@ -3,11 +3,9 @@
 import { useState } from 'react';
 import {
   Search,
-  Filter,
   Download,
   Mail,
   Phone,
-  MapPin,
   Calendar,
   User,
   Shield,
@@ -111,6 +109,11 @@ export default function UserManagement() {
   const [selectedRole, setSelectedRole] = useState('all');
   const [selectedStatus, setSelectedStatus] = useState('all');
 
+  const handleDeleteUser = (userId: string) => {
+    setUsers(prev => prev.filter(user => user.id !== userId));
+    alert('User deleted successfully');
+  };
+
   const filteredUsers = users.filter((user) => {
     const matchesSearch =
       user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -150,7 +153,7 @@ export default function UserManagement() {
     <div className="space-y-6">
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {userStats.map((stat, index) => (
+        {userStats.map((stat) => (
           <div
             key={stat.title}
             className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm border border-gray-200 dark:border-gray-700"
