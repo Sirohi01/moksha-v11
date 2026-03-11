@@ -1,31 +1,29 @@
 'use client';
 
 import { useEffect } from 'react';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
 
 export default function AOSInit() {
   useEffect(() => {
-    AOS.init({
-      duration: 800,
-      easing: 'ease-in-out',
-      once: true,
-      mirror: false,
-      offset: 100,
-      delay: 0,
-      anchorPlacement: 'top-bottom',
-    });
-
-    // Refresh AOS on route changes
-    const handleRouteChange = () => {
-      AOS.refresh();
+    // Simple scroll animation observer
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
     };
 
-    // Listen for route changes (for client-side navigation)
-    window.addEventListener('popstate', handleRouteChange);
-    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-fade-in');
+        }
+      });
+    }, observerOptions);
+
+    // Observe all elements with data-aos attribute
+    const elements = document.querySelectorAll('[data-aos]');
+    elements.forEach((el) => observer.observe(el));
+
     return () => {
-      window.removeEventListener('popstate', handleRouteChange);
+      observer.disconnect();
     };
   }, []);
 

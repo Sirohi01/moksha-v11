@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import {
   Search,
-  Filter,
   Download,
   Mail,
   Phone,
@@ -217,7 +216,7 @@ export default function VolunteerManagement() {
     <div className="space-y-6">
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {volunteerStats.map((stat, index) => (
+        {volunteerStats.map((stat) => (
           <div
             key={stat.title}
             className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm border border-gray-200 dark:border-gray-700"
