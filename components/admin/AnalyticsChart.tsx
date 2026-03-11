@@ -1,6 +1,5 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { TrendingUp } from 'lucide-react';
 
 // Mock data for the chart
@@ -17,12 +16,7 @@ export default function AnalyticsChart() {
   const maxDonations = Math.max(...chartData.map(d => d.donations));
   
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.1 }}
-      className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700"
-    >
+    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 animate-fade-in">
       <div className="p-6 border-b border-gray-200 dark:border-gray-700">
         <div className="flex items-center justify-between">
           <div>
@@ -43,12 +37,10 @@ export default function AnalyticsChart() {
       <div className="p-6">
         <div className="space-y-4">
           {chartData.map((data, index) => (
-            <motion.div
+            <div
               key={data.month}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.2 + index * 0.1 }}
-              className="flex items-center gap-4"
+              className="flex items-center gap-4 animate-slide-in"
+              style={{ animationDelay: `${index * 100}ms` }}
             >
               <div className="w-8 text-sm text-gray-600 dark:text-gray-400">
                 {data.month}
@@ -63,15 +55,16 @@ export default function AnalyticsChart() {
                   </span>
                 </div>
                 <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-                  <motion.div
-                    initial={{ width: 0 }}
-                    animate={{ width: `${(data.donations / maxDonations) * 100}%` }}
-                    transition={{ delay: 0.3 + index * 0.1, duration: 0.8 }}
-                    className="bg-blue-600 h-2 rounded-full"
+                  <div
+                    className="bg-blue-600 h-2 rounded-full animate-progress"
+                    style={{ 
+                      width: `${(data.donations / maxDonations) * 100}%`,
+                      animationDelay: `${300 + index * 100}ms`
+                    }}
                   />
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
         
@@ -92,6 +85,6 @@ export default function AnalyticsChart() {
           </div>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }
