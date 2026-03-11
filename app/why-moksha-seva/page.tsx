@@ -44,7 +44,7 @@ export default function WhyMokshaSeva() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-[#1e3a8a] to-[#20b2aa]">
+      <section className="py-12 md:py-16 lg:py-20 bg-gradient-to-br from-[#1e3a8a] to-[#20b2aa]">
         <Container>
           <div className="text-center text-white">
             <h1 className="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-6">

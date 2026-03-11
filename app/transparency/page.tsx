@@ -13,7 +13,7 @@ function statusBadge(record: { certificateNumber: string }) {
 export default function TransparencyPage() {
   return (
     <>
-      <section className="bg-gradient-to-br from-stone-900 to-stone-800 text-white py-20">
+      <section className="bg-gradient-to-br from-stone-900 to-stone-800 text-white py-12 md:py-16 lg:py-20">
         <Container>
           <div className="flex items-start gap-4">
             <div className="w-14 h-14 bg-green-900/50 rounded-xl flex items-center justify-center border border-green-700">

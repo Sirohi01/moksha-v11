@@ -116,7 +116,7 @@ export default function DonatePage() {
   return (
     <>
       {/* Enhanced Hero Section */}
-      <section className="relative bg-gradient-to-br from-orange-900 via-orange-800 to-red-900 text-white py-24 overflow-hidden">
+      <section className="relative bg-gradient-to-br from-orange-900 via-orange-800 to-red-900 text-white py-12 md:py-20 lg:py-24 overflow-hidden">
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute inset-0" style={{

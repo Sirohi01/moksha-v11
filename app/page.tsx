@@ -92,7 +92,7 @@ export default function HomePage() {
   return (
     <div className="bg-white min-h-screen font-sans">
       {/* ── HERO (HINDU RITUALS & SACRED DEPARTURE) ── */}
-      <section className="relative h-[85vh] w-full overflow-hidden bg-black border-b-[8px] border-[#f4c430]">
+      <section className="relative h-[60vh] md:h-[75vh] lg:h-[85vh] w-full overflow-hidden bg-black border-b-[8px] border-[#f4c430]">
         {heroSlides.map((src, idx) => (
           <div
             key={src}

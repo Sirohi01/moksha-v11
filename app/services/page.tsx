@@ -95,7 +95,7 @@ export default function ServicesPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-[#1e3a8a] to-[#20b2aa]">
+      <section className="py-12 md:py-16 lg:py-20 bg-gradient-to-br from-[#1e3a8a] to-[#20b2aa]">
         <Container>
           <div className="text-center text-white">
             <p className="text-[#f4c430] font-black text-[10px] uppercase tracking-[0.4em] mb-4">✦ Our Services ✦</p>

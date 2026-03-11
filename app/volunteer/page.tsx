@@ -205,7 +205,7 @@ export default function VolunteerPage() {
 
   return (
     <>
-      <section className="bg-gradient-to-br from-stone-900 to-stone-800 text-white py-20">
+      <section className="bg-gradient-to-br from-stone-900 to-stone-800 text-white py-12 md:py-16 lg:py-20">
         <Container>
           <span className="text-saffron-400 text-sm font-medium tracking-widest uppercase">✦ Join Us ✦</span>
           <h1 className="font-serif text-4xl md:text-5xl font-bold mt-3 mb-4">
