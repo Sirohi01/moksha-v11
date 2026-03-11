@@ -1,14 +1,11 @@
 'use client';
 
 import { useState } from 'react';
-import { motion } from 'framer-motion';
 import {
   Search,
-  Filter,
   Download,
   Receipt,
   Mail,
-  Calendar,
   TrendingUp,
   TrendingDown,
   Heart,
@@ -20,7 +17,6 @@ import {
   Send,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import toast from 'react-hot-toast';
 
 interface Donation {
   id: string;
@@ -81,33 +77,6 @@ const mockDonations: Donation[] = [
     taxExemption: false,
     transactionId: 'TXN123456791',
   },
-  {
-    id: 'DON-2024-004',
-    donorName: 'Amit Patel',
-    donorEmail: 'amit.patel@email.com',
-    amount: 1000,
-    currency: 'INR',
-    method: 'upi',
-    status: 'pending',
-    date: '2024-03-11T14:20:00Z',
-    campaign: 'General Fund',
-    receiptSent: false,
-    taxExemption: true,
-    transactionId: 'TXN123456792',
-  },
-  {
-    id: 'DON-2024-005',
-    donorName: 'Sunita Devi',
-    donorEmail: 'sunita.devi@email.com',
-    amount: 500,
-    currency: 'INR',
-    method: 'cash',
-    status: 'completed',
-    date: '2024-03-08T11:00:00Z',
-    receiptSent: true,
-    taxExemption: false,
-    notes: 'Cash donation at office',
-  },
 ];
 
 const donationStats = [
@@ -145,56 +114,17 @@ const donationStats = [
   },
 ];
 
-const paymentMethods = [
-  { value: 'all', label: 'All Methods' },
-  { value: 'card', label: 'Credit/Debit Card' },
-  { value: 'upi', label: 'UPI' },
-  { value: 'netbanking', label: 'Net Banking' },
-  { value: 'cash', label: 'Cash' },
-  { value: 'cheque', label: 'Cheque' },
-];
-
-const donationStatuses = [
-  { value: 'all', label: 'All Status' },
-  { value: 'completed', label: 'Completed' },
-  { value: 'pending', label: 'Pending' },
-  { value: 'failed', label: 'Failed' },
-  { value: 'refunded', label: 'Refunded' },
-];
-
 export default function DonationManagement() {
   const [donations, setDonations] = useState<Donation[]>(mockDonations);
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedMethod, setSelectedMethod] = useState('all');
-  const [selectedStatus, setSelectedStatus] = useState('all');
-  const [selectedDonations, setSelectedDonations] = useState<string[]>([]);
-  const [dateRange, setDateRange] = useState('30d');
 
   const filteredDonations = donations.filter((donation) => {
     const matchesSearch =
       donation.donorName.toLowerCase().includes(searchTerm.toLowerCase()) ||
       donation.donorEmail.toLowerCase().includes(searchTerm.toLowerCase()) ||
       donation.id.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesMethod = selectedMethod === 'all' || donation.method === selectedMethod;
-    const matchesStatus = selectedStatus === 'all' || donation.status === selectedStatus;
-    return matchesSearch && matchesMethod && matchesStatus;
+    return matchesSearch;
   });
-
-  const handleSelectDonation = (donationId: string) => {
-    setSelectedDonations((prev) =>
-      prev.includes(donationId)
-        ? prev.filter((id) => id !== donationId)
-        : [...prev, donationId]
-    );
-  };
-
-  const handleSelectAll = () => {
-    if (selectedDonations.length === filteredDonations.length) {
-      setSelectedDonations([]);
-    } else {
-      setSelectedDonations(filteredDonations.map((donation) => donation.id));
-    }
-  };
 
   const handleSendReceipt = (donationId: string) => {
     setDonations((prev) =>
@@ -202,19 +132,7 @@ export default function DonationManagement() {
         donation.id === donationId ? { ...donation, receiptSent: true } : donation
       )
     );
-    toast.success('Receipt sent successfully');
-  };
-
-  const handleBulkSendReceipts = () => {
-    if (selectedDonations.length === 0) return;
-
-    setDonations((prev) =>
-      prev.map((donation) =>
-        selectedDonations.includes(donation.id) ? { ...donation, receiptSent: true } : donation
-      )
-    );
-    toast.success(`Receipts sent to ${selectedDonations.length} donor(s)`);
-    setSelectedDonations([]);
+    alert('Receipt sent successfully');
   };
 
   const getMethodIcon = (method: string) => {
@@ -258,11 +176,8 @@ export default function DonationManagement() {
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {donationStats.map((stat, index) => (
-          <motion.div
+          <div
             key={stat.title}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.1 }}
             className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm border border-gray-200 dark:border-gray-700"
           >
             <div className="flex items-center justify-between mb-4">
@@ -289,128 +204,52 @@ export default function DonationManagement() {
               <div className="text-sm text-gray-600 dark:text-gray-400">{stat.title}</div>
               <div className="text-xs text-gray-500 dark:text-gray-500 mt-1">{stat.period}</div>
             </div>
-          </motion.div>
+          </div>
         ))}
       </div>
 
-      {/* Filters and Actions */}
-      <div className="flex flex-col sm:flex-row gap-4 justify-between">
-        <div className="flex flex-col sm:flex-row gap-4">
-          {/* Search */}
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-            <input
-              type="text"
-              placeholder="Search donations..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            />
-          </div>
-
-          {/* Method Filter */}
-          <select
-            value={selectedMethod}
-            onChange={(e) => setSelectedMethod(e.target.value)}
-            className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-          >
-            {paymentMethods.map((method) => (
-              <option key={method.value} value={method.value}>
-                {method.label}
-              </option>
-            ))}
-          </select>
-
-          {/* Status Filter */}
-          <select
-            value={selectedStatus}
-            onChange={(e) => setSelectedStatus(e.target.value)}
-            className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-          >
-            {donationStatuses.map((status) => (
-              <option key={status.value} value={status.value}>
-                {status.label}
-              </option>
-            ))}
-          </select>
-
-          {/* Date Range */}
-          <select
-            value={dateRange}
-            onChange={(e) => setDateRange(e.target.value)}
-            className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-          >
-            <option value="7d">Last 7 days</option>
-            <option value="30d">Last 30 days</option>
-            <option value="90d">Last 90 days</option>
-            <option value="1y">Last year</option>
-          </select>
+      {/* Search */}
+      <div className="flex gap-4">
+        <div className="relative flex-1">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+          <input
+            type="text"
+            placeholder="Search donations..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          />
         </div>
-
-        <div className="flex gap-2">
-          <button className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
-            <Download className="w-4 h-4" />
-            Export
-          </button>
-        </div>
+        <button className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+          <Download className="w-4 h-4" />
+          Export
+        </button>
       </div>
 
       {/* Summary */}
       <div className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border border-gray-200 dark:border-gray-700">
-        <div className="flex items-center justify-between">
-          <div>
-            <span className="text-sm text-gray-600 dark:text-gray-400">
-              Showing {filteredDonations.length} donations
-            </span>
-            <span className="text-sm text-gray-600 dark:text-gray-400 ml-4">
-              Total: ₹{totalAmount.toLocaleString()}
-            </span>
-          </div>
-          {selectedDonations.length > 0 && (
-            <button
-              onClick={handleBulkSendReceipts}
-              className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-            >
-              <Send className="w-4 h-4" />
-              Send Receipts ({selectedDonations.length})
-            </button>
-          )}
+        <div>
+          <span className="text-sm text-gray-600 dark:text-gray-400">
+            Showing {filteredDonations.length} donations
+          </span>
+          <span className="text-sm text-gray-600 dark:text-gray-400 ml-4">
+            Total: ₹{totalAmount.toLocaleString()}
+          </span>
         </div>
       </div>
 
       {/* Donations Table */}
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
         <div className="p-4 border-b border-gray-200 dark:border-gray-700">
-          <div className="flex items-center justify-between">
-            <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
-              Recent Donations
-            </h2>
-            <button
-              onClick={handleSelectAll}
-              className="text-sm text-blue-600 dark:text-blue-400 hover:underline"
-            >
-              {selectedDonations.length === filteredDonations.length
-                ? 'Deselect All'
-                : 'Select All'}
-            </button>
-          </div>
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
+            Recent Donations
+          </h2>
         </div>
 
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead className="bg-gray-50 dark:bg-gray-700">
               <tr>
-                <th className="px-6 py-3 text-left">
-                  <input
-                    type="checkbox"
-                    checked={
-                      selectedDonations.length === filteredDonations.length &&
-                      filteredDonations.length > 0
-                    }
-                    onChange={handleSelectAll}
-                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
-                  />
-                </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                   Donation ID
                 </th>
@@ -427,9 +266,6 @@ export default function DonationManagement() {
                   Status
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                  Date
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                   Receipt
                 </th>
                 <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
@@ -438,25 +274,14 @@ export default function DonationManagement() {
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-              {filteredDonations.map((donation, index) => {
+              {filteredDonations.map((donation) => {
                 const MethodIcon = getMethodIcon(donation.method);
 
                 return (
-                  <motion.tr
+                  <tr
                     key={donation.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.05 }}
                     className="hover:bg-gray-50 dark:hover:bg-gray-700"
                   >
-                    <td className="px-6 py-4">
-                      <input
-                        type="checkbox"
-                        checked={selectedDonations.includes(donation.id)}
-                        onChange={() => handleSelectDonation(donation.id)}
-                        className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
-                      />
-                    </td>
                     <td className="px-6 py-4">
                       <div className="font-medium text-gray-900 dark:text-white">
                         {donation.id}
@@ -503,12 +328,6 @@ export default function DonationManagement() {
                         {donation.status.charAt(0).toUpperCase() + donation.status.slice(1)}
                       </span>
                     </td>
-                    <td className="px-6 py-4 text-sm text-gray-700 dark:text-gray-300">
-                      {new Date(donation.date).toLocaleDateString()}
-                      <div className="text-xs text-gray-500 dark:text-gray-500">
-                        {new Date(donation.date).toLocaleTimeString()}
-                      </div>
-                    </td>
                     <td className="px-6 py-4">
                       {donation.receiptSent ? (
                         <span className="inline-flex items-center gap-1 text-xs text-green-600 dark:text-green-400">
@@ -538,7 +357,7 @@ export default function DonationManagement() {
                         </button>
                       </div>
                     </td>
-                  </motion.tr>
+                  </tr>
                 );
               })}
             </tbody>

@@ -244,26 +244,32 @@ export default function DonatePage() {
               </div>
 
               {/* Preset Amounts */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
                 {donationTiers.map((tier) => (
                   <button
                     key={tier.amount}
                     onClick={() => { setSelectedAmount(tier.amount); setCustomAmount(""); }}
-                    className={`group relative p-3 rounded-lg border-2 text-center transition-all ${
+                    className={`group relative p-4 rounded-xl border-2 text-center transition-all duration-300 ${
                       selectedAmount === tier.amount && !customAmount
-                        ? "border-saffron-600 bg-gradient-to-br from-saffron-50 to-gold-50 shadow-sm"
-                        : "border-stone-200 bg-white hover:border-saffron-400"
+                        ? "border-orange-500 bg-gradient-to-br from-orange-50 to-orange-100 shadow-lg transform scale-105"
+                        : "border-stone-200 bg-white hover:border-orange-400 hover:shadow-md hover:scale-102"
                     }`}
                   >
                     <div className="flex flex-col items-center">
-                      <p className="font-serif text-xl font-bold text-saffron-600 mb-0.5">
+                      {selectedAmount === tier.amount && !customAmount && (
+                        <div className="absolute -top-2 -right-2 w-6 h-6 bg-orange-500 rounded-full flex items-center justify-center">
+                          <CheckCircle className="w-4 h-4 text-white" />
+                        </div>
+                      )}
+                      <div className="text-2xl mb-2">💝</div>
+                      <p className="font-serif text-xl font-bold text-orange-600 mb-1">
                         {formatCurrency(tier.amount)}
                       </p>
-                      {selectedAmount === tier.amount && !customAmount && (
-                        <CheckCircle className="w-4 h-4 text-saffron-600 mb-0.5" />
-                      )}
-                      <p className="font-semibold text-stone-800 text-xs mb-0.5">{tier.label}</p>
+                      <p className="font-semibold text-stone-800 text-sm mb-1">{tier.label}</p>
                       <p className="text-stone-500 text-xs leading-tight">{tier.desc}</p>
+                      <div className="mt-2 text-xs text-orange-600 font-medium">
+                        {tier.impact}
+                      </div>
                     </div>
                   </button>
                 ))}
@@ -470,23 +476,24 @@ export default function DonatePage() {
                           <label className="block text-sm font-semibold text-stone-700 mb-2">
                             Frequency <span className="text-red-500">*</span>
                           </label>
-                          <div className="grid grid-cols-3 gap-3">
+                          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                             {[
-                              { value: "one-time", label: "One Time" },
-                              { value: "monthly", label: "Monthly" },
-                              { value: "yearly", label: "Yearly" }
+                              { value: "one-time", label: "One Time", desc: "Single donation" },
+                              { value: "monthly", label: "Monthly", desc: "Recurring monthly" },
+                              { value: "yearly", label: "Yearly", desc: "Recurring yearly" }
                             ].map((type) => (
                               <button
                                 key={type.value}
                                 type="button"
                                 onClick={() => setForm({ ...form, donationType: type.value })}
-                                className={`px-4 py-3 rounded-lg border-2 text-sm font-semibold transition-all ${
+                                className={`px-4 py-4 rounded-xl border-2 text-sm font-semibold transition-all duration-300 text-center ${
                                   form.donationType === type.value
-                                    ? "border-saffron-600 bg-saffron-600 text-white shadow-md"
-                                    : "border-stone-300 bg-white text-stone-700 hover:border-saffron-400"
+                                    ? "border-orange-500 bg-gradient-to-br from-orange-500 to-orange-600 text-white shadow-lg transform scale-105"
+                                    : "border-stone-300 bg-white text-stone-700 hover:border-orange-400 hover:shadow-md hover:scale-102"
                                 }`}
                               >
-                                {type.label}
+                                <div className="font-bold">{type.label}</div>
+                                <div className="text-xs opacity-80 mt-1">{type.desc}</div>
                               </button>
                             ))}
                           </div>
@@ -540,24 +547,26 @@ export default function DonatePage() {
                     <span className="w-7 h-7 bg-saffron-600 text-white rounded-full flex items-center justify-center text-sm font-bold">5</span>
                     Payment Method
                   </h4>
-                  <div className="grid grid-cols-4 gap-3 mb-4">
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
                     {[
-                      { value: "upi", label: "UPI" },
-                      { value: "card", label: "Card" },
-                      { value: "netbanking", label: "Net Banking" },
-                      { value: "wallet", label: "Wallet" }
+                      { value: "upi", label: "UPI", icon: "📱", desc: "PhonePe, GPay, Paytm" },
+                      { value: "card", label: "Card", icon: "💳", desc: "Debit/Credit Card" },
+                      { value: "netbanking", label: "Net Banking", icon: "🏦", desc: "Online Banking" },
+                      { value: "wallet", label: "Wallet", icon: "👛", desc: "Digital Wallets" }
                     ].map((method) => (
                       <button
                         key={method.value}
                         type="button"
                         onClick={() => setForm({ ...form, paymentMethod: method.value })}
-                        className={`px-3 py-3 rounded-lg border-2 text-sm font-bold transition-all ${
+                        className={`px-3 py-4 rounded-xl border-2 text-sm font-semibold transition-all duration-300 text-center ${
                           form.paymentMethod === method.value
-                            ? "border-saffron-600 bg-saffron-600 text-white shadow-lg scale-105"
-                            : "border-stone-300 bg-white text-stone-700 hover:border-saffron-400 hover:shadow-md"
+                            ? "border-orange-500 bg-gradient-to-br from-orange-500 to-orange-600 text-white shadow-lg transform scale-105"
+                            : "border-stone-300 bg-white text-stone-700 hover:border-orange-400 hover:shadow-md hover:scale-102"
                         }`}
                       >
-                        {method.label}
+                        <div className="text-2xl mb-1">{method.icon}</div>
+                        <div className="font-bold">{method.label}</div>
+                        <div className="text-xs opacity-80 mt-1">{method.desc}</div>
                       </button>
                     ))}
                   </div>
