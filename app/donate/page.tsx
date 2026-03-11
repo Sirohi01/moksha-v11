@@ -115,16 +115,105 @@ export default function DonatePage() {
 
   return (
     <>
-      <section className="bg-gradient-to-br from-saffron-800 to-saffron-950 text-white py-20">
-        <Container>
-          <span className="text-gold-300 text-sm font-medium tracking-widest uppercase">✦ Support the Mission ✦</span>
-          <h1 className="font-serif text-4xl md:text-5xl font-bold mt-3 mb-4">
-            Donate to Moksha Seva
-          </h1>
-          <p className="text-saffron-200 text-lg max-w-2xl">
-            ₹500 funds one complete cremation. Your contribution ensures that every soul —
-            regardless of wealth or identity — receives a dignified farewell.
-          </p>
+      {/* Enhanced Hero Section */}
+      <section className="relative bg-gradient-to-br from-orange-900 via-orange-800 to-red-900 text-white py-24 overflow-hidden">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `radial-gradient(circle at 1px 1px, rgba(255,255,255,0.15) 1px, transparent 0)`,
+            backgroundSize: '20px 20px'
+          }}></div>
+        </div>
+        
+        {/* Floating Elements */}
+        <div className="absolute top-10 left-10 w-20 h-20 bg-yellow-400/20 rounded-full blur-xl animate-pulse"></div>
+        <div className="absolute bottom-10 right-10 w-32 h-32 bg-orange-400/20 rounded-full blur-xl animate-pulse delay-1000"></div>
+        <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-red-400/20 rounded-full blur-xl animate-pulse delay-500"></div>
+        
+        <Container className="relative z-10">
+          <div className="max-w-4xl mx-auto text-center">
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 bg-yellow-400/20 backdrop-blur-sm border border-yellow-400/30 rounded-full px-6 py-2 mb-6">
+              <Heart className="w-4 h-4 text-yellow-300 fill-yellow-300" />
+              <span className="text-yellow-200 text-sm font-semibold tracking-wide uppercase">
+                Every Life Deserves Dignity
+              </span>
+            </div>
+            
+            {/* Main Heading */}
+            <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+              <span className="block text-white">Your</span>
+              <span className="block bg-gradient-to-r from-yellow-300 via-orange-300 to-red-300 bg-clip-text text-transparent">
+                Compassion
+              </span>
+              <span className="block text-white">Changes Lives</span>
+            </h1>
+            
+            {/* Subtitle */}
+            <p className="text-xl md:text-2xl text-orange-100 mb-8 max-w-3xl mx-auto leading-relaxed">
+              Just <span className="font-bold text-yellow-300">₹500</span> provides a complete dignified cremation service. 
+              Your donation ensures no soul is forgotten, regardless of their circumstances.
+            </p>
+            
+            {/* Impact Stats */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 max-w-3xl mx-auto">
+              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
+                <div className="text-3xl font-bold text-yellow-300 mb-2">15,000+</div>
+                <div className="text-orange-200 text-sm font-medium">Lives Honored</div>
+              </div>
+              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
+                <div className="text-3xl font-bold text-yellow-300 mb-2">50+</div>
+                <div className="text-orange-200 text-sm font-medium">Cities Served</div>
+              </div>
+              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
+                <div className="text-3xl font-bold text-yellow-300 mb-2">100%</div>
+                <div className="text-orange-200 text-sm font-medium">Transparency</div>
+              </div>
+            </div>
+            
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <button 
+                onClick={() => document.getElementById('donation-form')?.scrollIntoView({ behavior: 'smooth' })}
+                className="group bg-gradient-to-r from-yellow-400 to-orange-400 hover:from-yellow-500 hover:to-orange-500 text-black font-bold px-8 py-4 rounded-full text-lg shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all duration-300 flex items-center gap-3"
+              >
+                <Heart className="w-6 h-6 fill-current group-hover:animate-pulse" />
+                Donate Now
+                <span className="text-sm opacity-80">Starting ₹500</span>
+              </button>
+              
+              <Link 
+                href="/impact" 
+                className="group text-white hover:text-yellow-300 font-semibold px-6 py-4 rounded-full border-2 border-white/30 hover:border-yellow-300/50 backdrop-blur-sm transition-all duration-300 flex items-center gap-2"
+              >
+                <Info className="w-5 h-5 group-hover:rotate-12 transition-transform" />
+                See Our Impact
+              </Link>
+            </div>
+            
+            {/* Trust Indicators */}
+            <div className="mt-12 pt-8 border-t border-white/20">
+              <p className="text-orange-200 text-sm mb-4 font-medium">Trusted by thousands • Verified by government</p>
+              <div className="flex flex-wrap justify-center items-center gap-6 text-sm text-orange-200">
+                <div className="flex items-center gap-2">
+                  <ShieldCheck className="w-4 h-4 text-green-400" />
+                  <span>80G Tax Exemption</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="w-4 h-4 text-green-400" />
+                  <span>Government Registered</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Heart className="w-4 h-4 text-red-400 fill-red-400" />
+                  <span>100% Fund Utilization</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <ShieldCheck className="w-4 h-4 text-blue-400" />
+                  <span>Secure Payments</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </Container>
       </section>
 
@@ -141,7 +230,7 @@ export default function DonatePage() {
         </Container>
       </section>
 
-      <section className="py-10 bg-gradient-to-b from-cream-50 to-white">
+      <section id="donation-form" className="py-10 bg-gradient-to-b from-cream-50 to-white">
         <Container size="xl">
           <div className="max-w-6xl mx-auto space-y-5">
             
