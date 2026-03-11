@@ -1,43 +1,39 @@
 'use client';
 
-import { TrendingUp, TrendingDown, Users, Heart, Calendar, MessageSquare } from 'lucide-react';
+import { TrendingUp, TrendingDown, Users, Heart, Calendar, DollarSign } from 'lucide-react';
 
 const stats = [
   {
     title: 'Total Donations',
-    value: '₹2,45,678',
+    value: '₹12,45,678',
     change: '+12.5%',
     trend: 'up',
     icon: Heart,
-    color: 'text-green-600',
-    bgColor: 'bg-green-100',
+    period: 'vs last month',
   },
   {
     title: 'Active Volunteers',
-    value: '156',
+    value: '234',
     change: '+8.2%',
     trend: 'up',
     icon: Users,
-    color: 'text-blue-600',
-    bgColor: 'bg-blue-100',
+    period: 'vs last month',
   },
   {
     title: 'Services Completed',
-    value: '89',
+    value: '1,456',
     change: '+15.3%',
     trend: 'up',
     icon: Calendar,
-    color: 'text-purple-600',
-    bgColor: 'bg-purple-100',
+    period: 'vs last month',
   },
   {
-    title: 'Messages',
-    value: '23',
+    title: 'Monthly Revenue',
+    value: '₹3,45,890',
     change: '-2.1%',
     trend: 'down',
-    icon: MessageSquare,
-    color: 'text-orange-600',
-    bgColor: 'bg-orange-100',
+    icon: DollarSign,
+    period: 'vs last month',
   },
 ];
 
@@ -49,35 +45,29 @@ export default function DashboardStats() {
           key={stat.title}
           className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm border border-gray-200 dark:border-gray-700"
         >
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
-                {stat.title}
-              </p>
-              <p className="text-2xl font-bold text-gray-900 dark:text-white mt-2">
-                {stat.value}
-              </p>
+          <div className="flex items-center justify-between mb-4">
+            <div className="p-2 bg-blue-100 dark:bg-blue-900/20 rounded-lg">
+              <stat.icon className="w-6 h-6 text-blue-600 dark:text-blue-400" />
             </div>
-            <div className={`p-3 rounded-full ${stat.bgColor} dark:bg-opacity-20`}>
-              <stat.icon className={`w-6 h-6 ${stat.color}`} />
-            </div>
-          </div>
-          <div className="flex items-center mt-4">
-            {stat.trend === 'up' ? (
-              <TrendingUp className="w-4 h-4 text-green-500 mr-1" />
-            ) : (
-              <TrendingDown className="w-4 h-4 text-red-500 mr-1" />
-            )}
-            <span
-              className={`text-sm font-medium ${
+            <div
+              className={`flex items-center gap-1 text-sm font-medium ${
                 stat.trend === 'up' ? 'text-green-600' : 'text-red-600'
               }`}
             >
+              {stat.trend === 'up' ? (
+                <TrendingUp className="w-4 h-4" />
+              ) : (
+                <TrendingDown className="w-4 h-4" />
+              )}
               {stat.change}
-            </span>
-            <span className="text-sm text-gray-500 dark:text-gray-400 ml-1">
-              from last month
-            </span>
+            </div>
+          </div>
+          <div>
+            <div className="text-2xl font-bold text-gray-900 dark:text-white mb-1">
+              {stat.value}
+            </div>
+            <div className="text-sm text-gray-600 dark:text-gray-400">{stat.title}</div>
+            <div className="text-xs text-gray-500 dark:text-gray-500 mt-1">{stat.period}</div>
           </div>
         </div>
       ))}
