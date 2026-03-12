@@ -159,12 +159,12 @@ export default function ReportPage() {
       </section>
 
       <section className="py-12 bg-cream-50">
-        <Container size="lg">
+        <div className="max-w-[1400px] mx-auto px-6">
           <Alert variant="warning" title="Important Notice" className="mb-6">
             Please also inform your nearest police station. Moksha Seva works in coordination with law enforcement. Do not move or disturb the body.
           </Alert>
 
-          <div className="bg-white rounded-xl border border-stone-200 shadow-lg p-5">
+          <div className="bg-white rounded-xl border border-stone-200 shadow-lg p-6 md:p-8">
             <div className="pb-4 border-b border-stone-200 mb-5">
               <h2 className="font-serif text-lg font-bold text-stone-800">Case Report Form</h2>
               <p className="text-stone-500 text-xs mt-1">Please provide as much detail as possible to help us respond quickly</p>
@@ -914,7 +914,7 @@ export default function ReportPage() {
             </a>
             <p className="text-saffron-100 text-xs mt-1">Toll Free · 24/7 · All India</p>
           </div>
-        </Container>
+        </div>
       </section>
     </>
   );
