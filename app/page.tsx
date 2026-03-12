@@ -13,11 +13,11 @@ import { cn } from "@/lib/utils";
 
 // Optimized Hero Slides - Sorted for Hindu Sacred Rituals and Dignified Departure
 const heroSlides = [
-  "/gallery/image1.png",
-  "/gallery/image2.png",
-  "/gallery/image3.png",
-  "/gallery/image4.png",
-  "/gallery/image5.png",
+  "/gallery/image01.png",
+  "/gallery/image02.png",
+  "/gallery/image03.png",
+  "/gallery/image04.png",
+  "/gallery/image05.png",
   "/gallery/image6.png",
 ];
 

@@ -5,7 +5,6 @@ import {
     Instagram,
     Youtube,
     Linkedin,
-    MessageCircle,
     Camera
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -45,30 +44,8 @@ const socialLinks = [
 ];
 
 export default function SocialFloating() {
-    const whatsappNumber = process.env.NEXT_PUBLIC_SOCIAL_WHATSAPP?.replace(/\D/g, "") || "919773992516";
-    const whatsappUrl = `https://wa.me/${whatsappNumber}`;
-
     return (
         <>
-            {/* --- Left Side: WhatsApp Button --- */}
-            <div className="fixed bottom-6 left-6 z-[1100] group">
-                <div className="absolute -inset-2 bg-green-500/30 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-pulse" />
-                <a
-                    href={whatsappUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="relative flex items-center justify-center w-14 h-14 bg-[#25D366] text-white rounded-full shadow-xl hover:shadow-green-500/40 transition-all duration-300 hover:scale-110 active:scale-95"
-                    aria-label="Contact us on WhatsApp"
-                >
-                    <MessageCircle className="w-6 h-6 fill-white" strokeWidth={2} />
-
-                    {/* Tooltip */}
-                    <div className="absolute left-full ml-3 px-3 py-1.5 bg-stone-900/95 backdrop-blur-sm text-white text-xs font-bold rounded-xl opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 pointer-events-none whitespace-nowrap border border-white/10 uppercase tracking-widest shadow-xl">
-                        Chat on WhatsApp
-                    </div>
-                </a>
-            </div>
-
             {/* --- Right Side: Social Media Sidebar --- */}
             <div className="fixed right-4 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-3">
             {/* Gallery Button */}

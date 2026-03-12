@@ -174,40 +174,58 @@ export default function ChatBot() {
             )}
 
             {/* Floating Chat Button */}
-            <div className="fixed bottom-6 right-24 z-[1100] group">
-                <div className="absolute -inset-2 bg-[#f4c430]/30 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-pulse" />
+            <div className="fixed bottom-6 left-6 z-[1100] flex flex-col gap-3">
+                {/* Chat Button */}
                 <button
                     onClick={() => {
                         setIsOpen(!isOpen);
                         setIsMinimized(false);
                     }}
                     className={cn(
-                        "relative flex items-center justify-center w-14 h-14 rounded-full shadow-xl transition-all duration-300 hover:scale-110 active:scale-95",
+                        "group relative flex items-center justify-center w-12 h-12 rounded-full shadow-lg transition-all duration-300 hover:scale-110 active:scale-95",
                         isOpen
                             ? "bg-stone-900 text-white"
                             : "bg-gradient-to-br from-[#f4c430] to-[#eab308] text-white hover:shadow-[#f4c430]/40"
                     )}
                     aria-label={isOpen ? "Close chat" : "Open chat"}
                 >
+                    <div className="absolute -inset-2 bg-[#f4c430]/30 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     {isOpen ? (
-                        <X className="w-6 h-6" />
+                        <X className="w-5 h-5 relative z-10" />
                     ) : (
                         <>
-                            <MessageCircle className="w-6 h-6" />
+                            <MessageCircle className="w-5 h-5 relative z-10" />
                             {/* Notification Badge */}
-                            <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center animate-pulse">
+                            <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center animate-pulse z-20">
                                 1
                             </span>
                         </>
                     )}
+
+                    {/* Tooltip */}
+                    {!isOpen && (
+                        <div className="absolute left-full ml-3 px-3 py-1.5 bg-stone-900/95 backdrop-blur-sm text-white text-xs font-bold rounded-xl opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 pointer-events-none whitespace-nowrap border border-white/10 uppercase tracking-widest shadow-xl">
+                            Chat with us
+                        </div>
+                    )}
                 </button>
 
-                {/* Tooltip */}
-                {!isOpen && (
-                    <div className="absolute right-full mr-3 top-1/2 -translate-y-1/2 px-3 py-1.5 bg-stone-900/95 backdrop-blur-sm text-white text-xs font-bold rounded-xl opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 pointer-events-none whitespace-nowrap border border-white/10 uppercase tracking-widest shadow-xl">
-                        Chat with us
+                {/* WhatsApp Button */}
+                <a
+                    href={`https://wa.me/${process.env.NEXT_PUBLIC_SOCIAL_WHATSAPP?.replace(/\D/g, "") || "919773992516"}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group relative flex items-center justify-center w-12 h-12 bg-[#25D366] text-white rounded-full shadow-lg hover:shadow-green-500/40 transition-all duration-300 hover:scale-110 active:scale-95"
+                    aria-label="Contact us on WhatsApp"
+                >
+                    <div className="absolute -inset-2 bg-green-500/30 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <MessageCircle className="w-5 h-5 fill-white relative z-10" strokeWidth={2} />
+
+                    {/* Tooltip */}
+                    <div className="absolute left-full ml-3 px-3 py-1.5 bg-stone-900/95 backdrop-blur-sm text-white text-xs font-bold rounded-xl opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 pointer-events-none whitespace-nowrap border border-white/10 uppercase tracking-widest shadow-xl">
+                        Chat on WhatsApp
                     </div>
-                )}
+                </a>
             </div>
         </>
     );

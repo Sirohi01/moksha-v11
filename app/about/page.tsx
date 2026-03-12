@@ -25,14 +25,14 @@ export default function AboutPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-gradient-to-br from-[#1e3a8a] to-[#20b2aa] text-white py-20">
+      <section className="bg-gradient-to-br from-blue-200 via-teal-200 to-cyan-200 text-stone-800 py-20">
         <Container>
           <div className="max-w-3xl">
-            <span className="text-[#f4c430] text-sm font-medium tracking-widest uppercase">✦ Our Story ✦</span>
+            <span className="text-amber-700 text-sm font-medium tracking-widest uppercase">✦ Our Story ✦</span>
             <h1 className="font-serif text-4xl md:text-5xl font-bold mt-3 mb-6">
               About Moksha Seva
             </h1>
-            <p className="text-blue-100 text-lg leading-relaxed">
+            <p className="text-stone-700 text-lg leading-relaxed">
               Founded in 2018, Moksha Seva began with a simple conviction: that every human being —
               regardless of identity, wealth, or social status — deserves a respectful and dignified
               farewell.

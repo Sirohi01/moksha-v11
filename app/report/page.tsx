@@ -82,6 +82,16 @@ export default function ReportPage() {
     witnessPhone: "",
     witnessAddress: "",
     
+    // Document Uploads (Optional)
+    bplCardNumber: "",
+    bplCardPhoto: null as File | null,
+    aadhaarNumber: "",
+    aadhaarPhoto: null as File | null,
+    nocDetails: "",
+    nocPhoto: null as File | null,
+    panNumber: "",
+    panPhoto: null as File | null,
+    
     // Consent
     agreeToTerms: false,
     consentToShare: false,
@@ -129,18 +139,18 @@ export default function ReportPage() {
 
   return (
     <>
-      <section className="bg-gradient-to-br from-red-900 via-stone-900 to-stone-800 text-white py-16">
+      <section className="bg-gradient-to-br from-teal-900 via-teal-800 to-emerald-900 text-white py-16">
         <Container>
           <div className="flex items-start gap-4 max-w-4xl">
-            <div className="w-12 h-12 bg-red-600/20 rounded-xl flex items-center justify-center border-2 border-red-500/50 flex-shrink-0">
-              <AlertTriangle className="w-6 h-6 text-red-400" />
+            <div className="w-12 h-12 bg-teal-600/20 rounded-xl flex items-center justify-center border-2 border-teal-500/50 flex-shrink-0">
+              <AlertTriangle className="w-6 h-6 text-teal-300" />
             </div>
             <div>
-              <span className="text-red-400 text-xs font-semibold tracking-wider uppercase">Emergency Report</span>
+              <span className="text-teal-300 text-xs font-semibold tracking-wider uppercase">Emergency Report</span>
               <h1 className="font-serif text-3xl font-bold mt-1 mb-2">
                 Report an Unclaimed Body
               </h1>
-              <p className="text-stone-300 text-base">
+              <p className="text-teal-50 text-base">
                 If you have found an unclaimed or unidentified body, please fill this form immediately. Our team responds within 24 hours.
               </p>
             </div>
@@ -667,10 +677,160 @@ export default function ReportPage() {
                 </div>
               </div>
 
-              {/* Section 10: Photo Upload */}
+              {/* Section 10: Document Uploads (Optional) */}
               <div className="border border-stone-200 rounded-lg p-3.5 bg-stone-50/50">
                 <div className="flex items-center gap-2 mb-3">
                   <span className="w-5 h-5 bg-saffron-600 text-white rounded-full flex items-center justify-center text-xs font-bold">10</span>
+                  <h3 className="font-semibold text-stone-800 text-sm flex items-center gap-2">
+                    <FileText className="w-3.5 h-3.5" />
+                    Document Details (Optional)
+                  </h3>
+                </div>
+                <p className="text-stone-500 text-xs mb-3">If available, please provide details and upload photos of the following documents</p>
+                
+                <div className="space-y-4">
+                  {/* BPL Card */}
+                  <div className="bg-white rounded-lg p-3 border border-stone-200">
+                    <h4 className="text-sm font-medium text-stone-700 mb-2">BPL Card (Below Poverty Line)</h4>
+                    <div className="space-y-2">
+                      <InputField
+                        label="BPL Card Number"
+                        placeholder="Enter BPL card number"
+                        value={form.bplCardNumber}
+                        onChange={(e) => setForm({ ...form, bplCardNumber: e.target.value })}
+                      />
+                      <div>
+                        <label className="block text-sm font-medium text-stone-700 mb-1">
+                          Upload BPL Card Photo
+                        </label>
+                        <div className="border-2 border-dashed border-stone-300 rounded-lg p-3 text-center hover:border-saffron-400 transition-colors cursor-pointer bg-stone-50">
+                          <input
+                            type="file"
+                            accept="image/*"
+                            onChange={(e) => setForm({ ...form, bplCardPhoto: e.target.files?.[0] || null })}
+                            className="hidden"
+                            id="bplCardPhoto"
+                          />
+                          <label htmlFor="bplCardPhoto" className="cursor-pointer">
+                            <Upload className="w-5 h-5 text-stone-400 mx-auto mb-1" />
+                            <p className="text-stone-500 text-xs">
+                              {form.bplCardPhoto ? form.bplCardPhoto.name : "Click to upload BPL card"}
+                            </p>
+                            <p className="text-stone-400 text-xs mt-0.5">JPG, PNG up to 5MB</p>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Aadhaar Card */}
+                  <div className="bg-white rounded-lg p-3 border border-stone-200">
+                    <h4 className="text-sm font-medium text-stone-700 mb-2">Aadhaar Card</h4>
+                    <div className="space-y-2">
+                      <InputField
+                        label="Aadhaar Number"
+                        placeholder="Enter Aadhaar number"
+                        value={form.aadhaarNumber}
+                        onChange={(e) => setForm({ ...form, aadhaarNumber: e.target.value })}
+                      />
+                      <div>
+                        <label className="block text-sm font-medium text-stone-700 mb-1">
+                          Upload Aadhaar Card Photo
+                        </label>
+                        <div className="border-2 border-dashed border-stone-300 rounded-lg p-3 text-center hover:border-saffron-400 transition-colors cursor-pointer bg-stone-50">
+                          <input
+                            type="file"
+                            accept="image/*"
+                            onChange={(e) => setForm({ ...form, aadhaarPhoto: e.target.files?.[0] || null })}
+                            className="hidden"
+                            id="aadhaarPhoto"
+                          />
+                          <label htmlFor="aadhaarPhoto" className="cursor-pointer">
+                            <Upload className="w-5 h-5 text-stone-400 mx-auto mb-1" />
+                            <p className="text-stone-500 text-xs">
+                              {form.aadhaarPhoto ? form.aadhaarPhoto.name : "Click to upload Aadhaar card"}
+                            </p>
+                            <p className="text-stone-400 text-xs mt-0.5">JPG, PNG up to 5MB</p>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* NOC from Family/Government/Pradhan Certificate */}
+                  <div className="bg-white rounded-lg p-3 border border-stone-200">
+                    <h4 className="text-sm font-medium text-stone-700 mb-2">NOC from Family / Government Certificate / Pradhan Certificate</h4>
+                    <div className="space-y-2">
+                      <InputField
+                        label="Certificate Details"
+                        placeholder="Enter certificate type and details"
+                        value={form.nocDetails}
+                        onChange={(e) => setForm({ ...form, nocDetails: e.target.value })}
+                      />
+                      <div>
+                        <label className="block text-sm font-medium text-stone-700 mb-1">
+                          Upload Certificate Photo
+                        </label>
+                        <div className="border-2 border-dashed border-stone-300 rounded-lg p-3 text-center hover:border-saffron-400 transition-colors cursor-pointer bg-stone-50">
+                          <input
+                            type="file"
+                            accept="image/*"
+                            onChange={(e) => setForm({ ...form, nocPhoto: e.target.files?.[0] || null })}
+                            className="hidden"
+                            id="nocPhoto"
+                          />
+                          <label htmlFor="nocPhoto" className="cursor-pointer">
+                            <Upload className="w-5 h-5 text-stone-400 mx-auto mb-1" />
+                            <p className="text-stone-500 text-xs">
+                              {form.nocPhoto ? form.nocPhoto.name : "Click to upload certificate"}
+                            </p>
+                            <p className="text-stone-400 text-xs mt-0.5">JPG, PNG up to 5MB</p>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* PAN Card */}
+                  <div className="bg-white rounded-lg p-3 border border-stone-200">
+                    <h4 className="text-sm font-medium text-stone-700 mb-2">PAN Card</h4>
+                    <div className="space-y-2">
+                      <InputField
+                        label="PAN Number"
+                        placeholder="Enter PAN number"
+                        value={form.panNumber}
+                        onChange={(e) => setForm({ ...form, panNumber: e.target.value })}
+                      />
+                      <div>
+                        <label className="block text-sm font-medium text-stone-700 mb-1">
+                          Upload PAN Card Photo
+                        </label>
+                        <div className="border-2 border-dashed border-stone-300 rounded-lg p-3 text-center hover:border-saffron-400 transition-colors cursor-pointer bg-stone-50">
+                          <input
+                            type="file"
+                            accept="image/*"
+                            onChange={(e) => setForm({ ...form, panPhoto: e.target.files?.[0] || null })}
+                            className="hidden"
+                            id="panPhoto"
+                          />
+                          <label htmlFor="panPhoto" className="cursor-pointer">
+                            <Upload className="w-5 h-5 text-stone-400 mx-auto mb-1" />
+                            <p className="text-stone-500 text-xs">
+                              {form.panPhoto ? form.panPhoto.name : "Click to upload PAN card"}
+                            </p>
+                            <p className="text-stone-400 text-xs mt-0.5">JPG, PNG up to 5MB</p>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Section 11: Photo Upload */}
+              <div className="border border-stone-200 rounded-lg p-3.5 bg-stone-50/50">
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="w-5 h-5 bg-saffron-600 text-white rounded-full flex items-center justify-center text-xs font-bold">11</span>
                   <h3 className="font-semibold text-stone-800 text-sm">Upload Photos (Optional)</h3>
                 </div>
                 <div className="border-2 border-dashed border-stone-300 rounded-lg p-5 text-center hover:border-saffron-400 transition-colors cursor-pointer bg-white">
@@ -680,10 +840,10 @@ export default function ReportPage() {
                 </div>
               </div>
 
-              {/* Section 11: Consent */}
+              {/* Section 12: Consent */}
               <div className="border border-stone-200 rounded-lg p-3.5 bg-stone-50/50">
                 <div className="flex items-center gap-2 mb-3">
-                  <span className="w-5 h-5 bg-saffron-600 text-white rounded-full flex items-center justify-center text-xs font-bold">11</span>
+                  <span className="w-5 h-5 bg-saffron-600 text-white rounded-full flex items-center justify-center text-xs font-bold">12</span>
                   <h3 className="font-semibold text-stone-800 text-sm">Consent & Agreement</h3>
                 </div>
                 <div className="space-y-3">

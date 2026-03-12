@@ -1,68 +1,40 @@
 "use client";
-import React, { useState } from "react";
-import { Megaphone, Phone, X, ShieldAlert } from "lucide-react";
+import React from "react";
+import { Megaphone, Phone } from "lucide-react";
 import Link from "next/link";
-import { cn } from "@/lib/utils";
 
 export default function EmergencyFloating() {
-    const [isOpen, setIsOpen] = useState(false);
-
     return (
-        <div className="fixed bottom-6 right-6 z-[1100] flex flex-col items-end gap-4">
-            {/* Expanded Menu */}
-            <div className={cn(
-                "flex flex-col items-end gap-3 mb-2 transition-all duration-300 origin-bottom scale-95 opacity-0 pointer-events-none",
-                isOpen && "scale-100 opacity-100 pointer-events-auto shadow-2xl"
-            )}>
-                {/* Call Helpline */}
-                <a
-                    href="tel:+911800123456"
-                    className="group flex items-center gap-3 bg-white border border-stone-200 p-2 rounded-2xl shadow-xl hover:bg-stone-50 transition-all hover:-translate-x-2"
-                >
-                    <span className="px-3 text-[10px] font-black uppercase tracking-widest text-stone-600">24/7 HELPLINE</span>
-                    <div className="w-12 h-12 rounded-xl bg-[#1c1917] flex items-center justify-center text-white">
-                        <Phone size={20} />
-                    </div>
-                </a>
-
-                {/* Report a Body */}
-                <Link
-                    href="/report"
-                    onClick={() => setIsOpen(false)}
-                    className="group flex items-center gap-3 bg-white border border-stone-200 p-2 rounded-2xl shadow-xl hover:bg-stone-50 transition-all hover:-translate-x-2"
-                >
-                    <span className="px-3 text-[10px] font-black uppercase tracking-widest text-red-600">REPORT NOW</span>
-                    <div className="w-12 h-12 rounded-xl bg-red-600 flex items-center justify-center text-white">
-                        <Megaphone size={22} className="group-hover:rotate-12 transition-transform" />
-                    </div>
-                </Link>
-            </div>
-
-            {/* Main SOS Toggle */}
-            <button
-                onClick={() => setIsOpen(!isOpen)}
-                className={cn(
-                    "w-14 h-14 rounded-3xl flex items-center justify-center shadow-xl transition-all duration-500 relative group overflow-hidden border-2",
-                    isOpen
-                        ? "bg-white text-stone-900 border-stone-200 rotate-90"
-                        : "bg-stone-950 text-white hover:bg-red-600 border-red-600/20 hover:border-red-600 shadow-red-600/20"
-                )}
-                aria-label="Emergency Actions"
+        <div className="fixed bottom-6 right-6 z-[1100] flex flex-col items-end gap-3">
+            {/* 24/7 Helpline Button */}
+            <a
+                href="tel:+911800123456"
+                className="group relative flex items-center justify-center w-12 h-12 bg-blue-600 text-white rounded-full shadow-lg hover:shadow-blue-600/40 transition-all duration-300 hover:scale-110 active:scale-95"
+                aria-label="24/7 Helpline"
             >
-                {/* Pulsing Aura */}
-                {!isOpen && (
-                    <div className="absolute inset-0 bg-red-600/30 rounded-full animate-ping pointer-events-none" />
-                )}
+                <div className="absolute -inset-2 bg-blue-500/30 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <Phone className="w-5 h-5 relative z-10" strokeWidth={2} />
 
-                {isOpen ? (
-                    <X size={24} className="transition-transform duration-500" />
-                ) : (
-                    <div className="flex flex-col items-center justify-center">
-                        <ShieldAlert size={24} className="group-hover:scale-110 transition-transform" />
-                        <span className="text-[7px] font-black uppercase tracking-tight mt-0.5">SOS</span>
-                    </div>
-                )}
-            </button>
+                {/* Tooltip */}
+                <div className="absolute right-full mr-3 px-3 py-1.5 bg-stone-900/95 backdrop-blur-sm text-white text-xs font-bold rounded-xl opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 pointer-events-none whitespace-nowrap border border-white/10 uppercase tracking-widest shadow-xl">
+                    24/7 Helpline
+                </div>
+            </a>
+
+            {/* Report Button */}
+            <Link
+                href="/report"
+                className="group relative flex items-center justify-center w-12 h-12 bg-red-600 text-white rounded-full shadow-lg hover:shadow-red-600/40 transition-all duration-300 hover:scale-110 active:scale-95"
+                aria-label="Report Unclaimed Body"
+            >
+                <div className="absolute -inset-2 bg-red-500/30 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-pulse" />
+                <Megaphone className="w-5 h-5 relative z-10 group-hover:rotate-12 transition-transform" strokeWidth={2} />
+
+                {/* Tooltip */}
+                <div className="absolute right-full mr-3 px-3 py-1.5 bg-stone-900/95 backdrop-blur-sm text-white text-xs font-bold rounded-xl opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 pointer-events-none whitespace-nowrap border border-white/10 uppercase tracking-widest shadow-xl">
+                    Report Now
+                </div>
+            </Link>
         </div>
     );
 }

@@ -120,7 +120,7 @@ export default function Navbar() {
                 />
               </div>
               <div className="hidden sm:block">
-                <span className="font-sans text-lg font-semibold text-[#1c1917] leading-tight tracking-tight group-hover:text-[#f4c430] transition-colors duration-300">
+                <span className="font-sans text-lg font-semibold leading-tight tracking-tight bg-gradient-to-r from-[#f4c430] via-[#20b2aa] to-[#f4c430] bg-clip-text text-transparent group-hover:from-[#eab308] group-hover:via-[#1a9d94] group-hover:to-[#eab308] transition-all duration-300">
                   Moksha Seva
                 </span>
                 <span className="text-[10px] text-stone-500 font-normal leading-none uppercase tracking-wider block">
