@@ -31,11 +31,13 @@ interface Activity {
   createdAt: string;
 }
 
+type DashboardMode = 'standard' | 'advanced';
+
 export default function AdminDashboard() {
   const [stats, setStats] = useState<Stats | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const [dashboardMode, setDashboardMode] = useState<'standard' | 'advanced'>('standard');
+  const [dashboardMode, setDashboardMode] = useState<DashboardMode>('standard');
 
   useEffect(() => {
     fetchDashboardData();
@@ -126,9 +128,7 @@ export default function AdminDashboard() {
   if (!stats) return null;
 
   // If advanced mode is selected, show the advanced dashboard
-  if (dashboardMode === 'advanced') {
-    return <AdvancedDashboard />;
-  }
+  const renderAdvancedDashboard = dashboardMode === 'advanced';
 
   const statCards = [
     { title: 'Reports', count: stats.totalReports, icon: '📋', color: 'bg-blue-500', href: '/admin/reports' },
@@ -153,7 +153,7 @@ export default function AdminDashboard() {
         <div className="flex space-x-3">
           <div className="flex bg-gray-100 rounded-lg p-1">
             <button
-              onClick={() => setDashboardMode('standard')}
+              onClick={() => setDashboardMode('standard' as const)}
               className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
                 dashboardMode === 'standard'
                   ? 'bg-white text-gray-900 shadow-sm'
@@ -163,7 +163,7 @@ export default function AdminDashboard() {
               📊 Standard
             </button>
             <button
-              onClick={() => setDashboardMode('advanced')}
+              onClick={() => setDashboardMode('advanced' as const)}
               className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
                 dashboardMode === 'advanced'
                   ? 'bg-white text-gray-900 shadow-sm'
@@ -183,8 +183,13 @@ export default function AdminDashboard() {
         </div>
       </div>
 
-      {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {/* Conditional Content */}
+      {renderAdvancedDashboard ? (
+        <AdvancedDashboard />
+      ) : (
+        <>
+          {/* Stats Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {statCards.map((card) => (
           <a
             key={card.title}
@@ -274,6 +279,8 @@ export default function AdminDashboard() {
           </a>
         </div>
       </div>
+        </>
+      )}
     </div>
   );
 }
