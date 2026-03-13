@@ -73,7 +73,7 @@ export default function WhyMokshaSeva() {
             <div className="relative">
               <div className="aspect-square rounded-2xl overflow-hidden shadow-xl">
                 <Image 
-                  src="/gallery/image1.png" 
+                  src="/gallery/image0010.png" 
                   alt="Moksha Seva service" 
                   className="w-full h-full object-cover"
                   width={400}

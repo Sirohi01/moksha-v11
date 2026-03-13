@@ -67,7 +67,7 @@ export default function AboutPage() {
               <div className="relative bg-white rounded-2xl p-6 shadow-lg">
                 <div className="aspect-[4/3] rounded-xl overflow-hidden mb-4">
                   <Image 
-                    src="/gallery/image1.png" 
+                    src="/gallery/image007.png" 
                     alt="Moksha Seva Service" 
                     className="w-full h-full object-cover"
                     width={400}
@@ -165,7 +165,7 @@ export default function AboutPage() {
               <div className="relative">
                 <div className="aspect-[4/3] rounded-2xl overflow-hidden mb-4">
                   <Image 
-                    src="/gallery/image2.png" 
+                    src="/gallery/image009.png" 
                     alt="Our Journey" 
                     className="w-full h-full object-cover"
                     width={400}

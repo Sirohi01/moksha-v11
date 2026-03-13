@@ -25,25 +25,25 @@ const programmes = [
     title: "Final Journey", 
     icon: Flame, 
     desc: "Providing dignified transportation and sacred final rites for unclaimed souls with complete respect and traditional ceremonies.",
-    img: "/gallery/image1.png"
+    img: "/gallery/image001.png"
   },
   { 
     title: "Compassionate Care", 
     icon: Heart, 
     desc: "Supporting families in need with emotional, logistical and financial assistance during their most difficult times.",
-    img: "/gallery/image2.png"
+    img: "/gallery/image002.png"
   },
   { 
     title: "Community Outreach", 
     icon: Users, 
     desc: "Educating communities about dignity in death and building awareness for those who have no one to care.",
-    img: "/gallery/image3.png"
+    img: "/gallery/image003.png"
   },
   { 
     title: "Sacred Documentation", 
     icon: FileText, 
     desc: "Maintaining proper records and ensuring legal compliance while honoring the memory of every soul we serve.",
-    img: "/gallery/image6.png"
+    img: "/gallery/image004.png"
   },
 ];
 
@@ -256,10 +256,10 @@ export default function HomePage() {
                   <div className="relative h-96 rounded-2xl overflow-hidden shadow-xl">
                     {/* Carousel Images */}
                     {[
-                      { src: "/gallery/image1.png", title: "Sacred Kashi", desc: "Where eternal souls find liberation", location: "Primary Hub" },
-                      { src: "/gallery/image2.png", title: "Holy Haridwar", desc: "Gateway to divine blessings", location: "Regional Center" },
-                      { src: "/gallery/image3.png", title: "Sacred Prayagraj", desc: "Confluence of holy rivers", location: "Active Hub" },
-                      { src: "/gallery/image6.png", title: "Peaceful Service", desc: "Compassionate care for all souls", location: "Service Network" },
+                      { src: "/gallery/image001.png", title: "Sacred Kashi", desc: "Where eternal souls find liberation", location: "Primary Hub" },
+                      { src: "/gallery/image002.png", title: "Holy Haridwar", desc: "Gateway to divine blessings", location: "Regional Center" },
+                      { src: "/gallery/image003.png", title: "Sacred Prayagraj", desc: "Confluence of holy rivers", location: "Active Hub" },
+                      { src: "/gallery/image004.png", title: "Peaceful Service", desc: "Compassionate care for all souls", location: "Service Network" },
                     ].map((slide, idx) => (
                       <div
                         key={idx}
@@ -461,19 +461,19 @@ export default function HomePage() {
           <div className="relative group/carousel">
             <div className="flex gap-4 overflow-x-auto pb-8 scrollbar-hide px-4 -mx-4">
               {[
-                { img: "/gallery/image1.png", t: "SACRED KASHI RITES" },
-                { img: "/gallery/image2.png", t: "MISSION PRAYAGRAJ" },
-                { img: "/gallery/image3.png", t: "FINAL JOURNEY" },
-                { img: "/gallery/image4.png", t: "AMBULANCE SERVICE" },
-                { img: "/gallery/image5.png", t: "DIGNIFIED FAREWELL" },
+                { img: "/gallery/image005.png", t: "SACRED KASHI RITES" },
+                { img: "/gallery/image006.png", t: "MISSION PRAYAGRAJ" },
+                { img: "/gallery/image007.png", t: "FINAL JOURNEY" },
+                { img: "/gallery/image008.png", t: "AMBULANCE SERVICE" },
+                { img: "/gallery/image009.png", t: "DIGNIFIED FAREWELL" },
               ].map((story, i) => (
                 <div key={i} className="relative min-w-[280px] md:min-w-[400px] aspect-[16/10] rounded-[2rem] overflow-hidden group shadow-lg">
                   <Image src={story.img} alt={story.t} fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
-                  <div className="absolute inset-0 bg-black/30 flex items-center justify-center group-hover:bg-black/10 transition-all">
+                  {/* <div className="absolute inset-0 bg-black/30 flex items-center justify-center group-hover:bg-black/10 transition-all">
                     <div className="w-16 h-16 rounded-full bg-white/30 backdrop-blur-md flex items-center justify-center group-hover:bg-[#f4c430] transition-all">
                       <Play className="text-white fill-white ml-1" size={24} />
                     </div>
-                  </div>
+                  </div> */}
                   <div className="absolute bottom-5 left-6">
                     <p className="text-white font-black uppercase text-[10px] tracking-widest">{story.t}</p>
                   </div>
@@ -716,8 +716,6 @@ export default function HomePage() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
               </svg>
             </button>
-
-            {/* Enhanced Carousel Indicators */}
             <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-50">
               {campaigns.map((_, index) => (
                 <button
@@ -738,22 +736,14 @@ export default function HomePage() {
                 />
               ))}
             </div>
-
-            {/* Auto-play indicator */}
-            {/* <div className="absolute top-8 right-8 flex items-center gap-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg z-50">
-              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-              <span className="text-gray-700 text-xs font-medium">Auto-rotating</span>
-            </div> */}
           </div>
         </Container>
       </section>
-
-      {/* ── IN MEMORIAM (LEGACY GIVING) ── */}
       <section className="py-14 bg-stone-100">
         <Container>
           <div className="bg-stone-50 rounded-[3rem] p-8 md:p-14 border border-amber-200 shadow-2xl flex flex-col md:flex-row items-center gap-12 border-t-8 border-t-amber-600">
             <div className="w-full md:w-1/3 aspect-square rounded-[2rem] overflow-hidden rotate-2 shadow-2xl grayscale hover:rotate-0 hover:grayscale-0 transition-all duration-700 relative">
-              <Image src="/gallery/image6.png" alt="Legacy" fill className="object-cover" />
+              <Image src="/gallery/image006.png" alt="Legacy" fill className="object-cover" />
             </div>
             <div className="flex-1">
               <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tighter text-amber-900 leading-none mb-4">LEAVE A LEGACY <br /><span className="text-amber-700">IN THEIR HONOR</span></h2>
