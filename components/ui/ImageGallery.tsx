@@ -190,7 +190,6 @@ export default function ImageGallery({
                 width={800}
                 height={600}
                 className="max-w-full max-h-[80vh] object-contain"
-                priority
               />
             </div>
 
