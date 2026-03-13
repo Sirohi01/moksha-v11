@@ -25,34 +25,74 @@ export default function AboutPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-gradient-to-br from-blue-200 via-teal-200 to-cyan-200 text-stone-800 py-20">
+      <section className="relative py-20 bg-stone-100 overflow-hidden">
+        <div className="absolute inset-0">
+          <div className="absolute top-10 right-10 w-32 h-32 bg-amber-200/20 rounded-full blur-2xl"></div>
+          <div className="absolute bottom-10 left-10 w-24 h-24 bg-amber-300/20 rounded-full blur-xl"></div>
+        </div>
+        
         <Container>
-          <div className="max-w-3xl">
-            <span className="text-amber-700 text-sm font-medium tracking-widest uppercase">✦ Our Story ✦</span>
-            <h1 className="font-serif text-4xl md:text-5xl font-bold mt-3 mb-6">
-              About Moksha Seva
-            </h1>
-            <p className="text-stone-700 text-lg leading-relaxed">
-              Founded in 2018, Moksha Seva began with a simple conviction: that every human being —
-              regardless of identity, wealth, or social status — deserves a respectful and dignified
-              farewell.
-            </p>
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="max-w-xl">
+              <span className="text-amber-700 text-sm font-medium tracking-widest uppercase">✦ Our Story ✦</span>
+              <h1 className="font-serif text-4xl md:text-5xl font-bold mt-3 mb-6 text-gray-900">
+                About Moksha Seva
+              </h1>
+              <p className="text-gray-700 text-lg leading-relaxed mb-8">
+                Founded in 2018, Moksha Seva began with a simple conviction: that every human being —
+                regardless of identity, wealth, or social status — deserves a respectful and dignified
+                farewell.
+              </p>
+              <div className="flex items-center gap-6">
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-amber-800">2,847</div>
+                  <div className="text-sm text-gray-600">Lives Honored</div>
+                </div>
+                <div className="w-px h-12 bg-amber-200"></div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-amber-800">38+</div>
+                  <div className="text-sm text-gray-600">Cities Served</div>
+                </div>
+                <div className="w-px h-12 bg-amber-200"></div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-amber-800">6</div>
+                  <div className="text-sm text-gray-600">Years of Service</div>
+                </div>
+              </div>
+            </div>
+            
+            <div className="relative">
+              <div className="absolute -top-4 -left-4 w-full h-full bg-amber-100 rounded-2xl"></div>
+              <div className="relative bg-white rounded-2xl p-6 shadow-lg">
+                <div className="aspect-[4/3] rounded-xl overflow-hidden mb-4">
+                  <img 
+                    src="/gallery/image1.png" 
+                    alt="Moksha Seva Service" 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="text-center">
+                  <h3 className="font-semibold text-gray-900 mb-2">Serving with Dignity</h3>
+                  <p className="text-gray-600 text-sm">Every soul deserves respect in their final journey</p>
+                </div>
+              </div>
+            </div>
           </div>
         </Container>
       </section>
 
       {/* Mission & Vision */}
-      <section className="py-20 bg-gradient-to-r from-blue-50 to-teal-50">
+      <section className="py-20 bg-stone-50">
         <Container>
           <div className="grid md:grid-cols-2 gap-8">
             <Card variant="spiritual" padding="lg">
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 bg-[#f4c430]/10 rounded-lg flex items-center justify-center">
-                  <Target className="w-5 h-5 text-[#f4c430]" />
+                <div className="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center">
+                  <Target className="w-5 h-5 text-amber-700" />
                 </div>
-                <h2 className="font-serif text-xl font-bold text-stone-800">Our Mission</h2>
+                <h2 className="font-serif text-xl font-bold text-gray-900">Our Mission</h2>
               </div>
-              <p className="text-stone-600 leading-relaxed">
+              <p className="text-gray-700 leading-relaxed">
                 To ensure every unclaimed body and destitute individual receives a dignified cremation
                 with proper rites, complete documentation, and public accountability — in partnership
                 with police departments, hospitals, and municipal authorities.
@@ -60,12 +100,12 @@ export default function AboutPage() {
             </Card>
             <Card variant="spiritual" padding="lg">
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 bg-[#20b2aa]/10 rounded-lg flex items-center justify-center">
-                  <Eye className="w-5 h-5 text-[#20b2aa]" />
+                <div className="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center">
+                  <Eye className="w-5 h-5 text-amber-700" />
                 </div>
-                <h2 className="font-serif text-xl font-bold text-stone-800">Our Vision</h2>
+                <h2 className="font-serif text-xl font-bold text-gray-900">Our Vision</h2>
               </div>
-              <p className="text-stone-600 leading-relaxed">
+              <p className="text-gray-700 leading-relaxed">
                 A society where no person is left without dignified last rites — where technology,
                 compassion, and civic duty unite to ensure that death does not discriminate, and
                 neither does our response to it.
@@ -76,11 +116,11 @@ export default function AboutPage() {
       </section>
 
       {/* Our Story */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-stone-50">
         <Container size="lg">
           <SectionHeader tag="Journey" title="How Moksha Seva Began" centered={false} />
           <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="space-y-4 text-stone-600 leading-relaxed">
+            <div className="space-y-4 text-gray-700 leading-relaxed">
               <p>
                 In 2017, our founder Suresh Narayan witnessed an unclaimed body lying uncremated
                 near a Delhi railway station for three days due to bureaucratic delays and lack of
@@ -97,27 +137,38 @@ export default function AboutPage() {
                 in formal partnership with 12 police districts, 8 hospitals, and 25 NGOs.
               </p>
             </div>
-            <div className="grid grid-cols-2 gap-4">
-              {[
-                { year: "2018", event: "Founded in Delhi with 5 volunteers" },
-                { year: "2019", event: "First police partnership, 200 cremations" },
-                { year: "2020", event: "Expanded to Mumbai and Chennai" },
-                { year: "2021", event: "Launched transparency dashboard" },
-                { year: "2022", event: "500+ volunteers, 38 cities" },
-                { year: "2024", event: "2,847 cremations performed" },
-              ].map((item) => (
-                <div key={item.year} className="bg-gradient-to-br from-[#f4c430]/5 to-[#20b2aa]/5 rounded-lg p-4 border border-[#f4c430]/20">
-                  <p className="font-serif text-[#f4c430] font-bold text-lg">{item.year}</p>
-                  <p className="text-stone-600 text-sm mt-1">{item.event}</p>
+            <div className="space-y-6">
+              <div className="relative">
+                <div className="aspect-[4/3] rounded-2xl overflow-hidden mb-4">
+                  <img 
+                    src="/gallery/image2.png" 
+                    alt="Our Journey" 
+                    className="w-full h-full object-cover"
+                  />
                 </div>
-              ))}
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                {[
+                  { year: "2018", event: "Founded in Delhi with 5 volunteers" },
+                  { year: "2019", event: "First police partnership, 200 cremations" },
+                  { year: "2020", event: "Expanded to Mumbai and Chennai" },
+                  { year: "2021", event: "Launched transparency dashboard" },
+                  { year: "2022", event: "500+ volunteers, 38 cities" },
+                  { year: "2024", event: "2,847 cremations performed" },
+                ].map((item) => (
+                  <div key={item.year} className="bg-stone-100 rounded-lg p-4 border border-amber-200">
+                    <p className="font-serif text-amber-800 font-bold text-lg">{item.year}</p>
+                    <p className="text-gray-700 text-sm mt-1">{item.event}</p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </Container>
       </section>
 
       {/* Values */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-stone-100">
         <Container>
           <SectionHeader tag="Values" title="What We Stand For" />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -125,11 +176,11 @@ export default function AboutPage() {
               const Icon = v.icon;
               return (
                 <Card key={v.title} variant="elevated" padding="md" className="text-center hover:shadow-xl transition-all duration-300 group">
-                  <div className="w-12 h-12 bg-[#20b2aa]/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-[#20b2aa]/20 transition-colors">
-                    <Icon className="w-6 h-6 text-[#20b2aa]" />
+                  <div className="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-amber-200 transition-colors">
+                    <Icon className="w-6 h-6 text-amber-700" />
                   </div>
-                  <h3 className="font-serif font-semibold text-stone-800 mb-2">{v.title}</h3>
-                  <p className="text-stone-500 text-sm leading-relaxed">{v.desc}</p>
+                  <h3 className="font-serif font-semibold text-gray-900 mb-2">{v.title}</h3>
+                  <p className="text-gray-700 text-sm leading-relaxed">{v.desc}</p>
                 </Card>
               );
             })}
@@ -138,19 +189,19 @@ export default function AboutPage() {
       </section>
 
       {/* Team */}
-      <section className="py-20 bg-gradient-to-br from-teal-50 to-blue-50">
+      <section className="py-20 bg-stone-50">
         <Container>
           <SectionHeader tag="Team" title="The People Behind Moksha Seva" />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {team.map((member) => (
               <Card key={member.name} variant="bordered" padding="md" className="flex items-start gap-4 hover:shadow-lg transition-all duration-300">
-                <div className="w-12 h-12 bg-gradient-to-br from-[#f4c430] to-[#20b2aa] rounded-full flex items-center justify-center text-white font-serif font-bold text-lg flex-shrink-0">
+                <div className="w-12 h-12 bg-amber-700 rounded-full flex items-center justify-center text-stone-50 font-serif font-bold text-lg flex-shrink-0">
                   {member.name.charAt(0)}
                 </div>
                 <div>
-                  <h3 className="font-semibold text-stone-800">{member.name}</h3>
-                  <p className="text-[#20b2aa] text-sm">{member.role}</p>
-                  <p className="text-stone-500 text-xs mt-1">
+                  <h3 className="font-semibold text-gray-900">{member.name}</h3>
+                  <p className="text-amber-700 text-sm">{member.role}</p>
+                  <p className="text-gray-600 text-xs mt-1">
                     {member.city} · {member.years} with Moksha Seva
                   </p>
                 </div>
@@ -161,9 +212,9 @@ export default function AboutPage() {
       </section>
 
       {/* Registrations */}
-      <section className="py-16 bg-[#f4c430]/5 border-t border-[#f4c430]/20">
+      <section className="py-16 bg-stone-100 border-t border-amber-200">
         <Container>
-          <h2 className="font-serif text-2xl font-bold text-stone-800 text-center mb-8">
+          <h2 className="font-serif text-2xl font-bold text-gray-900 text-center mb-8">
             Official Registrations & Certifications
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -173,9 +224,9 @@ export default function AboutPage() {
               "80G Donation Tax Benefit",
               "FCRA Registered",
             ].map((cert) => (
-              <div key={cert} className="flex items-start gap-2 bg-white rounded-lg p-4 border border-[#f4c430]/10 hover:border-[#f4c430]/30 transition-colors">
-                <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
-                <p className="text-stone-700 text-sm">{cert}</p>
+              <div key={cert} className="flex items-start gap-2 bg-stone-50 rounded-lg p-4 border border-amber-200 hover:border-amber-300 transition-colors">
+                <CheckCircle className="w-5 h-5 text-amber-700 flex-shrink-0 mt-0.5" />
+                <p className="text-gray-700 text-sm">{cert}</p>
               </div>
             ))}
           </div>

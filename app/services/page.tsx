@@ -95,14 +95,14 @@ export default function ServicesPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="py-12 md:py-16 lg:py-20 bg-gradient-to-br from-[#1e3a8a] to-[#20b2aa]">
+      <section className="py-12 md:py-16 lg:py-20 bg-stone-50">
         <Container>
-          <div className="text-center text-white">
-            <p className="text-[#f4c430] font-black text-[10px] uppercase tracking-[0.4em] mb-4">✦ Our Services ✦</p>
-            <h1 className="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-[0.85] mb-6">
-              Our <span className="text-[#f4c430]">Services</span>
+          <div className="text-center">
+            <p className="text-amber-700 font-black text-[10px] uppercase tracking-[0.4em] mb-4">✦ Our Services ✦</p>
+            <h1 className="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-[0.85] mb-6 text-gray-900">
+              Our <span className="text-amber-700">Services</span>
             </h1>
-            <p className="text-xl md:text-2xl font-medium max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl md:text-2xl font-medium max-w-3xl mx-auto leading-relaxed text-gray-700">
               End-to-end humanitarian services — from cremation to documentation to family support —
               all at no cost to destitute individuals and families.
             </p>
@@ -111,32 +111,32 @@ export default function ServicesPage() {
       </section>
 
       {/* Services Grid */}
-      <section className="py-20 bg-stone-50">
+      <section className="py-20 bg-stone-100">
         <Container>
           <div className="space-y-12">
             {mainServices.map((service, idx) => {
               const Icon = service.icon;
               const isEven = idx % 2 === 0;
               return (
-                <div key={service.title} className="bg-white rounded-2xl border border-stone-100 p-8 shadow-lg hover:shadow-xl transition-all duration-500">
+                <div key={service.title} className="bg-white rounded-2xl border border-stone-200 p-8 shadow-lg hover:shadow-xl transition-all duration-500">
                   <div className={`flex flex-col ${isEven ? "md:flex-row" : "md:flex-row-reverse"} gap-8 items-start`}>
                     <div className="flex-shrink-0">
-                      <div className="w-16 h-16 bg-[#f4c430]/10 rounded-xl flex items-center justify-center border border-[#f4c430]/20">
-                        <Icon className="w-8 h-8 text-[#f4c430]" />
+                      <div className="w-16 h-16 bg-amber-100 rounded-xl flex items-center justify-center border border-amber-200">
+                        <Icon className="w-8 h-8 text-amber-700" />
                       </div>
                     </div>
                     <div className="flex-1">
                       <div className="flex flex-wrap items-center gap-3 mb-4">
-                        <h2 className="text-2xl md:text-3xl font-black uppercase tracking-tighter text-stone-900 leading-tight">{service.title}</h2>
-                        <span className="bg-[#20b2aa] text-white px-3 py-1 rounded-full text-xs font-black uppercase tracking-widest">
+                        <h2 className="text-2xl md:text-3xl font-black uppercase tracking-tighter text-gray-900 leading-tight">{service.title}</h2>
+                        <span className="bg-amber-700 text-white px-3 py-1 rounded-full text-xs font-black uppercase tracking-widest">
                           {service.badge}
                         </span>
                       </div>
-                      <p className="text-stone-600 text-lg leading-relaxed mb-6 font-medium">{service.desc}</p>
+                      <p className="text-gray-600 text-lg leading-relaxed mb-6 font-medium">{service.desc}</p>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         {service.includes.map((item, itemIdx) => (
-                          <div key={itemIdx} className="flex items-center gap-3 text-sm text-stone-700 bg-stone-50 p-3 rounded-lg">
-                            <div className="w-2 h-2 bg-[#20b2aa] rounded-full flex-shrink-0" />
+                          <div key={itemIdx} className="flex items-center gap-3 text-sm text-gray-700 bg-stone-50 p-3 rounded-lg">
+                            <div className="w-2 h-2 bg-amber-700 rounded-full flex-shrink-0" />
                             <span className="font-medium">{item}</span>
                           </div>
                         ))}
@@ -151,7 +151,7 @@ export default function ServicesPage() {
       </section>
 
       {/* Who Can Access Section */}
-      <section className="py-20 bg-[#20b2aa]">
+      <section className="py-20 bg-amber-800">
         <Container>
           <div className="flex flex-col md:flex-row gap-12 items-center">
             <div className="flex-1">
@@ -167,7 +167,7 @@ export default function ServicesPage() {
                   "Cases reported by municipal authorities",
                 ].map((item, idx) => (
                   <div key={idx} className="flex items-center gap-4 text-white bg-white/10 backdrop-blur-sm p-4 rounded-lg border border-white/20">
-                    <Heart className="w-5 h-5 text-[#f4c430] fill-[#f4c430] flex-shrink-0" />
+                    <Heart className="w-5 h-5 text-amber-100 fill-amber-100 flex-shrink-0" />
                     <span className="font-medium text-lg">{item}</span>
                   </div>
                 ))}
@@ -176,7 +176,7 @@ export default function ServicesPage() {
             <div className="flex-shrink-0 text-center bg-white/10 backdrop-blur-sm p-8 rounded-2xl border border-white/20">
               <p className="text-white/80 text-sm mb-4 font-medium">Available 24/7</p>
               <a href="tel:+911800123456">
-                <Button className="bg-[#f4c430] hover:bg-[#eab308] text-black px-8 py-4 rounded-lg font-black uppercase tracking-widest transition-all shadow-lg mb-4 flex items-center gap-2">
+                <Button className="bg-amber-100 hover:bg-white text-amber-800 px-8 py-4 rounded-lg font-black uppercase tracking-widest transition-all shadow-lg mb-4 flex items-center gap-2">
                   <Phone className="w-5 h-5" /> 1800-123-456
                 </Button>
               </a>

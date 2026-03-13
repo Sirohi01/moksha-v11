@@ -1,10 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
-import SocialFloating from "@/components/layout/SocialFloating";
-import EmergencyFloating from "@/components/layout/EmergencyFloating";
-import ChatBot from "@/components/layout/ChatBot";
+import RootLayoutContent from "@/components/layout/RootLayoutContent";
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://moksha-seva.org'),
@@ -135,15 +131,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         />
       </head>
-      <body className="min-h-screen flex flex-col bg-cream-100 antialiased">
-        <Navbar />
-        <main className="flex-1" id="main-content">
-          {children}
-        </main>
-        <SocialFloating />
-        <EmergencyFloating />
-        <ChatBot />
-        <Footer />
+      <body className="min-h-screen antialiased">
+        <RootLayoutContent>{children}</RootLayoutContent>
       </body>
     </html>
   );

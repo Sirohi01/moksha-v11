@@ -26,9 +26,48 @@ export default function FeedbackPage() {
 
   const handleSubmit = async () => {
     setLoading(true);
-    await new Promise((r) => setTimeout(r, 1500));
-    setLoading(false);
-    setSubmitted(true);
+    
+    try {
+      // Prepare form data for API
+      const feedbackData = {
+        name: form.name,
+        email: form.email,
+        phone: form.phone || undefined,
+        feedbackType: form.feedbackType,
+        serviceUsed: form.serviceUsed || undefined,
+        rating: form.experienceRating,
+        subject: form.subject,
+        message: form.message,
+        suggestions: form.suggestions || undefined,
+        wouldRecommend: form.wouldRecommend,
+        consentToPublish: form.consentToPublish,
+        status: 'new'
+      };
+
+      // Submit to backend API
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/feedback`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(feedbackData),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({ message: 'Network error' }));
+        throw new Error(errorData.message || 'Failed to submit feedback');
+      }
+
+      const result = await response.json();
+      console.log('Feedback submitted successfully:', result);
+      
+      setSubmitted(true);
+    } catch (error) {
+      console.error('Failed to submit feedback:', error);
+      alert(`Failed to submit feedback: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (submitted) {
@@ -59,18 +98,18 @@ export default function FeedbackPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-gradient-to-br from-emerald-600 via-teal-600 to-cyan-600 text-white py-16">
+      <section className="bg-stone-50 text-gray-900 py-16">
         <Container>
           <div className="flex items-start gap-4 max-w-4xl">
-            <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center border-2 border-white/50 flex-shrink-0">
-              <MessageSquare className="w-6 h-6 text-white" />
+            <div className="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center border-2 border-amber-200 flex-shrink-0">
+              <MessageSquare className="w-6 h-6 text-amber-700" />
             </div>
             <div>
-              <span className="text-emerald-200 text-xs font-semibold tracking-wider uppercase">Your Voice Matters</span>
+              <span className="text-amber-700 text-xs font-semibold tracking-wider uppercase">Your Voice Matters</span>
               <h1 className="font-serif text-3xl font-bold mt-1 mb-2">
                 Share Your Feedback
               </h1>
-              <p className="text-emerald-100 text-base">
+              <p className="text-gray-600 text-base">
                 Help us improve our services and serve you better. Your feedback is invaluable to us.
               </p>
             </div>
@@ -79,7 +118,7 @@ export default function FeedbackPage() {
       </section>
 
       {/* Feedback Form */}
-      <section className="py-12 bg-cream-50">
+      <section className="py-12 bg-stone-100">
         <div className="max-w-[1400px] mx-auto px-6">
           <Alert variant="info" title="We Value Your Opinion" className="mb-6">
             Your feedback helps us improve our services and better serve those in need. All responses are confidential.
@@ -87,16 +126,16 @@ export default function FeedbackPage() {
 
           <div className="bg-white rounded-xl border border-stone-200 shadow-lg p-6 md:p-8">
             <div className="pb-4 border-b border-stone-200 mb-5">
-              <h2 className="font-serif text-lg font-bold text-stone-800">Feedback Form</h2>
-              <p className="text-stone-500 text-xs mt-1">Please share your experience and suggestions with us</p>
+              <h2 className="font-serif text-lg font-bold text-gray-800">Feedback Form</h2>
+              <p className="text-gray-500 text-xs mt-1">Please share your experience and suggestions with us</p>
             </div>
 
             <div className="space-y-4">
               {/* Section 1: Personal Details */}
               <div className="border border-stone-200 rounded-lg p-3.5 bg-stone-50/50">
                 <div className="flex items-center justify-center gap-2 mb-3">
-                  <span className="w-5 h-5 bg-saffron-600 text-white rounded-full flex items-center justify-center text-xs font-bold">1</span>
-                  <h3 className="font-semibold text-stone-800 text-sm flex items-center gap-2">
+                  <span className="w-5 h-5 bg-amber-700 text-white rounded-full flex items-center justify-center text-xs font-bold">1</span>
+                  <h3 className="font-semibold text-gray-800 text-sm flex items-center gap-2">
                     <User className="w-3.5 h-3.5" />
                     Your Details
                   </h3>
@@ -132,8 +171,8 @@ export default function FeedbackPage() {
               {/* Section 2: Feedback Type */}
               <div className="border border-stone-200 rounded-lg p-3.5 bg-stone-50/50">
                 <div className="flex items-center justify-center gap-2 mb-3">
-                  <span className="w-5 h-5 bg-saffron-600 text-white rounded-full flex items-center justify-center text-xs font-bold">2</span>
-                  <h3 className="font-semibold text-stone-800 text-sm flex items-center gap-2">
+                  <span className="w-5 h-5 bg-amber-700 text-white rounded-full flex items-center justify-center text-xs font-bold">2</span>
+                  <h3 className="font-semibold text-gray-800 text-sm flex items-center gap-2">
                     <MessageSquare className="w-3.5 h-3.5" />
                     Feedback Type
                   </h3>

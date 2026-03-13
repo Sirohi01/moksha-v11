@@ -296,15 +296,15 @@ export default function SchemesPage() {
   return (
     <main className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-[#1e3a8a] via-[#20b2aa] to-[#1e40af] text-white py-12 md:py-20 lg:py-24 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")` }} />
+      <section className="bg-stone-50 text-gray-900 py-12 md:py-20 lg:py-24 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")` }} />
         <Container>
           <div className="max-w-4xl text-center mx-auto">
-            <div className="inline-block px-4 py-1.5 rounded-full bg-[#f4c430]/10 border border-[#f4c430]/20 mb-6">
-              <p className="text-[#f4c430] font-black text-[10px] uppercase tracking-[0.4em] leading-none">GOVERNMENT RESOURCES</p>
+            <div className="inline-block px-4 py-1.5 rounded-full bg-amber-100 border border-amber-200 mb-6">
+              <p className="text-amber-700 font-black text-[10px] uppercase tracking-[0.4em] leading-none">GOVERNMENT RESOURCES</p>
             </div>
-            <h1 className="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-[0.85] mb-8">FUNERAL ASSISTANCE <br /><span className="text-[#f4c430]">SCHEMES</span></h1>
-            <p className="text-blue-100 text-lg md:text-xl font-medium leading-relaxed max-w-3xl mx-auto">
+            <h1 className="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-[0.85] mb-8 text-gray-900">FUNERAL ASSISTANCE <br /><span className="text-amber-700">SCHEMES</span></h1>
+            <p className="text-gray-600 text-lg md:text-xl font-medium leading-relaxed max-w-3xl mx-auto">
               Complete guide to Central and State government schemes providing financial assistance for funeral expenses and family support
             </p>
           </div>
@@ -312,15 +312,15 @@ export default function SchemesPage() {
       </section>
 
       {/* Navigation Tabs */}
-      <section className="py-8 bg-gradient-to-r from-blue-50 to-teal-50 border-b border-blue-100">
+      <section className="py-8 bg-stone-100 border-b border-stone-200">
         <Container>
           <div className="flex flex-wrap justify-center gap-4">
             <button
               onClick={() => setActiveTab('central')}
               className={`px-6 py-3 rounded-xl font-medium transition-all ${
                 activeTab === 'central'
-                  ? 'bg-[#f4c430] text-black shadow-lg'
-                  : 'bg-white text-stone-600 hover:bg-stone-50'
+                  ? 'bg-amber-700 text-white shadow-lg'
+                  : 'bg-white text-gray-600 hover:bg-stone-50'
               }`}
             >
               Central Government Schemes
@@ -329,8 +329,8 @@ export default function SchemesPage() {
               onClick={() => setActiveTab('state')}
               className={`px-6 py-3 rounded-xl font-medium transition-all ${
                 activeTab === 'state'
-                  ? 'bg-[#20b2aa] text-white shadow-lg'
-                  : 'bg-white text-stone-600 hover:bg-stone-50'
+                  ? 'bg-amber-800 text-white shadow-lg'
+                  : 'bg-white text-gray-600 hover:bg-stone-50'
               }`}
             >
               State-Wise Schemes
@@ -344,10 +344,10 @@ export default function SchemesPage() {
         <section className="py-16">
           <Container>
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tighter text-stone-900 mb-4">
+              <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tighter text-gray-900 mb-4">
                 Central Government Schemes (All India)
               </h2>
-              <div className="w-20 h-1 bg-[#f4c430] mx-auto"></div>
+              <div className="w-20 h-1 bg-amber-700 mx-auto"></div>
             </div>
 
             <div className="grid gap-8 mb-16">

@@ -1,94 +1,54 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
-import OptimizedImage from './OptimizedImage';
-import { cn } from '@/lib/utils';
+import Image from 'next/image';
+import { useState } from 'react';
 
 interface LazyImageProps {
   src: string;
   alt: string;
-  width?: number;
-  height?: number;
+  width: number;
+  height: number;
   className?: string;
-  priority?: boolean;
-  fill?: boolean;
   sizes?: string;
-  quality?: number;
-  placeholder?: 'blur' | 'empty';
-  blurDataURL?: string;
-  threshold?: number;
-  rootMargin?: string;
 }
 
-export default function LazyImage({
-  src,
-  alt,
-  width,
-  height,
-  className,
-  priority = false,
-  fill = false,
-  sizes,
-  quality = 85,
-  placeholder = 'empty',
-  blurDataURL,
-  threshold = 0.1,
-  rootMargin = '50px',
-}: LazyImageProps) {
-  const [shouldLoad, setShouldLoad] = useState(priority);
-  const imgRef = useRef<HTMLDivElement>(null);
+export default function LazyImage({ src, alt, width, height, className, sizes }: LazyImageProps) {
+  const [isLoading, setIsLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
 
-  useEffect(() => {
-    if (priority) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setShouldLoad(true);
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      {
-        threshold,
-        rootMargin,
-      }
+  if (hasError) {
+    return (
+      <div 
+        className={`flex items-center justify-center bg-gray-200 dark:bg-gray-700 ${className}`}
+        style={{ width, height }}
+      >
+        <span className="text-gray-400 text-sm">Image not found</span>
+      </div>
     );
-
-    if (imgRef.current) {
-      observer.observe(imgRef.current);
-    }
-
-    return () => {
-      if (imgRef.current) {
-        observer.unobserve(imgRef.current);
-      }
-    };
-  }, [priority, threshold, rootMargin]);
+  }
 
   return (
-    <div ref={imgRef} className={cn('relative', className)}>
-      {shouldLoad ? (
-        <OptimizedImage
-          src={src}
-          alt={alt}
-          width={width}
-          height={height}
-          fill={fill}
-          priority={priority}
-          quality={quality}
-          sizes={sizes}
-          placeholder={placeholder}
-          blurDataURL={blurDataURL}
-          className="w-full h-full"
-        />
-      ) : (
-        <div
-          className="bg-gray-200 dark:bg-gray-800 animate-pulse"
-          style={{ width, height }}
-        />
+    <div className="relative">
+      {isLoading && (
+        <div 
+          className={`absolute inset-0 flex items-center justify-center bg-gray-200 dark:bg-gray-700 ${className}`}
+        >
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-400"></div>
+        </div>
       )}
+      <Image
+        src={src}
+        alt={alt}
+        width={width}
+        height={height}
+        className={className}
+        sizes={sizes || `${width}px`}
+        onLoad={() => setIsLoading(false)}
+        onError={() => {
+          setIsLoading(false);
+          setHasError(true);
+        }}
+      />
     </div>
   );
 }

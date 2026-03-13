@@ -116,58 +116,58 @@ export default function DonatePage() {
   return (
     <>
       {/* Enhanced Hero Section */}
-      <section className="relative bg-gradient-to-br from-orange-900 via-orange-800 to-red-900 text-white py-12 md:py-20 lg:py-24 overflow-hidden">
+      <section className="relative bg-stone-50 text-gray-900 py-12 md:py-20 lg:py-24 overflow-hidden">
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute inset-0" style={{
-            backgroundImage: `radial-gradient(circle at 1px 1px, rgba(255,255,255,0.15) 1px, transparent 0)`,
+            backgroundImage: `radial-gradient(circle at 1px 1px, rgba(0,0,0,0.15) 1px, transparent 0)`,
             backgroundSize: '20px 20px'
           }}></div>
         </div>
         
         {/* Floating Elements */}
-        <div className="absolute top-10 left-10 w-20 h-20 bg-yellow-400/20 rounded-full blur-xl animate-pulse"></div>
-        <div className="absolute bottom-10 right-10 w-32 h-32 bg-orange-400/20 rounded-full blur-xl animate-pulse delay-1000"></div>
-        <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-red-400/20 rounded-full blur-xl animate-pulse delay-500"></div>
+        <div className="absolute top-10 left-10 w-20 h-20 bg-amber-100 rounded-full blur-xl animate-pulse"></div>
+        <div className="absolute bottom-10 right-10 w-32 h-32 bg-stone-200 rounded-full blur-xl animate-pulse delay-1000"></div>
+        <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-amber-200 rounded-full blur-xl animate-pulse delay-500"></div>
         
         <Container className="relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 bg-yellow-400/20 backdrop-blur-sm border border-yellow-400/30 rounded-full px-6 py-2 mb-6">
-              <Heart className="w-4 h-4 text-yellow-300 fill-yellow-300" />
-              <span className="text-yellow-200 text-sm font-semibold tracking-wide uppercase">
+            <div className="inline-flex items-center gap-2 bg-amber-100 backdrop-blur-sm border border-amber-200 rounded-full px-6 py-2 mb-6">
+              <Heart className="w-4 h-4 text-amber-700 fill-amber-700" />
+              <span className="text-amber-700 text-sm font-semibold tracking-wide uppercase">
                 Every Life Deserves Dignity
               </span>
             </div>
             
             {/* Main Heading */}
-            <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-              <span className="block text-white">Your</span>
-              <span className="block bg-gradient-to-r from-yellow-300 via-orange-300 to-red-300 bg-clip-text text-transparent">
+            <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight text-gray-900">
+              <span className="block">Your</span>
+              <span className="block text-amber-700">
                 Compassion
               </span>
-              <span className="block text-white">Changes Lives</span>
+              <span className="block">Changes Lives</span>
             </h1>
             
             {/* Subtitle */}
-            <p className="text-xl md:text-2xl text-orange-100 mb-8 max-w-3xl mx-auto leading-relaxed">
-              Just <span className="font-bold text-yellow-300">₹500</span> provides a complete dignified cremation service. 
+            <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
+              Just <span className="font-bold text-amber-700">₹500</span> provides a complete dignified cremation service. 
               Your donation ensures no soul is forgotten, regardless of their circumstances.
             </p>
             
             {/* Impact Stats */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 max-w-3xl mx-auto">
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
-                <div className="text-3xl font-bold text-yellow-300 mb-2">15,000+</div>
-                <div className="text-orange-200 text-sm font-medium">Lives Honored</div>
+              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-stone-200">
+                <div className="text-3xl font-bold text-amber-700 mb-2">15,000+</div>
+                <div className="text-gray-600 text-sm font-medium">Lives Honored</div>
               </div>
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
-                <div className="text-3xl font-bold text-yellow-300 mb-2">50+</div>
-                <div className="text-orange-200 text-sm font-medium">Cities Served</div>
+              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-stone-200">
+                <div className="text-3xl font-bold text-amber-700 mb-2">50+</div>
+                <div className="text-gray-600 text-sm font-medium">Cities Served</div>
               </div>
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
-                <div className="text-3xl font-bold text-yellow-300 mb-2">100%</div>
-                <div className="text-orange-200 text-sm font-medium">Transparency</div>
+              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-stone-200">
+                <div className="text-3xl font-bold text-amber-700 mb-2">100%</div>
+                <div className="text-gray-600 text-sm font-medium">Transparency</div>
               </div>
             </div>
             
@@ -175,7 +175,7 @@ export default function DonatePage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <button 
                 onClick={() => document.getElementById('donation-form')?.scrollIntoView({ behavior: 'smooth' })}
-                className="group bg-gradient-to-r from-yellow-400 to-orange-400 hover:from-yellow-500 hover:to-orange-500 text-black font-bold px-8 py-4 rounded-full text-lg shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all duration-300 flex items-center gap-3"
+                className="group bg-amber-700 hover:bg-amber-800 text-white font-bold px-8 py-4 rounded-full text-lg shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all duration-300 flex items-center gap-3"
               >
                 <Heart className="w-6 h-6 fill-current group-hover:animate-pulse" />
                 Donate Now
@@ -184,7 +184,7 @@ export default function DonatePage() {
               
               <Link 
                 href="/impact" 
-                className="group text-white hover:text-yellow-300 font-semibold px-6 py-4 rounded-full border-2 border-white/30 hover:border-yellow-300/50 backdrop-blur-sm transition-all duration-300 flex items-center gap-2"
+                className="group text-gray-700 hover:text-amber-700 font-semibold px-6 py-4 rounded-full border-2 border-gray-300 hover:border-amber-300 backdrop-blur-sm transition-all duration-300 flex items-center gap-2"
               >
                 <Info className="w-5 h-5 group-hover:rotate-12 transition-transform" />
                 See Our Impact
@@ -192,23 +192,23 @@ export default function DonatePage() {
             </div>
             
             {/* Trust Indicators */}
-            <div className="mt-12 pt-8 border-t border-white/20">
-              <p className="text-orange-200 text-sm mb-4 font-medium">Trusted by thousands • Verified by government</p>
-              <div className="flex flex-wrap justify-center items-center gap-6 text-sm text-orange-200">
+            <div className="mt-12 pt-8 border-t border-stone-200">
+              <p className="text-gray-500 text-sm mb-4 font-medium">Trusted by thousands • Verified by government</p>
+              <div className="flex flex-wrap justify-center items-center gap-6 text-sm text-gray-600">
                 <div className="flex items-center gap-2">
-                  <ShieldCheck className="w-4 h-4 text-green-400" />
+                  <ShieldCheck className="w-4 h-4 text-green-600" />
                   <span>80G Tax Exemption</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 text-green-400" />
+                  <CheckCircle className="w-4 h-4 text-green-600" />
                   <span>Government Registered</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Heart className="w-4 h-4 text-red-400 fill-red-400" />
+                  <Heart className="w-4 h-4 text-red-600 fill-red-600" />
                   <span>100% Fund Utilization</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <ShieldCheck className="w-4 h-4 text-blue-400" />
+                  <ShieldCheck className="w-4 h-4 text-blue-600" />
                   <span>Secure Payments</span>
                 </div>
               </div>
@@ -230,7 +230,7 @@ export default function DonatePage() {
         </Container>
       </section>
 
-      <section id="donation-form" className="py-10 bg-gradient-to-b from-cream-50 to-white">
+      <section id="donation-form" className="py-10 bg-stone-100">
         <Container size="xl">
           <div className="max-w-6xl mx-auto space-y-5">
             

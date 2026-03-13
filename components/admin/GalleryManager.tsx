@@ -1,46 +1,22 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Upload, Search, Grid, List, Edit, Trash2, Eye, Download } from 'lucide-react';
 import LazyImage from '@/components/ui/LazyImage';
 import { cn } from '@/lib/utils';
+import { galleryAPI } from '@/lib/api';
 
-// Mock gallery data
-const mockImages = [
-  {
-    id: '1',
-    src: '/gallery/gallery_ambulance_unit_1772862517482.png',
-    alt: 'Ambulance Unit',
-    title: 'Emergency Ambulance Service',
-    description: 'Our dedicated ambulance unit providing 24/7 emergency services',
-    category: 'services',
-    uploadDate: '2024-01-15',
-    size: '2.3 MB',
-    dimensions: '1920x1080',
-  },
-  {
-    id: '2',
-    src: '/gallery/gallery_community_support_1772861359875.png',
-    alt: 'Community Support',
-    title: 'Community Outreach Program',
-    description: 'Volunteers engaging with local communities',
-    category: 'community',
-    uploadDate: '2024-01-14',
-    size: '1.8 MB',
-    dimensions: '1600x900',
-  },
-  {
-    id: '3',
-    src: '/gallery/gallery_cremation_ceremony_1772861295131.png',
-    alt: 'Cremation Ceremony',
-    title: 'Dignified Cremation Service',
-    description: 'Providing respectful final rites',
-    category: 'services',
-    uploadDate: '2024-01-13',
-    size: '2.1 MB',
-    dimensions: '1920x1080',
-  },
-];
+interface GalleryImage {
+  id: string;
+  src: string;
+  alt: string;
+  title: string;
+  description: string;
+  category: string;
+  uploadDate: string;
+  size: string;
+  dimensions: string;
+}
 
 const categories = [
   { value: 'all', label: 'All Categories' },
@@ -51,20 +27,42 @@ const categories = [
 ];
 
 export default function GalleryManager() {
-  const [images, setImages] = useState(mockImages);
+  const [images, setImages] = useState<GalleryImage[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [selectedImages, setSelectedImages] = useState<string[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [uploading, setUploading] = useState(false);
 
-  const filteredImages = images.filter((image) => {
-    const matchesSearch = 
-      image.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      image.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      image.alt.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = selectedCategory === 'all' || image.category === selectedCategory;
-    return matchesSearch && matchesCategory;
-  });
+  useEffect(() => {
+    fetchImages();
+  }, [currentPage, selectedCategory, searchTerm]);
+
+  const fetchImages = async () => {
+    try {
+      setLoading(true);
+      setError('');
+      
+      const data = await galleryAPI.getImages(
+        currentPage, 
+        20, 
+        selectedCategory === 'all' ? undefined : selectedCategory,
+        searchTerm || undefined
+      );
+      
+      setImages(data.data.images || []);
+      setTotalPages(data.data.pages || 1);
+    } catch (error: any) {
+      console.error('Failed to fetch images:', error);
+      setError(error.message || 'Failed to load images');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleSelectImage = (imageId: string) => {
     setSelectedImages(prev => 
@@ -74,13 +72,77 @@ export default function GalleryManager() {
     );
   };
 
-  const handleDeleteImage = (imageId: string) => {
-    if (confirm('Are you sure you want to delete this image?')) {
+  const handleDeleteImage = async (imageId: string) => {
+    if (!confirm('Are you sure you want to delete this image?')) return;
+
+    try {
+      await galleryAPI.deleteImage(imageId);
       setImages(prev => prev.filter(img => img.id !== imageId));
       setSelectedImages(prev => prev.filter(id => id !== imageId));
       alert('Image deleted successfully');
+    } catch (error: any) {
+      console.error('Failed to delete image:', error);
+      alert('Failed to delete image: ' + error.message);
     }
   };
+
+  const handleUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    // Basic validation
+    if (!file.type.startsWith('image/')) {
+      alert('Please select an image file');
+      return;
+    }
+
+    if (file.size > 10 * 1024 * 1024) {
+      alert('File size must be less than 10MB');
+      return;
+    }
+
+    const title = prompt('Enter image title:');
+    if (!title) return;
+
+    const description = prompt('Enter image description:') || '';
+    const category = prompt('Enter category (services, community, events, volunteers):') || 'services';
+
+    try {
+      setUploading(true);
+      
+      const formData = new FormData();
+      formData.append('image', file);
+      formData.append('title', title);
+      formData.append('description', description);
+      formData.append('category', category);
+      formData.append('alt', title);
+
+      const result = await galleryAPI.uploadImage(formData);
+      
+      // Add new image to the beginning of the list
+      setImages(prev => [result.data, ...prev]);
+      alert('Image uploaded successfully');
+      
+      // Reset file input
+      event.target.value = '';
+    } catch (error: any) {
+      console.error('Failed to upload image:', error);
+      alert('Failed to upload image: ' + error.message);
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  if (loading && images.length === 0) {
+    return (
+      <div className="flex items-center justify-center min-h-96">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading gallery...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">
@@ -93,10 +155,26 @@ export default function GalleryManager() {
           </p>
         </div>
         
-        <button className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-          <Upload className="w-4 h-4" />
-          Upload Images
-        </button>
+        <div className="relative">
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleUpload}
+            className="hidden"
+            id="upload-input"
+            disabled={uploading}
+          />
+          <label
+            htmlFor="upload-input"
+            className={cn(
+              "flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors cursor-pointer",
+              uploading && "opacity-50 cursor-not-allowed"
+            )}
+          >
+            <Upload className="w-4 h-4" />
+            {uploading ? 'Uploading...' : 'Upload Images'}
+          </label>
+        </div>
       </div>
 
       {/* Filters and Controls */}
@@ -109,7 +187,10 @@ export default function GalleryManager() {
               type="text"
               placeholder="Search images..."
               value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
+              onChange={(e) => {
+                setSearchTerm(e.target.value);
+                setCurrentPage(1);
+              }}
               className="pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
           </div>
@@ -117,7 +198,10 @@ export default function GalleryManager() {
           {/* Category Filter */}
           <select
             value={selectedCategory}
-            onChange={(e) => setSelectedCategory(e.target.value)}
+            onChange={(e) => {
+              setSelectedCategory(e.target.value);
+              setCurrentPage(1);
+            }}
             className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           >
             {categories.map((category) => (
@@ -157,12 +241,31 @@ export default function GalleryManager() {
         </div>
       </div>
 
+      {/* Error Display */}
+      {error && (
+        <div className="bg-red-50 border border-red-200 rounded-lg p-4">
+          <div className="flex items-center">
+            <span className="text-red-500 text-xl mr-3">⚠️</span>
+            <div>
+              <h3 className="text-red-800 font-medium">Error Loading Images</h3>
+              <p className="text-red-600 text-sm mt-1">{error}</p>
+            </div>
+          </div>
+          <button
+            onClick={fetchImages}
+            className="mt-3 bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors"
+          >
+            Retry
+          </button>
+        </div>
+      )}
+
       {/* Stats */}
       <div className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border border-gray-200 dark:border-gray-700">
         <div className="flex items-center justify-between">
           <div>
             <span className="text-sm text-gray-600 dark:text-gray-400">
-              Showing {filteredImages.length} of {images.length} images
+              Showing {images.length} images
             </span>
           </div>
           <div className="text-sm text-gray-600 dark:text-gray-400">
@@ -173,7 +276,7 @@ export default function GalleryManager() {
 
       {/* Images Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {filteredImages.map((image) => (
+        {images.map((image) => (
           <div
             key={image.id}
             className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden group"
@@ -183,6 +286,8 @@ export default function GalleryManager() {
               <LazyImage
                 src={image.src}
                 alt={image.alt}
+                width={400}
+                height={225}
                 className="w-full h-full object-cover"
               />
               
@@ -232,6 +337,38 @@ export default function GalleryManager() {
           </div>
         ))}
       </div>
+
+      {/* Pagination */}
+      {totalPages > 1 && (
+        <div className="flex items-center justify-between">
+          <div className="text-sm text-gray-700">
+            Page {currentPage} of {totalPages}
+          </div>
+          <div className="flex space-x-2">
+            <button
+              onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
+              disabled={currentPage === 1}
+              className="px-3 py-2 border border-gray-300 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
+            >
+              Previous
+            </button>
+            <button
+              onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
+              disabled={currentPage === totalPages}
+              className="px-3 py-2 border border-gray-300 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
+            >
+              Next
+            </button>
+          </div>
+        </div>
+      )}
+
+      {images.length === 0 && !loading && (
+        <div className="text-center py-12">
+          <span className="text-gray-400 text-4xl">🖼️</span>
+          <p className="text-gray-500 mt-2">No images found</p>
+        </div>
+      )}
     </div>
   );
 }

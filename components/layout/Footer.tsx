@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Phone, Mail, Facebook, Twitter, Instagram, Youtube, ArrowUpRight } from "lucide-react";
 import { Container } from "@/components/ui/Elements";
 
@@ -32,14 +33,14 @@ const footerLinks = {
 
 export default function Footer() {
   return (
-    <footer className="bg-[#0a0a0a] text-stone-300 border-t border-white/5">
+    <footer className="bg-gray-800 text-white border-t border-white/5">
       {/* 24/7 Response Bar - Tightened */}
       <div className="bg-red-600/5 border-b border-white/5 py-3 relative group">
         <Container>
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-3">
               <div className="w-1.5 h-1.5 rounded-full bg-red-600 animate-pulse shadow-[0_0_8px_rgba(220,38,38,0.4)]" />
-              <p className="text-stone-400 font-black text-[9px] uppercase tracking-[0.3em] leading-none">EMERGENCY STATUS: 24/7 ACTIVE RESPONSE</p>
+              <p className="text-white font-black text-[9px] uppercase tracking-[0.3em] leading-none">EMERGENCY STATUS: 24/7 ACTIVE RESPONSE</p>
             </div>
             <Link href="/report" className="text-white font-black text-[9px] uppercase tracking-widest hover:text-red-500 transition-all flex items-center gap-2">
               REPORT UNCLAIMED BODY <ArrowUpRight size={12} />
@@ -54,19 +55,31 @@ export default function Footer() {
           {/* Brand Column - More compact */}
           <div className="lg:col-span-2 lg:pr-10">
             <div className="mb-8">
-              <span className="font-serif text-3xl font-bold text-white leading-none block tracking-tight mb-2 italic">Moksha Seva</span>
-              <span className="text-[9px] text-[#7ab800] font-black uppercase tracking-[0.4em] block leading-none">THE FINAL DIGNITY</span>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="relative w-16 h-16">
+                  <Image
+                    src="/logo.png"
+                    alt="Moksha Seva Logo"
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+                <div>
+                  <span className="font-serif text-2xl font-bold text-white leading-none block tracking-tight italic">Moksha Seva</span>
+                  <span className="text-[9px] text-[#7ab800] font-black uppercase tracking-[0.4em] block leading-none mt-1">THE FINAL DIGNITY</span>
+                </div>
+              </div>
             </div>
-            <p className="text-stone-400 text-sm leading-relaxed mb-8 font-medium max-w-xs">
+            <p className="text-white text-sm leading-relaxed mb-8 font-medium max-w-xs">
               A world-class humanitarian force dedicated to the restoration of dignity for the forgotten dead.
               Powered by devotion and the vision of a society where no one departs alone.
             </p>
             <div className="space-y-4">
-              <a href="tel:1800123456" className="flex items-center gap-4 text-stone-300 hover:text-[#7ab800] transition-all group/call">
+              <a href="tel:1800123456" className="flex items-center gap-4 text-white hover:text-[#7ab800] transition-all group/call">
                 <Phone size={14} className="text-[#7ab800]" />
                 <span className="text-xs font-black tracking-[0.2em] font-mono">1800-123-456</span>
               </a>
-              <a href="mailto:info@mokshaseva.org" className="flex items-center gap-4 text-stone-300 hover:text-[#7ab800] transition-all group/mail">
+              <a href="mailto:info@mokshaseva.org" className="flex items-center gap-4 text-white hover:text-[#7ab800] transition-all group/mail">
                 <Mail size={14} className="text-[#7ab800]" />
                 <span className="text-xs font-black tracking-[0.2em] lowercase font-mono">info@mokshaseva.org</span>
               </a>
@@ -85,7 +98,7 @@ export default function Footer() {
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="text-stone-400 hover:text-white text-sm font-semibold transition-all hover:translate-x-1 inline-block"
+                      className="text-white hover:text-[#7ab800] text-sm font-semibold transition-all hover:translate-x-1 inline-block"
                     >
                       {link.label}
                     </Link>
@@ -103,17 +116,17 @@ export default function Footer() {
               <div className="w-1.5 h-1.5 rounded-full bg-[#7ab800] animate-pulse" />
               <p className="text-[9px] font-black uppercase tracking-[0.2em] text-[#7ab800]">MISSION SCALE: 12+ CITIES ACTIVE</p>
             </div>
-            <p className="text-stone-500 text-[9px] font-black uppercase tracking-[0.2em]">
+            <p className="text-white text-[9px] font-black uppercase tracking-[0.2em]">
               © {new Date().getFullYear()} MOKSHA SEVA
             </p>
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-8">
-            <Link href="/compliance" className="text-stone-500 hover:text-white text-[9px] font-black uppercase tracking-[0.15em] transition-colors">TAX EXEMPT (80G)</Link>
-            <Link href="/privacy" className="text-stone-500 hover:text-white text-[9px] font-black uppercase tracking-[0.15em] transition-colors">Privacy Policy</Link>
+            <Link href="/compliance" className="text-white hover:text-[#7ab800] text-[9px] font-black uppercase tracking-[0.15em] transition-colors">TAX EXEMPT (80G)</Link>
+            <Link href="/privacy" className="text-white hover:text-[#7ab800] text-[9px] font-black uppercase tracking-[0.15em] transition-colors">Privacy Policy</Link>
             <div className="flex items-center gap-6 ml-2">
               {[Facebook, Twitter, Instagram, Youtube].map((Icon, i) => (
-                <a key={i} href="#" className="text-stone-600 hover:text-white transition-all transform hover:-translate-y-1">
+                <a key={i} href="#" className="text-white hover:text-[#7ab800] transition-all transform hover:-translate-y-1">
                   <Icon size={16} />
                 </a>
               ))}

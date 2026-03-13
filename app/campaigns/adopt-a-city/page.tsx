@@ -10,7 +10,13 @@ export default function AdoptACityPage() {
             {/* Hero Section */}
             <section className="bg-stone-900 text-white py-32 relative overflow-hidden text-center">
                 <div className="absolute inset-0 opacity-100">
-                    <Image src="/gallery/gallery_ambulance_unit_1772862517482.png" alt="Ambulance Response Unit" fill className="object-cover" />
+                    <Image 
+                        src="/gallery/gallery_ambulance_unit_1772862517482.png" 
+                        alt="Ambulance Response Unit" 
+                        fill 
+                        sizes="100vw"
+                        className="object-cover" 
+                    />
                     <div className="absolute inset-0 bg-stone-900/50" />
                 </div>
                 <Container className="relative z-10">

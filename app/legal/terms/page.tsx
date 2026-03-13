@@ -6,33 +6,33 @@ export default function TermsPage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-stone-800 to-stone-950 text-white py-16">
+      <section className="bg-stone-50 text-gray-900 py-16">
         <Container>
-          <div className="flex items-center gap-2 text-gold-300 text-sm font-medium tracking-widest uppercase mb-3">
+          <div className="flex items-center gap-2 text-amber-700 text-sm font-medium tracking-widest uppercase mb-3">
             <FileText className="w-4 h-4" />
             <span>Legal Document</span>
           </div>
           <h1 className="font-serif text-4xl md:text-5xl font-bold mb-4">
             Terms & Conditions
           </h1>
-          <p className="text-stone-300 text-lg max-w-3xl">
+          <p className="text-gray-600 text-lg max-w-3xl">
             Please read these terms and conditions carefully before using our services or making a donation.
           </p>
-          <p className="text-stone-400 text-sm mt-4">
+          <p className="text-gray-500 text-sm mt-4">
             Last Updated: March 9, 2026
           </p>
         </Container>
       </section>
 
       {/* Main Content */}
-      <section className="py-16 bg-cream-50">
+      <section className="py-16 bg-stone-100">
         <Container size="lg">
           <div className="max-w-4xl mx-auto space-y-10">
 
             {/* Introduction */}
-            <div className="bg-white rounded-2xl border border-cream-200 shadow-sm p-8">
-              <h2 className="font-serif text-2xl font-bold text-stone-800 mb-4">1. Introduction</h2>
-              <p className="text-stone-600 leading-relaxed mb-4">
+            <div className="bg-white rounded-2xl border border-stone-200 shadow-sm p-8">
+              <h2 className="font-serif text-2xl font-bold text-gray-800 mb-4">1. Introduction</h2>
+              <p className="text-gray-600 leading-relaxed mb-4">
                 Welcome to Moksha Seva. These Terms and Conditions (&quot;Terms&quot;) govern your use of our website, 
                 services, and any donations made to our organization. By accessing our website or making a donation, 
                 you agree to be bound by these Terms.
@@ -233,18 +233,18 @@ export default function TermsPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-12 bg-saffron-800 text-white">
+      <section className="py-12 bg-amber-800 text-white">
         <Container>
           <div className="text-center max-w-2xl mx-auto">
             <h2 className="font-serif text-2xl font-bold mb-3">
               Ready to Make a Difference?
             </h2>
-            <p className="text-saffron-200 mb-6">
+            <p className="text-amber-200 mb-6">
               Your contribution helps us provide dignified last rites to those in need.
             </p>
             <Link 
               href="/donate"
-              className="inline-block px-8 py-3 bg-white text-saffron-800 rounded-lg font-semibold hover:bg-cream-50 transition-colors"
+              className="inline-block px-8 py-3 bg-white text-amber-800 rounded-lg font-semibold hover:bg-stone-50 transition-colors"
             >
               Donate Now
             </Link>

@@ -55,7 +55,13 @@ export default function CampaignsPage() {
             {/* Hero Section */}
             <section className="bg-stone-900 text-white py-24 relative overflow-hidden">
                 <div className="absolute inset-0 opacity-100">
-                    <Image src="/gallery/gallery_community_support_1772861359875.png" alt="Community Support" fill className="object-cover" />
+                    <Image 
+                        src="/gallery/gallery_community_support_1772861359875.png" 
+                        alt="Community Support" 
+                        fill 
+                        sizes="100vw"
+                        className="object-cover" 
+                    />
                     <div className="absolute inset-0 bg-stone-900/60" />
                 </div>
                 <Container>
@@ -84,7 +90,13 @@ export default function CampaignsPage() {
                                 {/* Visual Side */}
                                 <div className="lg:w-1/2 w-full">
                                     <div className="relative aspect-[16/10] rounded-[3rem] overflow-hidden shadow-2xl group">
-                                        <Image src={campaign.image} alt={campaign.title} fill className="object-cover group-hover:scale-110 transition-transform duration-1000" />
+                                        <Image 
+                                            src={campaign.image} 
+                                            alt={campaign.title} 
+                                            fill 
+                                            sizes="(max-width: 1024px) 100vw, 50vw"
+                                            className="object-cover group-hover:scale-110 transition-transform duration-1000" 
+                                        />
                                         <div className="absolute inset-0 bg-stone-900/20 group-hover:bg-transparent transition-all" />
                                         <div className="absolute top-8 left-8">
                                             <div className={cn("w-16 h-16 rounded-2xl flex items-center justify-center text-white shadow-xl", campaign.color)}>

@@ -59,14 +59,14 @@ const steps = [
 
 export default function HowItWorksPage() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-stone-50">
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-[#1e3a8a] to-[#20b2aa]">
+      <section className="py-20 bg-amber-800">
         <Container>
-          <div className="text-center text-white">
-            <p className="text-[#f4c430] font-black text-[10px] uppercase tracking-[0.4em] mb-4">✦ Our Sacred Process ✦</p>
+          <div className="text-center text-stone-50">
+            <p className="text-amber-200 font-black text-[10px] uppercase tracking-[0.4em] mb-4">✦ Our Sacred Process ✦</p>
             <h1 className="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-[0.85] mb-6">
-              How <span className="text-[#f4c430]">Moksha Seva</span> Works
+              How <span className="text-amber-200">Moksha Seva</span> Works
             </h1>
             <p className="text-xl md:text-2xl font-medium max-w-3xl mx-auto leading-relaxed">
               A transparent, humane, and legally compliant 6-step process — from the first report
@@ -77,7 +77,7 @@ export default function HowItWorksPage() {
       </section>
 
       {/* Timeline Process */}
-      <section className="py-20 bg-stone-50">
+      <section className="py-20 bg-stone-100">
         <Container>
           <div className="space-y-12">
             {steps.map((step, idx) => {
@@ -86,34 +86,34 @@ export default function HowItWorksPage() {
                 <div key={step.step} className="relative">
                   {/* Connector Line */}
                   {idx < steps.length - 1 && (
-                    <div className="absolute left-8 top-20 bottom-0 w-0.5 bg-gradient-to-b from-[#f4c430] to-transparent hidden md:block z-0" />
+                    <div className="absolute left-8 top-20 bottom-0 w-0.5 bg-gradient-to-b from-amber-600 to-transparent hidden md:block z-0" />
                   )}
 
                   <div className="flex gap-8 items-start relative z-10">
                     {/* Icon Circle */}
-                    <div className="flex-shrink-0 w-16 h-16 bg-[#f4c430] rounded-full flex items-center justify-center shadow-xl border-4 border-white">
-                      <Icon className="w-8 h-8 text-white" />
+                    <div className="flex-shrink-0 w-16 h-16 bg-amber-700 rounded-full flex items-center justify-center shadow-xl border-4 border-stone-50">
+                      <Icon className="w-8 h-8 text-stone-50" />
                     </div>
 
                     {/* Content Card */}
-                    <div className="flex-1 bg-white rounded-2xl border border-stone-100 p-8 shadow-lg hover:shadow-xl transition-all duration-500">
+                    <div className="flex-1 bg-stone-50 rounded-2xl border border-amber-200 p-8 shadow-lg hover:shadow-xl transition-all duration-500">
                       <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
                         <div>
-                          <span className="text-[#20b2aa] font-black text-xs uppercase tracking-widest">{step.step}</span>
-                          <h2 className="text-2xl md:text-3xl font-black uppercase tracking-tighter text-stone-900 mt-1 leading-tight">{step.title}</h2>
+                          <span className="text-amber-700 font-black text-xs uppercase tracking-widest">{step.step}</span>
+                          <h2 className="text-2xl md:text-3xl font-black uppercase tracking-tighter text-gray-900 mt-1 leading-tight">{step.title}</h2>
                         </div>
-                        <div className="flex items-center gap-2 bg-[#f4c430]/10 text-[#f4c430] text-xs font-black px-4 py-2 rounded-full border border-[#f4c430]/20">
+                        <div className="flex items-center gap-2 bg-amber-100 text-amber-800 text-xs font-black px-4 py-2 rounded-full border border-amber-200">
                           <Clock className="w-4 h-4" />
                           <span className="uppercase tracking-widest">{step.timeline}</span>
                         </div>
                       </div>
                       
-                      <p className="text-stone-600 text-lg leading-relaxed mb-6 font-medium">{step.desc}</p>
+                      <p className="text-gray-700 text-lg leading-relaxed mb-6 font-medium">{step.desc}</p>
                       
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         {step.actions.map((action, actionIdx) => (
-                          <div key={actionIdx} className="flex items-center gap-3 text-sm text-stone-700 bg-stone-50 p-3 rounded-lg">
-                            <div className="w-2 h-2 rounded-full bg-[#20b2aa] flex-shrink-0" />
+                          <div key={actionIdx} className="flex items-center gap-3 text-sm text-gray-700 bg-stone-100 p-3 rounded-lg">
+                            <div className="w-2 h-2 rounded-full bg-amber-700 flex-shrink-0" />
                             <span className="font-medium">{action}</span>
                           </div>
                         ))}
@@ -128,9 +128,9 @@ export default function HowItWorksPage() {
       </section>
 
       {/* Call to Action */}
-      <section className="py-20 bg-[#20b2aa]">
+      <section className="py-20 bg-amber-700">
         <Container>
-          <div className="text-center text-white">
+          <div className="text-center text-stone-50">
             <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tighter mb-6">
               Have a Case to Report?
             </h2>
@@ -139,12 +139,12 @@ export default function HowItWorksPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/report">
-                <Button className="bg-[#f4c430] hover:bg-[#eab308] text-black px-10 py-4 rounded-lg font-black uppercase tracking-widest transition-all shadow-lg">
+                <Button className="bg-stone-50 hover:bg-white text-amber-800 px-10 py-4 rounded-lg font-black uppercase tracking-widest transition-all shadow-lg">
                   Report Online
                 </Button>
               </Link>
               <a href="tel:+911800123456">
-                <Button className="border-2 border-white text-white hover:bg-white hover:text-[#20b2aa] px-10 py-4 rounded-lg font-black uppercase tracking-widest transition-all flex items-center gap-2">
+                <Button className="border-2 border-stone-50 text-stone-50 hover:bg-stone-50 hover:text-amber-800 px-10 py-4 rounded-lg font-black uppercase tracking-widest transition-all flex items-center gap-2">
                   <Phone className="w-5 h-5" /> Call 1800-123-456
                 </Button>
               </a>

@@ -6,26 +6,26 @@ export default function RefundPolicyPage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-stone-800 to-stone-950 text-white py-16">
+      <section className="bg-stone-50 text-gray-900 py-16">
         <Container>
-          <div className="flex items-center gap-2 text-gold-300 text-sm font-medium tracking-widest uppercase mb-3">
+          <div className="flex items-center gap-2 text-amber-700 text-sm font-medium tracking-widest uppercase mb-3">
             <FileText className="w-4 h-4" />
             <span>Legal Document</span>
           </div>
           <h1 className="font-serif text-4xl md:text-5xl font-bold mb-4">
             Refund & Cancellation Policy
           </h1>
-          <p className="text-stone-300 text-lg max-w-3xl">
+          <p className="text-gray-600 text-lg max-w-3xl">
             Complete information about donation refunds, cancellations, and our commitment to transparency.
           </p>
-          <p className="text-stone-400 text-sm mt-4">
+          <p className="text-gray-500 text-sm mt-4">
             Last Updated: March 9, 2026
           </p>
         </Container>
       </section>
 
       {/* Quick Summary */}
-      <section className="py-8 bg-saffron-50 border-b border-saffron-100">
+      <section className="py-8 bg-amber-50 border-b border-amber-100">
         <Container>
           <div className="grid md:grid-cols-3 gap-6">
             <div className="flex items-start gap-3">
@@ -33,8 +33,8 @@ export default function RefundPolicyPage() {
                 <CheckCircle className="w-5 h-5 text-green-600" />
               </div>
               <div>
-                <h3 className="font-semibold text-stone-800 mb-1">Refund Window</h3>
-                <p className="text-sm text-stone-600">7 days from donation date for eligible cases</p>
+                <h3 className="font-semibold text-gray-800 mb-1">Refund Window</h3>
+                <p className="text-sm text-gray-600">7 days from donation date for eligible cases</p>
               </div>
             </div>
             <div className="flex items-start gap-3">
@@ -42,17 +42,17 @@ export default function RefundPolicyPage() {
                 <Clock className="w-5 h-5 text-blue-600" />
               </div>
               <div>
-                <h3 className="font-semibold text-stone-800 mb-1">Processing Time</h3>
-                <p className="text-sm text-stone-600">5-7 business days after approval</p>
+                <h3 className="font-semibold text-gray-800 mb-1">Processing Time</h3>
+                <p className="text-sm text-gray-600">5-7 business days after approval</p>
               </div>
             </div>
             <div className="flex items-start gap-3">
-              <div className="w-10 h-10 bg-saffron-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                <Shield className="w-5 h-5 text-saffron-600" />
+              <div className="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                <Shield className="w-5 h-5 text-amber-700" />
               </div>
               <div>
-                <h3 className="font-semibold text-stone-800 mb-1">100% Transparent</h3>
-                <p className="text-sm text-stone-600">Clear process with email updates</p>
+                <h3 className="font-semibold text-gray-800 mb-1">100% Transparent</h3>
+                <p className="text-sm text-gray-600">Clear process with email updates</p>
               </div>
             </div>
           </div>
@@ -60,7 +60,7 @@ export default function RefundPolicyPage() {
       </section>
 
       {/* Main Content */}
-      <section className="py-16 bg-cream-50">
+      <section className="py-16 bg-stone-100">
         <Container size="lg">
           <div className="max-w-4xl mx-auto space-y-12">
 
@@ -539,25 +539,25 @@ export default function RefundPolicyPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-12 bg-saffron-800 text-white">
+      <section className="py-12 bg-amber-800 text-white">
         <Container>
           <div className="text-center max-w-2xl mx-auto">
             <h2 className="font-serif text-2xl font-bold mb-3">
               Have Questions About Our Refund Policy?
             </h2>
-            <p className="text-saffron-200 mb-6">
+            <p className="text-amber-200 mb-6">
               Our support team is here to help clarify any doubts or concerns you may have.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-4">
               <Link 
                 href="/contact"
-                className="px-6 py-3 bg-white text-saffron-800 rounded-lg font-semibold hover:bg-cream-50 transition-colors"
+                className="px-6 py-3 bg-white text-amber-800 rounded-lg font-semibold hover:bg-stone-50 transition-colors"
               >
                 Contact Support
               </Link>
               <Link 
                 href="/donate"
-                className="px-6 py-3 bg-saffron-700 text-white rounded-lg font-semibold hover:bg-saffron-600 transition-colors border-2 border-saffron-600"
+                className="px-6 py-3 bg-amber-700 text-white rounded-lg font-semibold hover:bg-amber-600 transition-colors border-2 border-amber-600"
               >
                 Make a Donation
               </Link>

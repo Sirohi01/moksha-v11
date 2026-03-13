@@ -111,20 +111,20 @@ export default function Navbar() {
         <div className="max-w-full mx-auto px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Logo Section - Left */}
-            <Link href="/" className="flex items-center gap-3 group shrink-0">
-              <div className="relative w-9 h-9 overflow-hidden">
+            <Link href="/" className="flex items-center gap-4 group shrink-0 relative z-50">
+              <div className="relative w-24 h-24 overflow-hidden rounded-full bg-white border-2 border-gray-200 group-hover:border-gray-300 transition-all duration-300 group-hover:scale-105 shadow-lg transform translate-y-6">
                 <Image
                   src="/logo.png"
                   alt="Moksha Seva Logo"
                   fill
-                  className="object-contain group-hover:scale-105 transition-transform duration-500"
+                  className="object-contain p-4 relative z-10 group-hover:scale-110 transition-transform duration-300"
                 />
               </div>
               <div className="hidden sm:block">
-                <span className="font-sans text-lg font-semibold leading-tight tracking-tight bg-gradient-to-r from-[#f4c430] via-[#20b2aa] to-[#f4c430] bg-clip-text text-transparent group-hover:from-[#eab308] group-hover:via-[#1a9d94] group-hover:to-[#eab308] transition-all duration-300">
+                <span className="font-sans text-xl font-bold leading-tight tracking-tight bg-gradient-to-r from-[#f4c430] via-[#20b2aa] to-[#f4c430] bg-clip-text text-transparent group-hover:from-[#eab308] group-hover:via-[#1a9d94] group-hover:to-[#eab308] transition-all duration-300 group-hover:scale-[1.02] inline-block">
                   Moksha Seva
                 </span>
-                <span className="text-[10px] text-stone-500 font-normal leading-none uppercase tracking-wider block">
+                <span className="text-[11px] text-stone-500 font-normal leading-none uppercase tracking-wider block group-hover:text-stone-600 transition-colors duration-300">
                   Liberation Through Service
                 </span>
               </div>
@@ -331,7 +331,7 @@ export default function Navbar() {
 
               {/* Donate Button */}
               <Link href="/donate">
-                <Button size="sm" className="px-4 lg:px-5 py-2 text-xs lg:text-sm font-medium bg-[#f4c430] hover:bg-[#eab308] text-black shadow-md hover:shadow-lg transition-all duration-300">
+                <Button size="sm" className="px-4 lg:px-6 py-2 text-sm font-normal bg-gray-100 hover:bg-gray-200 text-gray-700 border border-gray-300 hover:border-gray-400 transition-all duration-200 rounded-md">
                   Donate
                 </Button>
               </Link>
@@ -350,7 +350,7 @@ export default function Navbar() {
 
         {/* Mobile Navigation */}
         {mobileOpen && (
-          <div className="lg:hidden border-t border-stone-200/50 bg-white/95 backdrop-blur-md shadow-lg">
+          <div className="lg:hidden border-t border-stone-200/50 bg-white/95 backdrop-blur-md shadow-lg mt-1">
             <nav className="px-6 py-4 space-y-1" aria-label="Mobile navigation">
               {navLinks.map((link) => (
                 <div key={link.label} className="border-b border-stone-100/50 last:border-none pb-3 last:pb-0">
@@ -422,7 +422,7 @@ export default function Navbar() {
               {/* Mobile CTA */}
               <div className="pt-4 mt-4 border-t border-stone-200/50">
                 <Link href="/donate" onClick={() => setMobileOpen(false)}>
-                  <Button className="w-full py-3 text-sm font-medium bg-[#f4c430] hover:bg-[#eab308] text-black">
+                  <Button className="w-full py-3 text-sm font-normal bg-gray-100 hover:bg-gray-200 text-gray-700 border border-gray-300 hover:border-gray-400 rounded-md">
                     Donate Now
                   </Button>
                 </Link>

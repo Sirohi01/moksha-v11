@@ -108,3 +108,112 @@ export interface FAQ {
   answer: string;
   category: string;
 }
+
+// Board Application types
+export interface BoardApplication {
+  _id: string;
+  name: string;
+  email: string;
+  phone: string;
+  dateOfBirth: string;
+  address: string;
+  city: string;
+  state: string;
+  pincode?: string;
+  currentPosition: string;
+  organization: string;
+  experience: number;
+  expertise?: string[];
+  qualifications: string;
+  positionInterested: 'board_member' | 'advisory_member' | 'treasurer' | 'secretary' | 'any';
+  motivationStatement: string;
+  previousBoardExperience?: string;
+  timeCommitment: '5_hours_month' | '10_hours_month' | '15_hours_month' | '20_plus_hours_month';
+  references?: Array<{
+    name: string;
+    position?: string;
+    organization?: string;
+    phone?: string;
+    email?: string;
+    relationship?: string;
+  }>;
+  resumeUrl?: string;
+  coverLetterUrl?: string;
+  applicationId: string;
+  status: 'submitted' | 'under_review' | 'interview_scheduled' | 'approved' | 'rejected';
+  createdAt: string;
+  updatedAt: string;
+}
+
+// Legacy Giving types
+export interface LegacyGiving {
+  _id: string;
+  name: string;
+  email: string;
+  phone: string;
+  dateOfBirth?: string;
+  address?: string;
+  city?: string;
+  state?: string;
+  pincode?: string;
+  legacyType: 'will_bequest' | 'life_insurance' | 'retirement_plan' | 'charitable_trust' | 'other';
+  estimatedValue?: string;
+  timeframe?: 'immediate' | '1_2_years' | '3_5_years' | '5_plus_years' | 'uncertain';
+  specificPurpose?: string;
+  additionalInfo?: string;
+  preferredContact: 'phone' | 'email' | 'mail' | 'in_person';
+  bestTimeToContact?: string;
+  requestId: string;
+  status: 'new' | 'contacted' | 'in_discussion' | 'completed' | 'declined';
+  assignedTo?: string;
+  followUpDate?: string;
+  notes?: Array<{
+    note: string;
+    addedBy: string;
+    addedAt: string;
+  }>;
+  createdAt: string;
+  updatedAt: string;
+}
+
+// Expansion Request types
+export interface ExpansionRequest {
+  _id: string;
+  name: string;
+  email: string;
+  phone: string;
+  organization?: string;
+  position?: string;
+  requestedCity: string;
+  requestedState: string;
+  region?: string;
+  population?: number;
+  currentServices?: string;
+  needAssessment?: string;
+  localSupport: 'individual' | 'organization' | 'government' | 'community' | 'multiple';
+  supportDetails?: string;
+  volunteerAvailability?: string;
+  fundingSupport?: string;
+  whyNeeded: string;
+  expectedImpact?: string;
+  challenges?: string;
+  timeline?: string;
+  requestId: string;
+  status: 'submitted' | 'under_review' | 'feasibility_study' | 'approved' | 'rejected' | 'on_hold';
+  priority: 'low' | 'medium' | 'high';
+  assignedTo?: string;
+  reviewedBy?: string;
+  reviewedAt?: string;
+  approvalDate?: string;
+  rejectionReason?: string;
+  feasibilityScore?: number;
+  estimatedCost?: number;
+  estimatedTimeline?: string;
+  notes?: Array<{
+    note: string;
+    addedBy: string;
+    addedAt: string;
+  }>;
+  createdAt: string;
+  updatedAt: string;
+}

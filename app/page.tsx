@@ -11,23 +11,40 @@ import { Container } from "@/components/ui/Elements";
 import { useState, useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
 
-// Optimized Hero Slides - Sorted for Hindu Sacred Rituals and Dignified Departure
 const heroSlides = [
-  "/gallery/image01.png",
+  "/gallery/image1.png",
   "/gallery/image02.png",
   "/gallery/image03.png",
-  "/gallery/image04.png",
-  "/gallery/image05.png",
+  "/gallery/image2.png",
+  "/gallery/image3.png",
   "/gallery/image6.png",
 ];
 
 const programmes = [
-  { title: "LAST RIDE", icon: Flame, color: "text-orange-600", dot: "bg-orange-50", desc: "Providing dignified transportation and final rites for unclaimed souls." },
-  { title: "DESTITUTE CARE", icon: Heart, color: "text-rose-600", dot: "bg-rose-50", desc: "Supporting poor families with logistical and financial aid during loss." },
-  { title: "ADVOCACY", icon: Users, color: "text-blue-600", dot: "bg-blue-50", desc: "Sensitizing communities about the right to a dignified departure." },
-  { title: "DOCUMENTATION", icon: FileText, color: "text-slate-600", dot: "bg-slate-50", desc: "Ensuring legal compliance and proper record-keeping for every case." },
-  { title: "GRASSROOTS", icon: HelpingHand, color: "text-[#20b2aa]", dot: "bg-teal-50", desc: "Empowering local volunteers and partners in 38+ cities." },
-  { title: "EMERGENCY", icon: Cross, color: "text-red-600", dot: "bg-red-50", desc: "Responding to mass tragedies and natural disasters with swiftness." },
+  { 
+    title: "Final Journey", 
+    icon: Flame, 
+    desc: "Providing dignified transportation and sacred final rites for unclaimed souls with complete respect and traditional ceremonies.",
+    img: "/gallery/image1.png"
+  },
+  { 
+    title: "Compassionate Care", 
+    icon: Heart, 
+    desc: "Supporting families in need with emotional, logistical and financial assistance during their most difficult times.",
+    img: "/gallery/image2.png"
+  },
+  { 
+    title: "Community Outreach", 
+    icon: Users, 
+    desc: "Educating communities about dignity in death and building awareness for those who have no one to care.",
+    img: "/gallery/image3.png"
+  },
+  { 
+    title: "Sacred Documentation", 
+    icon: FileText, 
+    desc: "Maintaining proper records and ensuring legal compliance while honoring the memory of every soul we serve.",
+    img: "/gallery/image6.png"
+  },
 ];
 
 const sdgs = [
@@ -68,8 +85,12 @@ const mediaLogos = ["TIMES OF INDIA", "DAINIK BHASKAR", "AAJ TAK", "NDTV", "HIND
 
 export default function HomePage() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [currentLocationSlide, setCurrentLocationSlide] = useState(0);
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
+  const [currentCampaignSlide, setCurrentCampaignSlide] = useState(0);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const locationTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const campaignTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   const startTimer = () => {
     if (timerRef.current) clearInterval(timerRef.current);
@@ -80,17 +101,37 @@ export default function HomePage() {
 
   useEffect(() => {
     startTimer();
+    
+    // Location carousel timer
+    if (locationTimerRef.current) clearInterval(locationTimerRef.current);
+    locationTimerRef.current = setInterval(() => {
+      setCurrentLocationSlide((prev) => {
+        const next = (prev + 1) % 4;
+        console.log('Location slide changing from', prev, 'to', next);
+        return next;
+      });
+    }, 4000);
+    
+    // Campaign carousel timer
+    if (campaignTimerRef.current) clearInterval(campaignTimerRef.current);
+    campaignTimerRef.current = setInterval(() => {
+      setCurrentCampaignSlide((prev) => (prev + 1) % campaigns.length);
+    }, 6000);
+    
     const tTimer = setInterval(() => {
       setCurrentTestimonial((prev) => (prev + 1) % testimonialSlides.length);
     }, 6000);
+    
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
+      if (locationTimerRef.current) clearInterval(locationTimerRef.current);
+      if (campaignTimerRef.current) clearInterval(campaignTimerRef.current);
       clearInterval(tTimer);
     };
   }, []);
 
   return (
-    <div className="bg-white min-h-screen font-sans">
+    <div className="bg-stone-50 min-h-screen font-sans">
       {/* ── HERO (HINDU RITUALS & SACRED DEPARTURE) ── */}
       <section className="relative h-[60vh] md:h-[75vh] lg:h-[85vh] w-full overflow-hidden bg-black border-b-[8px] border-[#f4c430]">
         {heroSlides.map((src, idx) => (
@@ -144,108 +185,268 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── ACTION BANNER ── */}
-      <div className="bg-[#20b2aa] py-6 shadow-2xl relative z-40 border-b border-[#0d9488]">
+      {/* Action Banner */}
+      <div className="bg-amber-700 py-6">
         <Container className="flex flex-col md:flex-row items-center justify-between gap-6">
-          <h2 className="text-white font-black text-2xl md:text-3xl uppercase tracking-tighter leading-none italic drop-shadow-md">
-            DIGNITY IN DEPARTURE • SACRED RITES FOR ALL
+          <h2 className="text-stone-100 text-xl md:text-2xl font-semibold">
+            Dignity in Departure • Sacred Rites for All
           </h2>
           <div className="flex gap-4">
             <Link href="/report">
-              <Button variant="secondary" className="px-10 py-4 text-sm font-black shadow-lg hover:scale-105 transition-transform">
-                REPORT A CASE
+              <Button className="px-6 py-2 bg-stone-100 text-amber-900 hover:bg-white font-medium">
+                Report a Case
               </Button>
             </Link>
             <Link href="/donate">
-              <Button variant="white" className="px-10 py-4 text-sm font-black shadow-lg hover:scale-105 transition-transform">
-                DONATE NOW
+              <Button className="px-6 py-2 bg-amber-800 text-stone-100 hover:bg-amber-700 font-medium">
+                Donate Now
               </Button>
             </Link>
           </div>
         </Container>
       </div>
 
-      {/* ── PROGRAMMES (COMPACT) ── */}
-      <section className="py-12 bg-white">
+      {/* Our Seva */}
+      <section className="py-16 bg-stone-50">
         <Container>
-          <div className="text-center mb-8">
-            <h2 className="text-2xl md:text-3xl font-black uppercase tracking-tighter text-stone-900 leading-none">OUR PROGRAMMES</h2>
-            <div className="w-10 h-1 bg-[#f4c430] mx-auto mt-2" />
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-amber-900 mb-4">Our Seva</h2>
+            <p className="text-amber-800 max-w-2xl mx-auto">
+              We provide comprehensive support with compassion and dignity, ensuring every soul receives the respect they deserve in their final journey.
+            </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {programmes.map((p) => (
-              <div key={p.title} className="bg-stone-50/50 p-6 rounded-[1.5rem] border border-stone-100 hover:border-[#20b2aa]/40 hover:bg-white hover:shadow-xl transition-all duration-500 group flex flex-col items-center text-center">
-                <div className={cn("w-14 h-14 shrink-0 rounded-xl flex items-center justify-center p-4 mb-4 transition-transform group-hover:scale-110 shadow-sm", p.dot)}>
-                  <p.icon className={cn("w-full h-full", p.color)} />
+              <div key={p.title} className="text-center group">
+                <div className="relative mb-6">
+                  <div className="w-20 h-20 mx-auto bg-stone-100 rounded-full flex items-center justify-center group-hover:bg-stone-200 transition-colors">
+                    <p.icon className="w-10 h-10 text-amber-800" />
+                  </div>
                 </div>
-                <h3 className={cn("text-lg font-black uppercase tracking-tighter mb-2", p.color)}>{p.title}</h3>
-                <p className="text-stone-500 font-medium leading-relaxed tracking-tighter text-sm">{p.desc}</p>
+                <h3 className="text-lg font-semibold text-amber-900 mb-3">{p.title}</h3>
+                <p className="text-amber-700 text-sm leading-relaxed">{p.desc}</p>
               </div>
             ))}
           </div>
         </Container>
       </section>
 
-      {/* ── IMPACT & REACH ── */}
-      <section className="py-10 bg-[#1e3a8a] shadow-[inset_0_4px_20px_rgba(0,0,0,0.1)]">
+      {/* Where We Serve */}
+      <section className="py-16 bg-gradient-to-b from-gray-50 to-white">
         <Container>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {[
-              { val: "2,840+", lab: "SACRED RITES COMPLETE" },
-              { val: "38+", lab: "CITIES ACTIVE REACH" },
-              { val: "420+", lab: "MISSION VOLUNTEERS" },
-              { val: "100%", lab: "LEGAL DIGNITY" },
-            ].map((stat) => (
-              <div key={stat.lab} className="text-center text-white p-2">
-                <p className="text-3xl md:text-5xl font-black tracking-tighter mb-0.5">{stat.val}</p>
-                <p className="text-[9px] md:text-[10px] font-black uppercase tracking-widest opacity-90">{stat.lab}</p>
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center gap-3 mb-4">
+              <div className="w-8 h-px bg-gray-300"></div>
+              <span className="text-sm text-gray-500 uppercase tracking-wider">Our Presence</span>
+              <div className="w-8 h-px bg-gray-300"></div>
+            </div>
+            <h2 className="text-4xl font-bold text-gray-900 mb-6">Where We Serve</h2>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              From the sacred ghats of Kashi to the holy waters of Haridwar, we bring dignity and compassion 
+              to every corner where souls seek their final peace.
+            </p>
+          </div>
+          
+          <div className="max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
+              {/* Featured Image Carousel */}
+              <div className="lg:col-span-3">
+                <div className="relative">
+                  <div className="absolute -top-4 -left-4 w-full h-full bg-gray-100 rounded-2xl"></div>
+                  <div className="relative h-96 rounded-2xl overflow-hidden shadow-xl">
+                    {/* Carousel Images */}
+                    {[
+                      { src: "/gallery/image1.png", title: "Sacred Kashi", desc: "Where eternal souls find liberation", location: "Primary Hub" },
+                      { src: "/gallery/image2.png", title: "Holy Haridwar", desc: "Gateway to divine blessings", location: "Regional Center" },
+                      { src: "/gallery/image3.png", title: "Sacred Prayagraj", desc: "Confluence of holy rivers", location: "Active Hub" },
+                      { src: "/gallery/image6.png", title: "Peaceful Service", desc: "Compassionate care for all souls", location: "Service Network" },
+                    ].map((slide, idx) => (
+                      <div
+                        key={idx}
+                        className={cn(
+                          "absolute inset-0 transition-all duration-1000 ease-in-out",
+                          idx === currentLocationSlide ? "opacity-100 scale-100 z-10" : "opacity-0 scale-105 z-0"
+                        )}
+                      >
+                        <Image
+                          src={slide.src}
+                          alt={slide.title}
+                          fill
+                          className="object-cover"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+                        <div className="absolute bottom-8 left-8 text-white">
+                          <div className="flex items-center gap-2 mb-3">
+                            <div className="w-3 h-3 bg-white rounded-full animate-pulse"></div>
+                            <span className="text-sm font-medium">{slide.location}</span>
+                          </div>
+                          <h3 className="text-3xl font-bold mb-2">{slide.title}</h3>
+                          <p className="text-lg opacity-90">{slide.desc}</p>
+                        </div>
+                      </div>
+                    ))}
+                    
+                    {/* Carousel Controls */}
+                    <div className="absolute bottom-4 right-4 flex gap-2">
+                      {[...Array(4)].map((_, idx) => (
+                        <button
+                          key={idx}
+                          onClick={() => {
+                            setCurrentLocationSlide(idx);
+                            // Reset timer
+                            if (locationTimerRef.current) clearInterval(locationTimerRef.current);
+                            locationTimerRef.current = setInterval(() => {
+                              setCurrentLocationSlide((prev) => (prev + 1) % 4);
+                            }, 4000);
+                          }}
+                          className={cn(
+                            "h-2 rounded-full transition-all duration-300 cursor-pointer hover:bg-white/80",
+                            idx === currentLocationSlide ? "w-8 bg-white" : "w-2 bg-white/50"
+                          )}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                </div>
               </div>
-            ))}
+
+              {/* Service Network Panel */}
+              <div className="lg:col-span-2">
+                <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 h-full">
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+                      <div className="w-4 h-4 bg-green-500 rounded-full animate-pulse"></div>
+                    </div>
+                    <h3 className="text-xl font-semibold text-gray-900">Active Network</h3>
+                  </div>
+                  
+                  <div className="space-y-3 mb-8">
+                    {[
+                      { city: "Haridwar", status: "24/7 Active" },
+                      { city: "Prayagraj", status: "Full Service" },
+                      { city: "Rishikesh", status: "Active Hub" },
+                      
+                    ].map((location) => (
+                      <div key={location.city} className="flex items-center justify-between p-3 rounded-lg hover:bg-gray-50 transition-colors group">
+                        <div className="flex items-center gap-3">
+                          <div className="w-2 h-2 bg-green-400 rounded-full group-hover:scale-125 transition-transform"></div>
+                          <span className="font-medium text-gray-800">{location.city}</span>
+                        </div>
+                        <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full">
+                          {location.status}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                  
+                  {/* Stats */}
+                  <div className="border-t pt-6">
+                    <div className="grid grid-cols-2 gap-6">
+                      <div className="text-center">
+                        <div className="text-2xl font-bold text-gray-900 mb-1">38+</div>
+                        <div className="text-sm text-gray-600">Sacred Cities</div>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-2xl font-bold text-gray-900 mb-1">24/7</div>
+                        <div className="text-sm text-gray-600">Service</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Extended Network */}
+            <div className="mt-12 text-center">
+              <div className="inline-flex items-center gap-2 px-6 py-3 bg-white rounded-full shadow-sm border border-gray-200 mb-6">
+                <span className="text-sm font-medium text-gray-700">Complete Network Coverage</span>
+                <div className="flex gap-1">
+                  <div className="w-1 h-1 bg-green-400 rounded-full animate-pulse"></div>
+                  <div className="w-1 h-1 bg-green-400 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></div>
+                  <div className="w-1 h-1 bg-green-400 rounded-full animate-pulse" style={{ animationDelay: '0.4s' }}></div>
+                </div>
+              </div>
+              <div className="flex flex-wrap justify-center gap-3 max-w-4xl mx-auto">
+                {["Lucknow", "Patna", "Ujjain", "Gaya", "Agra", "Kanpur", "Allahabad", "Varanasi"].map((city) => (
+                  <div key={city} className="px-4 py-2 bg-white border border-gray-200 rounded-full text-sm text-gray-700 hover:border-gray-300 hover:shadow-sm transition-all">
+                    {city}
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </Container>
       </section>
 
-      {/* ── WHERE WE SERVE (CITY HUBS) ── */}
-      <section className="py-12 bg-white">
-        <Container>
-          <div className="flex flex-col md:flex-row items-end justify-between mb-8 gap-6">
-            <div className="max-w-xl">
-              <p className="text-[#f4c430] font-black text-[10px] uppercase tracking-[0.4em] mb-2">OUR LOGISTICAL SCALE</p>
-              <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tighter text-stone-900 leading-none">WHERE WE SERVE</h2>
-            </div>
-            <div className="flex items-center gap-2 text-stone-400 font-black text-[10px] uppercase tracking-widest">
-              <span>38+ CITIES</span>
-              <div className="w-10 h-px bg-stone-200" />
-              <span>NORTHERN BHARAT</span>
-            </div>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-            {["KASHI", "HARIDWAR", "PRAYAGRAJ", "RISHIKESH", "DELHI-NCR", "AYODHYA", "MATHURA", "LUCKNOW", "PATNA", "UJJAIN", "GAYA", "AGRA"].map((city) => (
-              <div key={city} className="bg-stone-50 border border-stone-100 p-4 rounded-2xl flex flex-col items-center justify-center group hover:bg-[#20b2aa] hover:border-[#20b2aa] transition-all duration-500 cursor-default">
-                <p className="text-stone-800 font-black text-[11px] group-hover:text-white transition-colors uppercase">{city}</p>
-                <div className="w-4 h-0.5 bg-stone-200 mt-2 group-hover:bg-white/40 transition-all group-hover:w-8" />
-              </div>
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      {/* ── MISSION GOALS (SACRED PILLARS) ── */}
-      <section className="py-12 bg-stone-50 border-y border-stone-100">
+      {/* Mission Pillars */}
+      <section className="py-12 bg-stone-100 relative overflow-hidden">
         <Container>
           <div className="text-center mb-8">
-            <p className="text-[#f4c430] font-black text-[10px] uppercase tracking-[0.4em] mb-2 leading-none">CORE MISSION</p>
-            <h2 className="text-2xl md:text-3xl font-black uppercase tracking-tighter text-stone-900 leading-none">MISSION PILLARS</h2>
+            <div className="inline-flex items-center gap-3 mb-4">
+              <div className="w-8 h-px bg-amber-700"></div>
+              <span className="text-amber-800 text-sm uppercase tracking-wider">Core Values</span>
+              <div className="w-8 h-px bg-amber-700"></div>
+            </div>
+            <h2 className="text-3xl font-bold text-amber-900 mb-3">Mission Pillars</h2>
+            <p className="text-amber-800 max-w-2xl mx-auto">
+              Five sacred principles guiding our mission
+            </p>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 max-w-4xl mx-auto">
-            {sdgs.map((s) => (
-              <div key={s.n} className="group relative cursor-default">
-                <div className={cn("aspect-square clip-path-hexagon flex flex-col items-center justify-center p-4 text-center transition-all duration-500 hover:-translate-y-1 shadow-md hover:shadow-xl", s.c)}>
-                  <s.i className="text-white/60 w-8 h-8 mb-2 group-hover:text-white transition-all" />
-                  <p className="text-white font-black text-[9px] leading-tight uppercase tracking-tighter">{s.t}</p>
-                </div>
+
+          {/* Compact Marigold Garland */}
+          <div className="w-full px-4">
+            <div className="relative">
+              {/* Simple Connecting Line */}
+              <div className="absolute top-1/2 left-0 right-0 h-px bg-amber-300 hidden lg:block"></div>
+
+              {/* Flowers in a Row */}
+              <div className="flex justify-center items-center gap-6 md:gap-12 lg:gap-16">
+                {[
+                  { title: "Final Dignity", icon: Heart, number: "01" },
+                  { title: "Sacred Rites", icon: Flame, number: "02" },
+                  { title: "Restoring Humanity", icon: Users, number: "03" },
+                  { title: "Legal Sanctity", icon: ShieldCheck, number: "04" },
+                  { title: "Mission Unity", icon: Handshake, number: "05" },
+                ].map((pillar, index) => (
+                  <div 
+                    key={pillar.number} 
+                    className={cn(
+                      "group relative transition-all duration-300 hover:-translate-y-1",
+                      // Subtle alternating heights
+                      index % 2 === 0 ? "mt-0" : "mt-2"
+                    )}
+                  >
+                    {/* Simple Flower Design */}
+                    <div className="relative">
+                      {/* Main Flower Circle */}
+                      <div className="relative w-16 h-16 bg-stone-50 rounded-full flex items-center justify-center shadow-md border-2 border-stone-200 group-hover:shadow-lg group-hover:scale-105 transition-all duration-300">
+                        {/* Icon */}
+                        <pillar.icon className="w-6 h-6 text-amber-800 group-hover:text-amber-900" />
+                        
+                        {/* Number Badge */}
+                        <div className="absolute -top-1 -right-1 w-5 h-5 bg-amber-800 text-stone-50 rounded-full flex items-center justify-center text-xs font-bold">
+                          {pillar.number}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Title below */}
+                    <div className="text-center mt-4">
+                      <h3 className="text-xs font-medium text-amber-800 group-hover:text-amber-900 transition-colors leading-tight">
+                        {pillar.title}
+                      </h3>
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
+
+            {/* Bottom Statement */}
+            <div className="text-center mt-8">
+              <div className="inline-flex items-center gap-3 px-6 py-2 bg-stone-50 rounded-full shadow-sm border border-amber-200">
+                <span className="text-amber-800 text-sm">United in Service, Guided by Compassion</span>
+              </div>
+            </div>
           </div>
         </Container>
       </section>
@@ -287,17 +488,17 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* ── JOIN THE MISSION (CINEMATIC FULL-WIDTH) ── */}
+      {/* Join The Mission */}
       <section className="relative py-24 md:py-32 overflow-hidden bg-stone-950">
         <div className="absolute inset-0 z-0">
           <Image
             src="/gallery/image4.png"
             alt="Join the Mission"
             fill
-            className="object-cover grayscale-[20%] opacity-60"
+            className="object-cover"
           />
-          {/* Sophisticated gradient: Dark on left for text, transparent on right for image visibility */}
-          <div className="absolute inset-0 bg-gradient-to-r from-stone-950 via-stone-950/60 to-transparent" />
+          {/* Simple curved gradient - dark on left for text, clear on right for image */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent" />
         </div>
 
         <Container className="relative z-10">
@@ -306,14 +507,14 @@ export default function HomePage() {
               <p className="text-[#20b2aa] font-black text-[10px] uppercase tracking-[0.4em] leading-none">MISSION SAATHI PORTAL</p>
             </div>
             <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter text-white leading-[0.85] mb-8">STAND WITH US <br />IN THE <span className="text-[#f4c430]">FINAL JOURNEY</span></h2>
-            <p className="text-white/80 font-medium text-lg mb-10 leading-snug drop-shadow-lg">Whether you have an hour a week or a lifetime to give, your presence can bring dignity to a soul forgotten by the world. Join our specialized hubs in 38+ cities.</p>
+            <p className="text-white/90 font-medium text-lg mb-10 leading-snug drop-shadow-lg">Whether you have an hour a week or a lifetime to give, your presence can bring dignity to a soul forgotten by the world. Join our specialized hubs in 38+ cities.</p>
 
-            <div className="flex flex-wrap gap-5">
+            <div className="flex flex-wrap gap-4">
               <Link href="/volunteer">
-                <Button variant="primary" className="px-12 py-5 text-sm font-black shadow-[0_20px_40px_rgba(244,196,48,0.3)] hover:-translate-y-1 transition-all">JOIN OUR FORCE</Button>
+                <Button variant="ghost" className="px-8 py-3 bg-gray-600 text-white hover:bg-gray-700 transition-colors">JOIN OUR FORCE</Button>
               </Link>
               <Link href="/contact">
-                <Button variant="outline" className="px-12 py-5 text-sm font-black text-white border-white/40 hover:bg-white/10 transition-all backdrop-blur-sm">VIEW OPPORTUNITIES</Button>
+                <Button variant="ghost" className="px-8 py-3 bg-white text-gray-800 hover:bg-yellow-400 hover:text-gray-900 transition-colors">VIEW OPPORTUNITIES</Button>
               </Link>
             </div>
 
@@ -331,61 +532,244 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* ── URGENT CAMPAIGNS ── */}
-      <section className="py-14 bg-white">
-        <Container>
-          <div className="text-center mb-10">
-            <h2 className="text-2xl md:text-3xl font-black uppercase tracking-tighter text-stone-900 leading-none">URGENT CAMPAIGNS</h2>
-            <p className="text-[#f4c430] font-bold text-xs mt-2 italic uppercase tracking-widest leading-none">Directly Support a Mission</p>
+      {/* Urgent Campaigns */}
+      <section className="py-16 bg-gradient-to-br from-stone-50 to-stone-100 relative overflow-hidden">
+        {/* Background decoration */}
+        <div className="absolute inset-0">
+          <div className="absolute top-20 left-20 w-32 h-32 bg-amber-200/20 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-20 right-20 w-40 h-40 bg-amber-300/20 rounded-full blur-3xl"></div>
+        </div>
+        
+        <Container className="relative z-10">
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center gap-3 mb-4">
+              <div className="w-12 h-px bg-gradient-to-r from-transparent via-amber-600 to-transparent"></div>
+              <span className="text-amber-700 text-sm uppercase tracking-wider font-medium">Active Missions</span>
+              <div className="w-12 h-px bg-gradient-to-r from-transparent via-amber-600 to-transparent"></div>
+            </div>
+            <h2 className="text-4xl font-bold text-amber-900 mb-3">Urgent Campaigns</h2>
+            <p className="text-amber-800 text-lg">Support our sacred missions across India</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {campaigns.map((c) => (
-              <div key={c.t} className="flex flex-col group p-2">
-                <div className="relative aspect-[3/4] rounded-[2rem] overflow-hidden mb-6 shadow-2xl transition-transform group-hover:-translate-y-2 duration-500">
-                  <Image src={c.img} alt={c.t} fill className="object-cover" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-stone-900 via-stone-900/10 to-transparent flex flex-col justify-end p-8">
-                    <h4 className="text-white font-black text-2xl leading-[0.9] uppercase tracking-tighter mb-4">{c.t}</h4>
-                    <div className="bg-white/10 backdrop-blur-md rounded-full h-1.5 w-full mb-4">
-                      <div className="bg-[#f4c430] h-full rounded-full" style={{ width: c.p }} />
+          
+          {/* Enhanced 3D Circular Carousel */}
+          <div className="relative max-w-7xl mx-auto h-[500px] overflow-visible" style={{ perspective: '1200px' }}>
+            <div className="relative w-full h-full flex items-center justify-center">
+              {campaigns.map((c, index) => {
+                // Calculate position relative to current slide
+                let position = index - currentCampaignSlide;
+                if (position < 0) position += campaigns.length;
+                if (position >= campaigns.length) position -= campaigns.length;
+                
+                // Enhanced 3D positioning
+                let transform = '';
+                let zIndex = 0;
+                let opacity = 0.3;
+                let scale = 0.7;
+                let blur = 'blur(2px)';
+                
+                if (position === 0) {
+                  // Center (active) - enhanced
+                  transform = 'translateX(0) translateY(0) translateZ(50px) rotateY(0deg)';
+                  zIndex = 50;
+                  opacity = 1;
+                  scale = 1.05;
+                  blur = 'blur(0px)';
+                } else if (position === 1) {
+                  // Right side - enhanced depth
+                  transform = 'translateX(350px) translateY(20px) translateZ(-150px) rotateY(-35deg)';
+                  zIndex = 30;
+                  opacity = 0.6;
+                  scale = 0.8;
+                  blur = 'blur(1px)';
+                } else if (position === 2) {
+                  // Left side - enhanced depth
+                  transform = 'translateX(-350px) translateY(20px) translateZ(-150px) rotateY(35deg)';
+                  zIndex = 30;
+                  opacity = 0.6;
+                  scale = 0.8;
+                  blur = 'blur(1px)';
+                }
+                
+                return (
+                  <div
+                    key={c.t}
+                    className="absolute transition-all duration-1000 ease-out cursor-pointer group"
+                    style={{
+                      transform: `${transform} scale(${scale})`,
+                      zIndex,
+                      opacity,
+                      filter: blur,
+                    }}
+                    onClick={() => {
+                      if (position !== 0) {
+                        setCurrentCampaignSlide(index);
+                        // Reset timer when manually clicked
+                        if (campaignTimerRef.current) clearInterval(campaignTimerRef.current);
+                        campaignTimerRef.current = setInterval(() => {
+                          setCurrentCampaignSlide((prev) => (prev + 1) % campaigns.length);
+                        }, 6000);
+                      }
+                    }}
+                  >
+                    <div className={cn(
+                      "w-80 bg-white rounded-3xl overflow-hidden transition-all duration-500",
+                      position === 0 
+                        ? "shadow-2xl shadow-gray-900/20 ring-1 ring-gray-200" 
+                        : "shadow-lg shadow-gray-500/20 hover:shadow-xl"
+                    )}>
+                      <div className="relative aspect-[4/3] overflow-hidden">
+                        <Image 
+                          src={c.img} 
+                          alt={c.t} 
+                          fill 
+                          className={cn(
+                            "object-cover transition-transform duration-700",
+                            position === 0 ? "scale-100" : "scale-105 group-hover:scale-100"
+                          )} 
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+                        
+                        {/* Enhanced overlay content */}
+                        <div className="absolute bottom-6 left-6 right-6">
+                          <div className="flex items-center gap-2 mb-3">
+                            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                            <span className="text-white/80 text-xs font-medium uppercase tracking-wider">Active Campaign</span>
+                          </div>
+                          <h4 className="text-white font-bold text-xl mb-3 leading-tight">{c.t}</h4>
+                          
+                          {/* Enhanced progress bar */}
+                          <div className="relative mb-3">
+                            <div className="bg-white/20 backdrop-blur-sm rounded-full h-3 w-full overflow-hidden">
+                              <div 
+                                className="bg-white h-full rounded-full transition-all duration-1000"
+                                style={{ width: c.p }}
+                              >
+                              </div>
+                            </div>
+                            <div className="absolute -top-1 -right-1 w-5 h-5 bg-white rounded-full flex items-center justify-center">
+                              <div className="w-2 h-2 bg-gray-600 rounded-full"></div>
+                            </div>
+                          </div>
+                          
+                          <div className="flex justify-between items-center text-white">
+                            <div className="text-sm">
+                              <span className="text-white/70">Raised: </span>
+                              <span className="font-semibold">{c.raised}</span>
+                            </div>
+                            <div className="text-sm font-bold bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full">
+                              {c.p}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      {/* Enhanced card content */}
+                      <div className="p-6">
+                        <p className="text-gray-600 text-sm mb-5 leading-relaxed line-clamp-2">{c.d}</p>
+                        <Link href="/donate">
+                          <Button 
+                            variant="ghost" 
+                            className={cn(
+                              "w-full transition-all duration-300",
+                              position === 0 
+                                ? "bg-gradient-to-r from-gray-700 to-gray-800 text-white hover:from-gray-800 hover:to-gray-900 shadow-lg" 
+                                : "bg-gray-600 text-white hover:bg-gray-700"
+                            )}
+                          >
+                            {position === 0 ? "Donate Now" : "View Campaign"}
+                          </Button>
+                        </Link>
+                      </div>
                     </div>
-                    <div className="flex justify-between text-white font-black text-[10px] uppercase tracking-widest mb-4">
-                      <span>RAISED: {c.raised}</span>
-                      <span>{c.p} COMPLETE</span>
-                    </div>
-                    <Link href="/donate" className="text-white text-[10px] font-black uppercase tracking-widest bg-[#f4c430] px-4 py-2.5 rounded-full w-fit hover:bg-white hover:text-[#f4c430] transition-all">
-                      DONATE NOW
-                    </Link>
                   </div>
-                </div>
-                <p className="text-stone-500 text-sm font-bold leading-tight px-2 mb-4 line-clamp-2 uppercase tracking-tighter">{c.d}</p>
-              </div>
-            ))}
+                );
+              })}
+            </div>
+
+            {/* Enhanced Navigation Arrows */}
+            <button
+              onClick={() => {
+                setCurrentCampaignSlide((prev) => (prev - 1 + campaigns.length) % campaigns.length);
+                if (campaignTimerRef.current) clearInterval(campaignTimerRef.current);
+                campaignTimerRef.current = setInterval(() => {
+                  setCurrentCampaignSlide((prev) => (prev + 1) % campaigns.length);
+                }, 6000);
+              }}
+              className="absolute left-8 top-1/2 -translate-y-1/2 w-14 h-14 bg-white/90 hover:bg-white rounded-full flex items-center justify-center shadow-xl transition-all duration-300 hover:scale-110 z-50 backdrop-blur-sm border border-gray-200"
+            >
+              <svg className="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+            
+            <button
+              onClick={() => {
+                setCurrentCampaignSlide((prev) => (prev + 1) % campaigns.length);
+                if (campaignTimerRef.current) clearInterval(campaignTimerRef.current);
+                campaignTimerRef.current = setInterval(() => {
+                  setCurrentCampaignSlide((prev) => (prev + 1) % campaigns.length);
+                }, 6000);
+              }}
+              className="absolute right-8 top-1/2 -translate-y-1/2 w-14 h-14 bg-white/90 hover:bg-white rounded-full flex items-center justify-center shadow-xl transition-all duration-300 hover:scale-110 z-50 backdrop-blur-sm border border-gray-200"
+            >
+              <svg className="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+
+            {/* Enhanced Carousel Indicators */}
+            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-50">
+              {campaigns.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => {
+                    setCurrentCampaignSlide(index);
+                    if (campaignTimerRef.current) clearInterval(campaignTimerRef.current);
+                    campaignTimerRef.current = setInterval(() => {
+                      setCurrentCampaignSlide((prev) => (prev + 1) % campaigns.length);
+                    }, 6000);
+                  }}
+                  className={cn(
+                    "h-3 rounded-full transition-all duration-500 border-2",
+                    index === currentCampaignSlide 
+                      ? "w-12 bg-gray-700 border-gray-700 shadow-lg" 
+                      : "w-3 bg-white/70 border-gray-300 hover:bg-white hover:border-gray-400"
+                  )}
+                />
+              ))}
+            </div>
+
+            {/* Auto-play indicator */}
+            {/* <div className="absolute top-8 right-8 flex items-center gap-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg z-50">
+              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+              <span className="text-gray-700 text-xs font-medium">Auto-rotating</span>
+            </div> */}
           </div>
         </Container>
       </section>
 
       {/* ── IN MEMORIAM (LEGACY GIVING) ── */}
-      <section className="py-14 bg-stone-50">
+      <section className="py-14 bg-stone-100">
         <Container>
-          <div className="bg-white rounded-[3rem] p-8 md:p-14 border border-stone-100 shadow-2xl flex flex-col md:flex-row items-center gap-12 border-t-8 border-t-[#20b2aa]">
+          <div className="bg-stone-50 rounded-[3rem] p-8 md:p-14 border border-amber-200 shadow-2xl flex flex-col md:flex-row items-center gap-12 border-t-8 border-t-amber-600">
             <div className="w-full md:w-1/3 aspect-square rounded-[2rem] overflow-hidden rotate-2 shadow-2xl grayscale hover:rotate-0 hover:grayscale-0 transition-all duration-700 relative">
               <Image src="/gallery/image6.png" alt="Legacy" fill className="object-cover" />
             </div>
             <div className="flex-1">
-              <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tighter text-stone-900 leading-none mb-4">LEAVE A LEGACY <br /><span className="text-[#f4c430]">IN THEIR HONOR</span></h2>
-              <p className="text-stone-500 font-medium text-lg leading-snug mb-8">Donate a &apos;Sacred Kit&apos; in memory of your loved ones. We will perform the rites in their name as a direct tribute to their life.</p>
+              <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tighter text-amber-900 leading-none mb-4">LEAVE A LEGACY <br /><span className="text-amber-700">IN THEIR HONOR</span></h2>
+              <p className="text-amber-800 font-medium text-lg leading-snug mb-8">Donate a &apos;Sacred Kit&apos; in memory of your loved ones. We will perform the rites in their name as a direct tribute to their life.</p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-                <div className="flex items-center gap-4 p-4 rounded-2xl bg-stone-50 border border-stone-100 italic">
-                  <Star className="text-orange-500 shrink-0" size={24} />
-                  <p className="text-[10px] font-black uppercase tracking-widest leading-none">Named Tributes</p>
+                <div className="flex items-center gap-4 p-4 rounded-2xl bg-stone-100 border border-amber-200 italic">
+                  <Star className="text-amber-600 shrink-0" size={24} />
+                  <p className="text-[10px] font-black uppercase tracking-widest leading-none text-amber-800">Named Tributes</p>
                 </div>
-                <div className="flex items-center gap-4 p-4 rounded-2xl bg-stone-50 border border-stone-100 italic">
-                  <FileText className="text-blue-500 shrink-0" size={24} />
-                  <p className="text-[10px] font-black uppercase tracking-widest leading-none">Digital Certificates</p>
+                <div className="flex items-center gap-4 p-4 rounded-2xl bg-stone-100 border border-amber-200 italic">
+                  <FileText className="text-amber-600 shrink-0" size={24} />
+                  <p className="text-[10px] font-black uppercase tracking-widest leading-none text-amber-800">Digital Certificates</p>
                 </div>
               </div>
               <Link href="/donate">
-                <Button variant="secondary" className="px-12 py-5 font-black uppercase tracking-tighter shadow-xl">CREATE A TRIBUTE</Button>
+                <Button variant="ghost" className="px-8 py-3 bg-amber-700 text-stone-50 hover:bg-amber-800 transition-colors">Create a Tribute</Button>
               </Link>
             </div>
           </div>
@@ -536,23 +920,6 @@ export default function HomePage() {
           </div>
         </Container>
       </section>
-
-      {/* ── FOOTER BAR ── */}
-      <div className="bg-[#1c1917] py-10">
-        <Container className="flex flex-col md:flex-row items-center justify-between gap-8">
-          <div className="flex items-center gap-4">
-            <div>
-              <p className="text-white font-black uppercase tracking-tighter text-xl leading-none">Moksha Seva</p>
-              <p className="text-stone-500 font-bold uppercase tracking-widest text-[8px] mt-1.5 italic">Official Mission for Terminal Dignity © 2026</p>
-            </div>
-          </div>
-          <div className="flex gap-4">
-            <Link href="/donate">
-              <Button variant="primary" className="px-10 py-4 font-black uppercase tracking-tighter text-sm shadow-[0_10px_30px_rgba(244,196,48,0.3)]">SEND DONATION</Button>
-            </Link>
-          </div>
-        </Container>
-      </div>
 
       <style jsx global>{`
         .clip-path-hexagon {

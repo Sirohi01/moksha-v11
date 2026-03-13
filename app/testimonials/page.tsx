@@ -64,13 +64,13 @@ export default function Testimonials() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="py-12 md:py-16 lg:py-20 bg-gradient-to-br from-[#1e3a8a] to-[#20b2aa]">
+      <section className="py-12 md:py-16 lg:py-20 bg-stone-50">
         <Container>
-          <div className="text-center text-white">
-            <h1 className="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-6">
-              <span className="text-[#f4c430]">Testimonials</span>
+          <div className="text-center">
+            <h1 className="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-6 text-gray-900">
+              <span className="text-amber-700">Testimonials</span>
             </h1>
-            <p className="text-xl md:text-2xl font-medium max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl md:text-2xl font-medium max-w-3xl mx-auto leading-relaxed text-gray-700">
               Hear from the families, volunteers, and partners who have experienced our compassionate service
             </p>
           </div>
@@ -78,15 +78,15 @@ export default function Testimonials() {
       </section>
 
       {/* Statistics */}
-      <section className="py-16 bg-stone-50">
+      <section className="py-16 bg-stone-100">
         <Container>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
               <div key={index} className="text-center">
-                <div className="text-4xl md:text-5xl font-black text-[#f4c430] mb-2">
+                <div className="text-4xl md:text-5xl font-black text-amber-700 mb-2">
                   {stat.number}
                 </div>
-                <div className="text-sm font-bold uppercase tracking-widest text-stone-600">
+                <div className="text-sm font-bold uppercase tracking-widest text-gray-600">
                   {stat.label}
                 </div>
               </div>
@@ -99,10 +99,10 @@ export default function Testimonials() {
       <section className="py-16">
         <Container>
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tighter text-stone-900 mb-4">
+            <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tighter text-gray-900 mb-4">
               Stories of Gratitude
             </h2>
-            <div className="w-20 h-1 bg-[#f4c430] mx-auto"></div>
+            <div className="w-20 h-1 bg-amber-700 mx-auto"></div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -111,14 +111,14 @@ export default function Testimonials() {
                 {/* Rating Stars */}
                 <div className="flex items-center gap-1 mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 fill-[#f4c430] text-[#f4c430]" />
+                    <Star key={i} className="w-5 h-5 fill-amber-700 text-amber-700" />
                   ))}
                 </div>
 
                 {/* Quote */}
                 <div className="relative mb-6">
-                  <Quote className="w-8 h-8 text-[#f4c430] opacity-20 absolute -top-2 -left-2" />
-                  <p className="text-stone-700 italic leading-relaxed pl-6">
+                  <Quote className="w-8 h-8 text-amber-700 opacity-20 absolute -top-2 -left-2" />
+                  <p className="text-gray-700 italic leading-relaxed pl-6">
                     {testimonial.quote}
                   </p>
                 </div>
@@ -126,17 +126,17 @@ export default function Testimonials() {
                 {/* Author Info */}
                 <div className="border-t border-stone-100 pt-6">
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-full bg-[#f4c430]/10 flex items-center justify-center">
-                      <Heart className="w-6 h-6 text-[#f4c430]" />
+                    <div className="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center">
+                      <Heart className="w-6 h-6 text-amber-700" />
                     </div>
                     <div>
-                      <div className="font-black text-stone-900 uppercase tracking-widest text-sm">
+                      <div className="font-black text-gray-900 uppercase tracking-widest text-sm">
                         {testimonial.name}
                       </div>
-                      <div className="text-stone-500 text-xs uppercase tracking-widest">
+                      <div className="text-gray-500 text-xs uppercase tracking-widest">
                         {testimonial.role}
                       </div>
-                      <div className="text-stone-400 text-xs">
+                      <div className="text-gray-400 text-xs">
                         {testimonial.location}
                       </div>
                     </div>
@@ -149,14 +149,14 @@ export default function Testimonials() {
       </section>
 
       {/* Video Testimonials Section */}
-      <section className="py-16 bg-stone-50">
+      <section className="py-16 bg-stone-100">
         <Container>
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tighter text-stone-900 mb-4">
+            <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tighter text-gray-900 mb-4">
               Video Stories
             </h2>
-            <div className="w-20 h-1 bg-[#f4c430] mx-auto"></div>
-            <p className="text-stone-600 mt-4 max-w-2xl mx-auto">
+            <div className="w-20 h-1 bg-amber-700 mx-auto"></div>
+            <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
               Watch heartfelt stories from families and volunteers who have experienced our compassionate service firsthand.
             </p>
           </div>
@@ -171,14 +171,14 @@ export default function Testimonials() {
                   className="object-cover group-hover:scale-105 transition-transform duration-700"
                 />
                 <div className="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/20 transition-all">
-                  <div className="w-16 h-16 rounded-full bg-[#f4c430] flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <div className="w-16 h-16 rounded-full bg-amber-700 flex items-center justify-center group-hover:scale-110 transition-transform">
                     <div className="w-0 h-0 border-l-[12px] border-l-white border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent ml-1"></div>
                   </div>
                 </div>
                 <div className="absolute bottom-4 left-4 right-4">
                   <div className="bg-white/90 backdrop-blur-sm rounded-lg p-3">
-                    <div className="font-black text-sm text-stone-900">Family Testimonial {index + 1}</div>
-                    <div className="text-xs text-stone-600">2 minutes</div>
+                    <div className="font-black text-sm text-gray-900">Family Testimonial {index + 1}</div>
+                    <div className="text-xs text-gray-600">2 minutes</div>
                   </div>
                 </div>
               </div>
@@ -188,7 +188,7 @@ export default function Testimonials() {
       </section>
 
       {/* Call to Action */}
-      <section className="py-16 bg-[#20b2aa]">
+      <section className="py-16 bg-amber-800">
         <Container>
           <div className="text-center text-white">
             <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tighter mb-6">
@@ -200,13 +200,13 @@ export default function Testimonials() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a 
                 href="/contact" 
-                className="bg-[#f4c430] hover:bg-[#eab308] text-black px-8 py-4 rounded-lg font-black uppercase tracking-widest transition-all"
+                className="bg-amber-100 hover:bg-white text-amber-800 px-8 py-4 rounded-lg font-black uppercase tracking-widest transition-all"
               >
                 Share Your Story
               </a>
               <a 
                 href="/volunteer" 
-                className="border-2 border-white text-white hover:bg-white hover:text-[#20b2aa] px-8 py-4 rounded-lg font-black uppercase tracking-widest transition-all"
+                className="border-2 border-white text-white hover:bg-white hover:text-amber-800 px-8 py-4 rounded-lg font-black uppercase tracking-widest transition-all"
               >
                 Join Our Mission
               </a>

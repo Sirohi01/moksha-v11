@@ -44,15 +44,42 @@ export default function WhyMokshaSeva() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="py-12 md:py-16 lg:py-20 bg-gradient-to-br from-[#1e3a8a] to-[#20b2aa]">
+      <section className="py-12 md:py-16 lg:py-20 bg-stone-50">
         <Container>
-          <div className="text-center text-white">
-            <h1 className="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-6">
-              Why Choose <span className="text-[#f4c430]">Moksha Seva</span>
-            </h1>
-            <p className="text-xl md:text-2xl font-medium max-w-3xl mx-auto leading-relaxed">
-              When dignity matters most, trust the organization that has served with compassion for over 8 years
-            </p>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <h1 className="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-6 text-gray-900">
+                Why Choose <span className="text-amber-700">Moksha Seva</span>
+              </h1>
+              <p className="text-xl md:text-2xl font-medium max-w-3xl leading-relaxed text-gray-700 mb-8">
+                When dignity matters most, trust the organization that has served with compassion for over 8 years
+              </p>
+              <div className="flex items-center gap-8">
+                <div className="text-center">
+                  <div className="text-3xl font-black text-amber-700">2,840+</div>
+                  <div className="text-sm text-gray-600">Lives Honored</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl font-black text-amber-700">38+</div>
+                  <div className="text-sm text-gray-600">Cities</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl font-black text-amber-700">8+</div>
+                  <div className="text-sm text-gray-600">Years</div>
+                </div>
+              </div>
+            </div>
+            <div className="relative">
+              <div className="aspect-square rounded-2xl overflow-hidden shadow-xl">
+                <img 
+                  src="/gallery/image1.png" 
+                  alt="Moksha Seva service" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-amber-100 rounded-full opacity-20"></div>
+              <div className="absolute -top-6 -left-6 w-24 h-24 bg-stone-200 rounded-full opacity-30"></div>
+            </div>
           </div>
         </Container>
       </section>
@@ -79,13 +106,13 @@ export default function WhyMokshaSeva() {
       </section>
 
       {/* Statistics */}
-      <section className="py-16 bg-stone-50">
+      <section className="py-16 bg-stone-100">
         <Container>
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tighter text-stone-900 mb-4">
+            <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tighter text-gray-900 mb-4">
               Our Impact Speaks
             </h2>
-            <div className="w-20 h-1 bg-[#f4c430] mx-auto"></div>
+            <div className="w-20 h-1 bg-amber-700 mx-auto"></div>
           </div>
           
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -96,10 +123,10 @@ export default function WhyMokshaSeva() {
               { number: "100%", label: "Legal Compliance" }
             ].map((stat, index) => (
               <div key={index} className="text-center">
-                <div className="text-4xl md:text-5xl font-black text-[#f4c430] mb-2">
+                <div className="text-4xl md:text-5xl font-black text-amber-700 mb-2">
                   {stat.number}
                 </div>
-                <div className="text-sm font-bold uppercase tracking-widest text-stone-600">
+                <div className="text-sm font-bold uppercase tracking-widest text-gray-600">
                   {stat.label}
                 </div>
               </div>
@@ -109,7 +136,7 @@ export default function WhyMokshaSeva() {
       </section>
 
       {/* Call to Action */}
-      <section className="py-16 bg-[#20b2aa]">
+      <section className="py-16 bg-amber-800">
         <Container>
           <div className="text-center text-white">
             <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tighter mb-6">
@@ -121,13 +148,13 @@ export default function WhyMokshaSeva() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a 
                 href="/volunteer" 
-                className="bg-[#f4c430] hover:bg-[#eab308] text-black px-8 py-4 rounded-lg font-black uppercase tracking-widest transition-all"
+                className="bg-amber-100 hover:bg-white text-amber-800 px-8 py-4 rounded-lg font-black uppercase tracking-widest transition-all"
               >
                 Become a Volunteer
               </a>
               <a 
                 href="/donate" 
-                className="border-2 border-white text-white hover:bg-white hover:text-[#20b2aa] px-8 py-4 rounded-lg font-black uppercase tracking-widest transition-all"
+                className="border-2 border-white text-white hover:bg-white hover:text-amber-800 px-8 py-4 rounded-lg font-black uppercase tracking-widest transition-all"
               >
                 Support Our Cause
               </a>

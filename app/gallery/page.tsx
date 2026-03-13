@@ -173,12 +173,13 @@ export default function GalleryPage() {
                         ].map((src, idx) => (
                             <div 
                                 key={idx} 
-                                className="relative overflow-hidden opacity-20 hover:opacity-40 transition-all duration-1000"
+                                className="relative overflow-hidden opacity-20 hover:opacity-40 transition-all duration-1000 aspect-square"
                             >
                                 <Image
                                     src={src}
                                     alt=""
                                     fill
+                                    sizes="(max-width: 768px) 16vw, (max-width: 1024px) 12vw, 8vw"
                                     className="object-cover grayscale hover:grayscale-0 transition-all duration-700"
                                 />
                             </div>
@@ -277,6 +278,7 @@ export default function GalleryPage() {
                                                 src={image.src}
                                                 alt={image.title}
                                                 fill
+                                                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                                                 className="object-cover transition-transform duration-700 group-hover:scale-105"
                                             />
                                             

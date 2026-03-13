@@ -99,9 +99,115 @@ export default function ReportPage() {
 
   const handleSubmit = async () => {
     setLoading(true);
-    await new Promise((r) => setTimeout(r, 1500));
-    setLoading(false);
-    setSubmitted(true);
+    
+    try {
+      // Prepare form data for API
+      const reportData = {
+        reportType: 'unclaimed_body',
+        location: {
+          address: form.exactLocation,
+          landmark: form.landmark,
+          area: form.area,
+          city: form.city,
+          state: form.state,
+          pincode: form.pincode,
+          locationType: form.locationType,
+          coordinates: form.gpsCoordinates ? {
+            latitude: parseFloat(form.gpsCoordinates.split(',')[0]?.trim() || '0'),
+            longitude: parseFloat(form.gpsCoordinates.split(',')[1]?.trim() || '0')
+          } : undefined
+        },
+        reporterInfo: {
+          name: form.reporterName,
+          phone: form.reporterPhone,
+          email: form.reporterEmail || undefined,
+          address: form.reporterAddress,
+          relationship: form.reporterRelation
+        },
+        deceasedInfo: {
+          gender: form.gender,
+          approximateAge: form.approximateAge,
+          height: form.height,
+          weight: form.weight,
+          complexion: form.complexion,
+          hairColor: form.hairColor,
+          eyeColor: form.eyeColor,
+          tattoos: form.tattoos,
+          scars: form.scars,
+          birthmarks: form.birthmarks,
+          jewelry: form.jewelry,
+          clothing: form.clothing,
+          personalBelongings: form.personalBelongings,
+          bodyCondition: form.bodyCondition,
+          visibleInjuries: form.visibleInjuries,
+          suspectedCauseOfDeath: form.causeOfDeathSuspected,
+          identityDocuments: form.identityDocumentsFound ? form.documentDetails : undefined,
+          suspectedIdentity: form.suspectedIdentity
+        },
+        timeDetails: {
+          dateFound: form.dateFound,
+          timeFound: form.timeFound,
+          approximateDeathTime: form.approximateDeathTime
+        },
+        authorityDetails: {
+          policeInformed: form.policeInformed,
+          policeStationName: form.policeStationName,
+          firNumber: form.firNumber,
+          hospitalName: form.hospitalName,
+          postMortemDone: form.postMortemDone
+        },
+        witnessInfo: form.witnessName ? {
+          name: form.witnessName,
+          phone: form.witnessPhone,
+          address: form.witnessAddress
+        } : undefined,
+        documents: {
+          bplCard: form.bplCardNumber ? {
+            number: form.bplCardNumber,
+            hasPhoto: !!form.bplCardPhoto
+          } : undefined,
+          aadhaar: form.aadhaarNumber ? {
+            number: form.aadhaarNumber,
+            hasPhoto: !!form.aadhaarPhoto
+          } : undefined,
+          noc: form.nocDetails ? {
+            details: form.nocDetails,
+            hasPhoto: !!form.nocPhoto
+          } : undefined,
+          pan: form.panNumber ? {
+            number: form.panNumber,
+            hasPhoto: !!form.panPhoto
+          } : undefined
+        },
+        urgencyLevel: 'high', // Default to high for unclaimed body reports
+        description: `${form.additionalNotes}\n\nFamily Contacted: ${form.familyContacted ? 'Yes' : 'No'}`,
+        status: 'new'
+      };
+
+      // Submit to backend API
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/reports`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(reportData),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({ message: 'Network error' }));
+        throw new Error(errorData.message || 'Failed to submit report');
+      }
+
+      const result = await response.json();
+      console.log('Report submitted successfully:', result);
+      
+      setSubmitted(true);
+    } catch (error) {
+      console.error('Failed to submit report:', error);
+      alert(`Failed to submit report: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (submitted) {
