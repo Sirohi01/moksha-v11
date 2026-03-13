@@ -60,13 +60,15 @@ interface MediaStats {
   }>;
 }
 
+type TabType = 'overview' | 'gallery' | 'videos' | 'social' | 'brand' | 'analytics' | 'approval';
+
 export default function MediaDashboard() {
   const [assets, setAssets] = useState<MediaAsset[]>([]);
   const [stats, setStats] = useState<MediaStats | null>(null);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const [selectedTab, setSelectedTab] = useState('overview');
+  const [selectedTab, setSelectedTab] = useState<TabType>('overview');
   const [filters, setFilters] = useState({
     type: '',
     category: '',
@@ -76,13 +78,13 @@ export default function MediaDashboard() {
   const [uploadModalOpen, setUploadModalOpen] = useState(false);
 
   const tabs = [
-    { id: 'overview', name: 'Overview', icon: '📊' },
-    { id: 'gallery', name: 'Gallery', icon: '🖼️' },
-    { id: 'videos', name: 'Videos', icon: '🎥' },
-    { id: 'social', name: 'Social Media', icon: '📱' },
-    { id: 'brand', name: 'Brand Assets', icon: '🎨' },
-    { id: 'analytics', name: 'Analytics', icon: '📈' },
-    { id: 'approval', name: 'Approval', icon: '✅' }
+    { id: 'overview' as TabType, name: 'Overview', icon: '📊' },
+    { id: 'gallery' as TabType, name: 'Gallery', icon: '🖼️' },
+    { id: 'videos' as TabType, name: 'Videos', icon: '🎥' },
+    { id: 'social' as TabType, name: 'Social Media', icon: '📱' },
+    { id: 'brand' as TabType, name: 'Brand Assets', icon: '🎨' },
+    { id: 'analytics' as TabType, name: 'Analytics', icon: '📈' },
+    { id: 'approval' as TabType, name: 'Approval', icon: '✅' }
   ];
 
   const mediaTypes = [
@@ -263,7 +265,6 @@ export default function MediaDashboard() {
           </button>
         </div>
       </div>
-
       {/* Stats Cards */}
       {stats && (
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
@@ -339,201 +340,202 @@ export default function MediaDashboard() {
 
       {/* Tab Content */}
       {(selectedTab === 'overview' || selectedTab === 'gallery') && (
-        <>
+        <div className="space-y-6">
           {/* Filters */}
           <div className="bg-white p-4 rounded-lg shadow-sm border">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Type</label>
-            <select
-              value={filters.type}
-              onChange={(e) => setFilters({ ...filters, type: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            >
-              {mediaTypes.map(type => (
-                <option key={type.value} value={type.value}>{type.label}</option>
-              ))}
-            </select>
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Category</label>
-            <select
-              value={filters.category}
-              onChange={(e) => setFilters({ ...filters, category: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            >
-              {categories.map(category => (
-                <option key={category.value} value={category.value}>{category.label}</option>
-              ))}
-            </select>
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Status</label>
-            <select
-              value={filters.status}
-              onChange={(e) => setFilters({ ...filters, status: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            >
-              <option value="">All Status</option>
-              <option value="draft">Draft</option>
-              <option value="pending_review">Pending Review</option>
-              <option value="approved">Approved</option>
-              <option value="rejected">Rejected</option>
-              <option value="archived">Archived</option>
-            </select>
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Search</label>
-            <input
-              type="text"
-              value={filters.search}
-              onChange={(e) => setFilters({ ...filters, search: e.target.value })}
-              placeholder="Search assets..."
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            />
-          </div>
-        </div>
-      </div>
-
-      {/* Media Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {assets.map((asset) => (
-          <div key={asset._id} className="bg-white rounded-lg shadow-sm border overflow-hidden">
-            {/* Media Preview */}
-            <div className="aspect-video bg-gray-100 relative">
-              {asset.type === 'image' ? (
-                <img
-                  src={asset.thumbnailUrl || asset.url}
-                  alt={asset.altText || asset.title}
-                  className="w-full h-full object-cover"
-                />
-              ) : (
-                <div className="w-full h-full flex items-center justify-center">
-                  <span className="text-4xl">{getTypeIcon(asset.type)}</span>
-                </div>
-              )}
-              
-              {/* Status Badge */}
-              <div className="absolute top-2 right-2">
-                <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(asset.status)}`}>
-                  {asset.status.replace('_', ' ')}
-                </span>
-              </div>
-
-              {/* Featured Badge */}
-              {asset.isFeatured && (
-                <div className="absolute top-2 left-2">
-                  <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
-                    ⭐ Featured
-                  </span>
-                </div>
-              )}
-            </div>
-
-            {/* Asset Info */}
-            <div className="p-4">
-              <h3 className="font-medium text-gray-900 truncate">{asset.title}</h3>
-              <p className="text-sm text-gray-500 mt-1">{asset.category}</p>
-              
-              <div className="flex items-center justify-between mt-3 text-xs text-gray-500">
-                <span>{formatFileSize(asset.fileSize)}</span>
-                <span>{asset.viewCount} views</span>
-              </div>
-
-              {/* Tags */}
-              {asset.tags.length > 0 && (
-                <div className="flex flex-wrap gap-1 mt-2">
-                  {asset.tags.slice(0, 3).map((tag, index) => (
-                    <span key={index} className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-gray-100 text-gray-600">
-                      {tag}
-                    </span>
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Type</label>
+                <select
+                  value={filters.type}
+                  onChange={(e) => setFilters({ ...filters, type: e.target.value })}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                >
+                  {mediaTypes.map(type => (
+                    <option key={type.value} value={type.value}>{type.label}</option>
                   ))}
-                  {asset.tags.length > 3 && (
-                    <span className="text-xs text-gray-400">+{asset.tags.length - 3}</span>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Category</label>
+                <select
+                  value={filters.category}
+                  onChange={(e) => setFilters({ ...filters, category: e.target.value })}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                >
+                  {categories.map(category => (
+                    <option key={category.value} value={category.value}>{category.label}</option>
+                  ))}
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Status</label>
+                <select
+                  value={filters.status}
+                  onChange={(e) => setFilters({ ...filters, status: e.target.value })}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                >
+                  <option value="">All Status</option>
+                  <option value="draft">Draft</option>
+                  <option value="pending_review">Pending Review</option>
+                  <option value="approved">Approved</option>
+                  <option value="rejected">Rejected</option>
+                  <option value="archived">Archived</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Search</label>
+                <input
+                  type="text"
+                  value={filters.search}
+                  onChange={(e) => setFilters({ ...filters, search: e.target.value })}
+                  placeholder="Search assets..."
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Media Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {assets.map((asset) => (
+              <div key={asset._id} className="bg-white rounded-lg shadow-sm border overflow-hidden">
+                {/* Media Preview */}
+                <div className="aspect-video bg-gray-100 relative">
+                  {asset.type === 'image' ? (
+                    <img
+                      src={asset.thumbnailUrl || asset.url}
+                      alt={asset.altText || asset.title}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center">
+                      <span className="text-4xl">{getTypeIcon(asset.type)}</span>
+                    </div>
+                  )}
+                  
+                  {/* Status Badge */}
+                  <div className="absolute top-2 right-2">
+                    <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(asset.status)}`}>
+                      {asset.status.replace('_', ' ')}
+                    </span>
+                  </div>
+
+                  {/* Featured Badge */}
+                  {asset.isFeatured && (
+                    <div className="absolute top-2 left-2">
+                      <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                        ⭐ Featured
+                      </span>
+                    </div>
                   )}
                 </div>
-              )}
 
-              {/* Actions */}
-              <div className="flex justify-between items-center mt-4">
-                <div className="flex space-x-2">
-                  <button
-                    onClick={() => window.open(asset.url, '_blank')}
-                    className="text-blue-600 hover:text-blue-800 text-sm"
-                  >
-                    View
-                  </button>
-                  <button className="text-green-600 hover:text-green-800 text-sm">
-                    Edit
-                  </button>
+                {/* Asset Info */}
+                <div className="p-4">
+                  <h3 className="font-medium text-gray-900 truncate">{asset.title}</h3>
+                  <p className="text-sm text-gray-500 mt-1">{asset.category}</p>
+                  
+                  <div className="flex items-center justify-between mt-3 text-xs text-gray-500">
+                    <span>{formatFileSize(asset.fileSize)}</span>
+                    <span>{asset.viewCount} views</span>
+                  </div>
+
+                  {/* Tags */}
+                  {asset.tags.length > 0 && (
+                    <div className="flex flex-wrap gap-1 mt-2">
+                      {asset.tags.slice(0, 3).map((tag, index) => (
+                        <span key={index} className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-gray-100 text-gray-600">
+                          {tag}
+                        </span>
+                      ))}
+                      {asset.tags.length > 3 && (
+                        <span className="text-xs text-gray-400">+{asset.tags.length - 3}</span>
+                      )}
+                    </div>
+                  )}
+
+                  {/* Actions */}
+                  <div className="flex justify-between items-center mt-4">
+                    <div className="flex space-x-2">
+                      <button
+                        onClick={() => window.open(asset.url, '_blank')}
+                        className="text-blue-600 hover:text-blue-800 text-sm"
+                      >
+                        View
+                      </button>
+                      <button className="text-green-600 hover:text-green-800 text-sm">
+                        Edit
+                      </button>
+                    </div>
+                    <button
+                      onClick={() => deleteAsset(asset._id)}
+                      className="text-red-600 hover:text-red-800 text-sm"
+                    >
+                      Delete
+                    </button>
+                  </div>
                 </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Pagination */}
+          {totalPages > 1 && (
+            <div className="flex items-center justify-between">
+              <div className="flex-1 flex justify-between sm:hidden">
                 <button
-                  onClick={() => deleteAsset(asset._id)}
-                  className="text-red-600 hover:text-red-800 text-sm"
+                  onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
+                  disabled={currentPage === 1}
+                  className="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50"
                 >
-                  Delete
+                  Previous
+                </button>
+                <button
+                  onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
+                  disabled={currentPage === totalPages}
+                  className="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50"
+                >
+                  Next
                 </button>
               </div>
+              <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+                <div>
+                  <p className="text-sm text-gray-700">
+                    Showing page <span className="font-medium">{currentPage}</span> of{' '}
+                    <span className="font-medium">{totalPages}</span>
+                  </p>
+                </div>
+                <div>
+                  <nav className="relative z-0 inline-flex rounded-md shadow-sm -space-x-px">
+                    {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
+                      const page = i + 1;
+                      return (
+                        <button
+                          key={page}
+                          onClick={() => setCurrentPage(page)}
+                          className={`relative inline-flex items-center px-4 py-2 border text-sm font-medium ${
+                            currentPage === page
+                              ? 'z-10 bg-blue-50 border-blue-500 text-blue-600'
+                              : 'bg-white border-gray-300 text-gray-500 hover:bg-gray-50'
+                          }`}
+                        >
+                          {page}
+                        </button>
+                      );
+                    })}
+                  </nav>
+                </div>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
-
-      {/* Pagination */}
-      {totalPages > 1 && (
-        <div className="flex items-center justify-between">
-          <div className="flex-1 flex justify-between sm:hidden">
-            <button
-              onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
-              disabled={currentPage === 1}
-              className="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50"
-            >
-              Previous
-            </button>
-            <button
-              onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
-              disabled={currentPage === totalPages}
-              className="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50"
-            >
-              Next
-            </button>
-          </div>
-          <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
-            <div>
-              <p className="text-sm text-gray-700">
-                Showing page <span className="font-medium">{currentPage}</span> of{' '}
-                <span className="font-medium">{totalPages}</span>
-              </p>
-            </div>
-            <div>
-              <nav className="relative z-0 inline-flex rounded-md shadow-sm -space-x-px">
-                {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
-                  const page = i + 1;
-                  return (
-                    <button
-                      key={page}
-                      onClick={() => setCurrentPage(page)}
-                      className={`relative inline-flex items-center px-4 py-2 border text-sm font-medium ${
-                        currentPage === page
-                          ? 'z-10 bg-blue-50 border-blue-500 text-blue-600'
-                          : 'bg-white border-gray-300 text-gray-500 hover:bg-gray-50'
-                      }`}
-                    >
-                      {page}
-                    </button>
-                  );
-                })}
-              </nav>
-            </div>
-          </div>
-          </div>
-        </>
+          )}
+        </div>
       )}
 
-      {/* Tab Content */}
+      {/* Other Tab Content */}
       {selectedTab === 'videos' && <VideoManager />}
       {selectedTab === 'social' && (
         <div className="space-y-6">
