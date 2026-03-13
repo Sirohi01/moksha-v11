@@ -1,5 +1,6 @@
 import { Container } from "@/components/ui/Elements";
 import { TrendingUp, Users, MapPin, Heart, Calendar, Award } from "lucide-react";
+import Image from 'next/image';
 
 export default function Impact() {
   const impactStats = [
@@ -109,10 +110,12 @@ export default function Impact() {
             
             <div className="relative">
               <div className="aspect-square rounded-2xl overflow-hidden shadow-xl">
-                <img 
+                <Image 
                   src="/gallery/image2.png" 
                   alt="Our impact in serving communities" 
                   className="w-full h-full object-cover"
+                  width={400}
+                  height={400}
                 />
               </div>
               <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-amber-100 rounded-full opacity-30"></div>
@@ -253,10 +256,12 @@ export default function Impact() {
             
             <div className="relative">
               <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-xl">
-                <img 
+                <Image 
                   src="/gallery/image3.png" 
                   alt="Our growth across cities" 
                   className="w-full h-full object-cover"
+                  width={500}
+                  height={375}
                 />
               </div>
               <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-amber-100 rounded-full opacity-20"></div>
@@ -280,10 +285,12 @@ export default function Impact() {
               <div key={index} className="bg-white p-6 rounded-2xl border border-stone-100 hover:shadow-lg transition-all duration-500 relative">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-12 h-12 rounded-full overflow-hidden">
-                    <img 
+                    <Image 
                       src={`/gallery/image${(index % 3) + 4}.png`} 
                       alt={testimonial.author}
                       className="w-full h-full object-cover"
+                      width={48}
+                      height={48}
                     />
                   </div>
                   <div>
@@ -334,10 +341,12 @@ export default function Impact() {
             </div>
             <div className="relative">
               <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-xl">
-                <img 
+                <Image 
                   src="/gallery/image1.png" 
                   alt="Join our mission" 
                   className="w-full h-full object-cover"
+                  width={500}
+                  height={375}
                 />
               </div>
               <div className="absolute -top-4 -right-4 w-20 h-20 bg-white/20 rounded-full"></div>

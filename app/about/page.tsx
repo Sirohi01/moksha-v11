@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { SectionHeader, Container } from "@/components/ui/Elements";
 import { Card } from "@/components/ui/Card";
 import { Users, Target, Eye, Heart, Award, CheckCircle } from "lucide-react";
+import Image from 'next/image';
 
 export const metadata: Metadata = { title: "About Moksha Seva" };
 
@@ -25,14 +26,14 @@ export default function AboutPage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative py-20 bg-stone-100 overflow-hidden">
+      <section className="relative py-16 bg-stone-100 overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute top-10 right-10 w-32 h-32 bg-amber-200/20 rounded-full blur-2xl"></div>
           <div className="absolute bottom-10 left-10 w-24 h-24 bg-amber-300/20 rounded-full blur-xl"></div>
         </div>
         
         <Container>
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="grid md:grid-cols-2 gap-8 items-center">
             <div className="max-w-xl">
               <span className="text-amber-700 text-sm font-medium tracking-widest uppercase">✦ Our Story ✦</span>
               <h1 className="font-serif text-4xl md:text-5xl font-bold mt-3 mb-6 text-gray-900">
@@ -65,10 +66,12 @@ export default function AboutPage() {
               <div className="absolute -top-4 -left-4 w-full h-full bg-amber-100 rounded-2xl"></div>
               <div className="relative bg-white rounded-2xl p-6 shadow-lg">
                 <div className="aspect-[4/3] rounded-xl overflow-hidden mb-4">
-                  <img 
+                  <Image 
                     src="/gallery/image1.png" 
                     alt="Moksha Seva Service" 
                     className="w-full h-full object-cover"
+                    width={400}
+                    height={300}
                   />
                 </div>
                 <div className="text-center">
@@ -82,7 +85,7 @@ export default function AboutPage() {
       </section>
 
       {/* Mission & Vision */}
-      <section className="py-20 bg-stone-50">
+      <section className="py-12 bg-stone-50">
         <Container>
           <div className="grid md:grid-cols-2 gap-8">
             <Card variant="spiritual" padding="lg">
@@ -116,12 +119,12 @@ export default function AboutPage() {
       </section>
 
       {/* Our Story */}
-      <section className="py-20 bg-stone-50">
+      <section className="py-12 bg-stone-50">
         <Container size="lg">
           <SectionHeader tag="Journey" title="How Moksha Seva Began" centered={false} />
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="grid md:grid-cols-2 gap-8 items-start">
             <div className="space-y-4 text-gray-700 leading-relaxed">
-              <p>
+              <p className="text-lg">
                 In 2017, our founder Suresh Narayan witnessed an unclaimed body lying uncremated
                 near a Delhi railway station for three days due to bureaucratic delays and lack of
                 resources. That experience became the seed of Moksha Seva.
@@ -136,31 +139,39 @@ export default function AboutPage() {
                 performed 2,847 cremations — each one documented and publicly accessible. We work
                 in formal partnership with 12 police districts, 8 hospitals, and 25 NGOs.
               </p>
+              
+              {/* Key Statistics */}
+              <div className="grid grid-cols-2 gap-4 mt-6 pt-4 border-t border-stone-200">
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-amber-700">2,847</div>
+                  <div className="text-sm text-gray-600">Cremations Performed</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-amber-700">38</div>
+                  <div className="text-sm text-gray-600">Cities Served</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-amber-700">412</div>
+                  <div className="text-sm text-gray-600">Active Volunteers</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-amber-700">8+</div>
+                  <div className="text-sm text-gray-600">Years of Service</div>
+                </div>
+              </div>
             </div>
-            <div className="space-y-6">
+            
+            <div className="space-y-4">
               <div className="relative">
                 <div className="aspect-[4/3] rounded-2xl overflow-hidden mb-4">
-                  <img 
+                  <Image 
                     src="/gallery/image2.png" 
                     alt="Our Journey" 
                     className="w-full h-full object-cover"
+                    width={400}
+                    height={300}
                   />
                 </div>
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                {[
-                  { year: "2018", event: "Founded in Delhi with 5 volunteers" },
-                  { year: "2019", event: "First police partnership, 200 cremations" },
-                  { year: "2020", event: "Expanded to Mumbai and Chennai" },
-                  { year: "2021", event: "Launched transparency dashboard" },
-                  { year: "2022", event: "500+ volunteers, 38 cities" },
-                  { year: "2024", event: "2,847 cremations performed" },
-                ].map((item) => (
-                  <div key={item.year} className="bg-stone-100 rounded-lg p-4 border border-amber-200">
-                    <p className="font-serif text-amber-800 font-bold text-lg">{item.year}</p>
-                    <p className="text-gray-700 text-sm mt-1">{item.event}</p>
-                  </div>
-                ))}
               </div>
             </div>
           </div>
@@ -168,7 +179,7 @@ export default function AboutPage() {
       </section>
 
       {/* Values */}
-      <section className="py-20 bg-stone-100">
+      <section className="py-12 bg-stone-100">
         <Container>
           <SectionHeader tag="Values" title="What We Stand For" />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -189,7 +200,7 @@ export default function AboutPage() {
       </section>
 
       {/* Team */}
-      <section className="py-20 bg-stone-50">
+      <section className="py-12 bg-stone-50">
         <Container>
           <SectionHeader tag="Team" title="The People Behind Moksha Seva" />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

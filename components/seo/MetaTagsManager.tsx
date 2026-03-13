@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 import { Search, Globe, Twitter, Facebook, Eye, AlertCircle } from 'lucide-react';
 
 interface MetaTagsData {
@@ -391,10 +392,12 @@ export default function MetaTagsManager({ data, onChange, onSave }: MetaTagsMana
               <div className="bg-white border border-gray-200 rounded-lg overflow-hidden max-w-md">
                 {formData.ogImage && (
                   <div className="h-32 bg-gray-200 flex items-center justify-center">
-                    <img 
+                    <Image 
                       src={formData.ogImage} 
                       alt="Preview" 
                       className="max-h-full max-w-full object-cover"
+                      width={200}
+                      height={128}
                       onError={(e) => {
                         (e.target as HTMLImageElement).style.display = 'none';
                       }}

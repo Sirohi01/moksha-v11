@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 import VideoManager from '@/components/admin/VideoManager';
 import SocialMediaScheduler from '@/components/admin/SocialMediaScheduler';
 import SocialMediaAnalytics from '@/components/admin/SocialMediaAnalytics';
@@ -406,10 +407,12 @@ export default function MediaDashboard() {
                 {/* Media Preview */}
                 <div className="aspect-video bg-gray-100 relative">
                   {asset.type === 'image' ? (
-                    <img
+                    <Image
                       src={asset.thumbnailUrl || asset.url}
                       alt={asset.altText || asset.title}
                       className="w-full h-full object-cover"
+                      width={400}
+                      height={300}
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center">

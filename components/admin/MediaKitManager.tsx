@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 
 interface MediaKit {
   _id: string;
@@ -372,10 +373,12 @@ function MediaKitModal({ isOpen, onClose, onSave, editingKit }: any) {
                       className="mr-2"
                     />
                     {asset.thumbnailUrl && (
-                      <img
+                      <Image
                         src={asset.thumbnailUrl}
                         alt={asset.title}
                         className="w-12 h-12 object-cover rounded"
+                        width={48}
+                        height={48}
                       />
                     )}
                     <div className="flex-1">

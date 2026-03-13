@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 import PressReleaseModal from '@/components/admin/PressReleaseModal';
 import MediaKitManager from '@/components/admin/MediaKitManager';
 import PressContactManager from '@/components/admin/PressContactManager';
@@ -323,10 +324,12 @@ export default function PressRoomManagement() {
                   <td className="px-6 py-4">
                     <div className="flex items-start space-x-3">
                       {release.featuredImage && (
-                        <img
+                        <Image
                           src={release.featuredImage.url}
                           alt={release.featuredImage.altText}
                           className="w-16 h-12 object-cover rounded"
+                          width={64}
+                          height={48}
                         />
                       )}
                       <div className="flex-1 min-w-0">

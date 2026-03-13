@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 
 interface BrandAsset {
   _id: string;
@@ -259,10 +260,12 @@ export default function BrandAssetManager() {
             {/* Asset Preview */}
             <div className="aspect-square bg-gray-50 relative group">
               {asset.thumbnailUrl || asset.url ? (
-                <img
+                <Image
                   src={asset.thumbnailUrl || asset.url}
                   alt={asset.title}
                   className="w-full h-full object-contain p-4"
+                  width={300}
+                  height={300}
                 />
               ) : (
                 <div className="w-full h-full flex items-center justify-center">

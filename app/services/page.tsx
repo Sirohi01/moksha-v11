@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { SectionHeader, Container, Badge } from "@/components/ui/Elements";
-import { Card } from "@/components/ui/Card";
+import { SectionHeader, Container } from "@/components/ui/Elements";
 import Button from "@/components/ui/Button";
+import Image from 'next/image';
 import {
   Flame, FileText, Users, Phone, MapPin, Heart,
-  Clock, Shield, Camera, BookOpen
+  Clock, Shield, Camera, BookOpen, CheckCircle, UserCheck
 } from "lucide-react";
 
 export const metadata: Metadata = { title: "Services" };
@@ -151,36 +150,97 @@ export default function ServicesPage() {
       </section>
 
       {/* Who Can Access Section */}
-      <section className="py-20 bg-amber-800">
+      <section className="py-12 bg-gradient-to-br from-amber-50 to-stone-100">
         <Container>
-          <div className="flex flex-col md:flex-row gap-12 items-center">
-            <div className="flex-1">
-              <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tighter text-white mb-8">
-                Who Can Access Our Services?
-              </h2>
-              <div className="space-y-4">
-                {[
-                  "Unclaimed bodies reported by police or public",
-                  "Homeless individuals with no family",
-                  "Families unable to afford cremation",
-                  "Bodies referred by hospitals",
-                  "Cases reported by municipal authorities",
-                ].map((item, idx) => (
-                  <div key={idx} className="flex items-center gap-4 text-white bg-white/10 backdrop-blur-sm p-4 rounded-lg border border-white/20">
-                    <Heart className="w-5 h-5 text-amber-100 fill-amber-100 flex-shrink-0" />
-                    <span className="font-medium text-lg">{item}</span>
+          <div className="text-center mb-8">
+            <span className="text-amber-700 text-sm font-medium tracking-widest uppercase">✦ Eligibility ✦</span>
+            <h2 className="text-3xl md:text-4xl font-bold mt-2 mb-4 text-gray-900">
+              Who Can Access Our Services?
+            </h2>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              Our services are completely free and available to anyone in need. We believe dignity in death is a fundamental right, not a privilege.
+            </p>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-8 items-start">
+            {/* Left side - Eligibility criteria */}
+            <div className="space-y-4">
+              {[
+                {
+                  icon: UserCheck,
+                  title: "Unclaimed Bodies",
+                  desc: "Bodies reported by police, hospitals, or public with no family to claim them",
+                  image: "/gallery/image1.png"
+                },
+                {
+                  icon: Heart,
+                  title: "Homeless Individuals",
+                  desc: "People without family or support system who need dignified final rites",
+                  image: "/gallery/image2.png"
+                },
+                {
+                  icon: Users,
+                  title: "Destitute Families",
+                  desc: "Families who cannot afford cremation costs - we provide complete support",
+                  image: "/gallery/image3.png"
+                },
+                {
+                  icon: Shield,
+                  title: "Hospital Referrals",
+                  desc: "Bodies referred by government and private hospitals across our service areas",
+                  image: "/gallery/image4.png"
+                },
+                {
+                  icon: MapPin,
+                  title: "Municipal Cases",
+                  desc: "Cases reported by municipal authorities and local government bodies",
+                  image: "/gallery/image5.png"
+                }
+              ].map((item, idx) => {
+                const Icon = item.icon;
+                return (
+                  <div key={idx} className="bg-white rounded-xl p-4 shadow-sm border border-stone-200 hover:shadow-md transition-all duration-300 group">
+                    <div className="flex items-start gap-3">
+                      <div className="flex-shrink-0">
+                        <div className="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center group-hover:bg-amber-200 transition-colors">
+                          <Icon className="w-5 h-5 text-amber-700" />
+                        </div>
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="text-base font-semibold text-gray-900 mb-1">{item.title}</h3>
+                        <p className="text-gray-600 text-sm leading-relaxed">{item.desc}</p>
+                      </div>
+                      <div className="flex-shrink-0 w-12 h-12 rounded-lg overflow-hidden">
+                        <Image
+                          src={item.image}
+                          alt={item.title}
+                          width={48}
+                          height={48}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    </div>
                   </div>
-                ))}
-              </div>
+                );
+              })}
             </div>
-            <div className="flex-shrink-0 text-center bg-white/10 backdrop-blur-sm p-8 rounded-2xl border border-white/20">
-              <p className="text-white/80 text-sm mb-4 font-medium">Available 24/7</p>
-              <a href="tel:+911800123456">
-                <Button className="bg-amber-100 hover:bg-white text-amber-800 px-8 py-4 rounded-lg font-black uppercase tracking-widest transition-all shadow-lg mb-4 flex items-center gap-2">
-                  <Phone className="w-5 h-5" /> 1800-123-456
-                </Button>
-              </a>
-              <p className="text-white/80 text-xs font-medium">All services are free of charge</p>
+
+            {/* Right side - Contact and process */}
+            <div className="space-y-6">
+              {/* Main image */}
+              <div className="relative">
+                <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-xl">
+                  <Image
+                    src="/gallery/image6.png"
+                    alt="Moksha Seva services"
+                    width={400}
+                    height={300}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="absolute -bottom-3 -right-3 w-16 h-16 bg-amber-100 rounded-full opacity-30"></div>
+                <div className="absolute -top-3 -left-3 w-12 h-12 bg-stone-200 rounded-full opacity-40"></div>
+              </div>
             </div>
           </div>
         </Container>

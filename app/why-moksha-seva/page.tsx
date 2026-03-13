@@ -1,5 +1,6 @@
 import { Container } from "@/components/ui/Elements";
 import { Heart, Shield, Users, Clock, Award, CheckCircle } from "lucide-react";
+import Image from 'next/image';
 
 export default function WhyMokshaSeva() {
   const reasons = [
@@ -71,10 +72,12 @@ export default function WhyMokshaSeva() {
             </div>
             <div className="relative">
               <div className="aspect-square rounded-2xl overflow-hidden shadow-xl">
-                <img 
+                <Image 
                   src="/gallery/image1.png" 
                   alt="Moksha Seva service" 
                   className="w-full h-full object-cover"
+                  width={400}
+                  height={400}
                 />
               </div>
               <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-amber-100 rounded-full opacity-20"></div>

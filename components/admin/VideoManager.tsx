@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 
 interface Video {
   _id: string;
@@ -215,10 +216,12 @@ export default function VideoManager({ onVideoSelect }: VideoManagerProps) {
               {/* Video Thumbnail */}
               <div className="aspect-video bg-gray-100 relative group cursor-pointer"
                    onClick={() => onVideoSelect ? onVideoSelect(video) : setSelectedVideo(video)}>
-                <img
+                <Image
                   src={video.thumbnailUrl}
                   alt={video.title}
                   className="w-full h-full object-cover"
+                  width={400}
+                  height={225}
                 />
                 
                 {/* Play Button Overlay */}
